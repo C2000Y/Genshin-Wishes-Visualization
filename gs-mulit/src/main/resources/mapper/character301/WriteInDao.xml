@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+        <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cygs.gsweb.character301.dao.WriteInDao">
+
+    <select id="getData" resultType="com.cygs.gsweb.character301.dto.Gacha">
+        select * from gs.gacha_cn_301 where uid = #{uid}
+    </select>
+
+    <insert id="add301Data">
+        insert ignore into gs.gacha_cn_301(id, uid, name, item_type, rank_type, time) values
+        <foreach collection ="list" item="gacha" separator =",">
+            (#{gacha.id},#{gacha.uid},#{gacha.name},#{gacha.itemType},#{gacha.rankType},#{gacha.time})
+        </foreach >
+    </insert>
+
+    <insert id="add302Data">
+        insert ignore into gs.gacha_cn_302(id, uid, name, item_type, rank_type, time) values
+        <foreach collection ="list" item="gacha" separator =",">
+            (#{gacha.id},#{gacha.uid},#{gacha.name},#{gacha.itemType},#{gacha.rankType},#{gacha.time})
+        </foreach >
+    </insert>
+
+
+    <insert id="add200Data">
+        insert ignore into gs.gacha_cn_200(id, uid, name, item_type, rank_type, time) values
+        <foreach collection ="list" item="gacha" separator =",">
+            (#{gacha.id},#{gacha.uid},#{gacha.name},#{gacha.itemType},#{gacha.rankType},#{gacha.time})
+        </foreach >
+    </insert>
+
+</mapper>

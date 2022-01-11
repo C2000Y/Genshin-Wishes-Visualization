@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+        <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cygs.gsweb.character301.dao.PickupDao">
+
+    <select id="list" resultType="com.cygs.gsweb.character301.entity.PickupEntity">
+        select * from gacha_cn_301 where id = "1624975560002753422";
+    </select>
+
+    <select id="get301CountById" resultType="Integer">
+        select
+            count(*) as total
+        from
+            gacha_cn_301
+        where
+            uid = #{uid}
+    </select>
+
+    <select id="get302CountById" resultType="Integer">
+        select
+            count(*) as total
+        from
+            gacha_cn_302
+        where
+            uid = #{uid}
+    </select>
+
+    <select id="get200CountById" resultType="Integer">
+        select
+            count(*) as total
+        from
+            gacha_cn_200
+        where
+            uid = #{uid}
+    </select>
+
+    <select id="getSummonCountByUid" resultType="com.cygs.gsweb.character301.dto.PickupDTO">
+        select
+            rank_type,
+            name,
+            item_type,
+            uid,
+            id,
+            `time`,
+            count
+        from
+            (
+            select
+                rank_type,
+                name,
+                item_type,
+                uid,
+                id,
+                `time`,
+                rank() over (
+                order by id) as count
+            from
+                gacha_cn_${code} g
+            where
+                uid = #{uid}) t
+        where
+            t.rank_type = 5
+    </select>
+
+    <select id="getItemsByLevel" resultType="com.cygs.gsweb.character301.dto.PickupDTO">
+        select
+            count(id) as count,
+            rank_type,
+            item_type
+        from
+            gacha_cn_${code}
+        where
+            uid = #{uid}
+        group by
+            rank_type,
+            item_type
+        order by rank_type, item_type asc
+    </select>
+
+</mapper>

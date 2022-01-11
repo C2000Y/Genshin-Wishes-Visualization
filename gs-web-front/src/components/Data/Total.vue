@@ -1,0 +1,74 @@
+<template>
+  <div>
+    <div>
+      标配池：共{{count200}}次
+    </div>
+    <div>
+      角色池：共{{count301}}次{{detail301}}
+    </div>
+    <div>
+      武器池：共{{count302}}次
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'Total',
+  data () {
+    return {
+      count301: '-',
+      count302: '-',
+      count200: '-',
+      detail301: '',
+      detail302: '',
+      detail200: ''
+    }
+  },
+  methods: {
+    getTotal (uid) {
+      this.uid = uid
+      this.$axios.get('summon/totalCount', {
+        params: {
+          uid: this.uid
+        }
+      }).then(res => {
+        let data = res.data.data
+        this.count200 = data.standard
+        this.count301 = data.character
+        this.count302 = data.weapon
+        this.$loading.service().close()
+      })
+    }
+    // charaDetail (chData) {
+    //   this.clean()
+    //   this.$axios.get('summon/totalCount', {
+    //     params: {
+    //       uid: this.uid
+    //     }
+    //   }).then(res => {
+    //     let data = res.data.data
+    //     this.count200 = data.standard
+    //     this.count301 = data.character
+    //     this.count302 = data.weapon
+    //     this.detail301 = '; 其中'
+    //     chData.forEach(item => {
+    //       this.detail301 += item.rankType + '星' + item.itemType + ': ' + (item.count / parseInt(this.count301) * 100).toFixed(2) + '%; '
+    //     })
+    //   })
+    // },
+    // clean () {
+    //   this.detail301 = ''
+    //   this.detail302 = ''
+    //   this.detail200 = ''
+    //   this.count301 = '-'
+    //   this.count302 = '-'
+    //   this.count200 = '-'
+    // }
+  }
+}
+</script>
+
+<style scoped>
+
+</style>
