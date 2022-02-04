@@ -16,7 +16,7 @@ Vue.prototype.$message = Message
 Vue.prototype.$echarts = echarts
 
 // axios.defaults.withCredentials = true
-axios.defaults.baseURL = 'http://localhost:6480/'
+axios.defaults.baseURL = 'http://175.24.165.47:6480/'
 Vue.config.productionTip = false
 Vue.use(router)
 // element-ui

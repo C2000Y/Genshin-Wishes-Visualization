@@ -1,7 +1,7 @@
-// import Vue from 'vue'
-// import VueRouter from 'vue-router'
+import Vue from 'vue'
+import VueRouter from 'vue-router'
 // // 导入组件
-// import Main from "../views/Main";
+import main from '../components/Content'
 // import Login from "../views/Login";
 // import NotFound from "../views/NotFound";
 //
@@ -22,12 +22,19 @@
 // import c12 from "../views/chpts/c12";
 // import request from "../views/chpts/request"
 // // 使用
-// Vue.use(VueRouter);
+Vue.use(VueRouter)
 // // 导出
-// export default new VueRouter({
-//   mode: 'history',
-//   routes: [
-//     {
+export default new VueRouter({
+  mode: 'hash',
+  routes: [
+    {
+      path: '/main',
+      component: main,
+      props: true
+    }
+  ]
+})
+// {
 //       //登录页
 //       path: '/main',
 //       component: Main,

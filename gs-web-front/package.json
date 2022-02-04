@@ -20,7 +20,8 @@
     "element-ui": "^2.15.6",
     "vue": "^2.5.2",
     "vue-axios": "^3.4.0",
-    "vue-element-loading": "^2.0.2"
+    "vue-element-loading": "^2.0.2",
+    "vue-router": "^3.5.3"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",

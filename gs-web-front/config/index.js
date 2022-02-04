@@ -4,21 +4,35 @@
 
 const path = require('path')
 
+let proxyObj = {};
+proxyObj['/ws'] = {
+  ws: true,
+  target: "ws://175.24.165.47:6480"
+};
+proxyObj['/'] = {
+  ws: false,
+  target: 'http://175.24.165.47:6480',
+  changeOrigin: true,
+  pathRewrite: {
+    '^/': ''
+  }
+},
+
 module.exports = {
   dev: {
-
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-    proxyTable: {
-      '/api': {
-        target: 'http://localhost:6480/',
-        changeOrigin: true,
-        pathRewrite: {
-          '^/api': ''
-        }
-      }
-    },
+    proxyTable: proxyObj,
+    //   {
+    //   '/api': {
+    //     target: 'http://localhost:6480/',
+    //     changeOrigin: true,
+    //     pathRewrite: {
+    //       '^/api': ''
+    //     }
+    //   }
+    // },
 
     // Various Dev Server settings
     host: 'localhost', // can be overwritten by process.env.HOST
