@@ -26,19 +26,21 @@ export default {
     }
   },
   methods: {
-    getTotal (uid) {
-      this.uid = uid
-      this.$axios.get('summon/totalCount', {
-        params: {
-          uid: this.uid
+    getTotal (data, code) {
+      switch (code) {
+        case 301: {
+          this.count301 = data
+          break
         }
-      }).then(res => {
-        let data = res.data.data
-        this.count200 = data.standard
-        this.count301 = data.character
-        this.count302 = data.weapon
-        this.$loading.service().close()
-      })
+        case 302: {
+          this.count302 = data
+          break
+        }
+        case 200: {
+          this.count200 = data
+          break
+        }
+      }
     }
     // charaDetail (chData) {
     //   this.clean()

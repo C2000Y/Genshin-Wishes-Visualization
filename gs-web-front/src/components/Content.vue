@@ -54,9 +54,14 @@ export default {
       this.$refs.weaponPieData.getData(uid, 302)
       this.$refs.standardBarData.getData(uid, 200)
       this.$refs.standardPieData.getData(uid, 200)
-      await this.$refs.totalref.getTotal(uid)
+      this.endLoading()
     },
-    getData (data) {
+    async getData (data, code) {
+      let count = 0
+      for (let i = 0; i < data.length; i++) {
+        count += data[i].count
+      }
+      await this.$refs.totalref.getTotal(count, code)
       // this.$refs.totalref.charaDetail(data)
     },
     // 更新uid下拉列表
@@ -64,6 +69,9 @@ export default {
       this.uid = uid
       this.$refs.uidSelect.getUids(uid)
       this.getUid(uid)
+    },
+    endLoading () {
+      this.$loading.service().close()
     }
   }
 }

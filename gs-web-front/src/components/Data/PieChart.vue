@@ -12,7 +12,8 @@ export default {
       data: [],
       text: '',
       code: undefined,
-      chartName: 'pieChart'
+      chartName: 'pieChart',
+      echarts: undefined
     }
   },
   mounted () {
@@ -29,14 +30,17 @@ export default {
       }).then(res => {
         // console.log(res)
         this.data = res.data.data
-        this.$emit('data', this.data)
+        this.$emit('data', this.data, code)
         this.chart()
       })
     },
     chart () {
+      if (this.echarts != null && this.echarts !== '' && this.echarts !== undefined) {
+        this.echarts.dispose()
+      }
       this.title()
-      const echarts = this.$echarts.init(document.getElementById(this.chartName))
-      echarts.setOption({
+      this.echarts = this.$echarts.init(document.getElementById(this.chartName))
+      this.echarts.setOption({
         tooltip: {
           trigger: 'item',
           formatter: '{a} <br/>{b}: {c} ({d}%)'

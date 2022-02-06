@@ -15,7 +15,7 @@ export default {
     return {
       uid: '',
       uids: [],
-      loadingText: ['让我康康！', '转啊，转~', '我超，原……来我在加载中', '祝你好运']
+      loadingText: ['让我康康！', '转啊，转~', '我超，原……来我在加载中', '♪好运来，祝你好运来♪', '今天的爆率那叫一个高啊.jpg']
     }
   },
   mounted () {
@@ -30,7 +30,7 @@ export default {
       })
     },
     UidChangeHandler (event) {
-      this.$loading.service({ fullscreen: true, text: this.loadingText[this.getRandomInt(4)] })
+      this.$loading.service({ fullscreen: true, text: this.loadingText[this.getRandomInt(this.loadingText.length)] })
       this.$emit('uid', this.uid)
     },
     /**

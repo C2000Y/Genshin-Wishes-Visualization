@@ -13,7 +13,8 @@ export default {
       uid: undefined,
       code: undefined,
       text: '',
-      chartName: 'barChart'
+      chartName: 'barChart',
+      echarts: undefined
     }
   },
   mounted () {
@@ -38,9 +39,12 @@ export default {
       })
     },
     chart () {
+      if (this.echarts != null && this.echarts !== '' && this.echarts !== undefined) {
+        this.echarts.dispose()
+      }
       this.title()
-      const echarts = this.$echarts.init(document.getElementById(this.chartName))
-      echarts.setOption({
+      this.echarts = this.$echarts.init(document.getElementById(this.chartName))
+      this.echarts.setOption({
         title: {
           text: this.text
         },
