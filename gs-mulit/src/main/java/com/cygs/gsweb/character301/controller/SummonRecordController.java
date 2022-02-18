@@ -5,6 +5,7 @@ import com.cygs.gsweb.character301.entity.PickupEntity;
 import com.cygs.gsweb.character301.service.PickupService;
 import com.cygs.gsweb.character301.service.WriteInService;
 import com.cygs.gsweb.connectGachaUser.service.ConnectGachaUserService;
+import com.cygs.gsweb.utils.result.InsertError;
 import com.cygs.gsweb.utils.result.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -38,8 +39,12 @@ public class SummonRecordController implements Serializable {
 //    @ResponseBody
     public Result<Integer> writeIn(@RequestParam("url") String url) throws Exception {
         Integer uid = writeInService.writeIn(url);
-        connectGachaUserService.insertUid(uid);
-        return new Result<Integer>().ok(uid);
+        if(uid > 0){
+            connectGachaUserService.insertUid(uid);
+            return new Result<Integer>().ok(uid);
+        } else {
+            return new Result<Integer>().error(new InsertError().getInsertError(uid));
+        }
     }
 
 //    各池子一共抽了多少次

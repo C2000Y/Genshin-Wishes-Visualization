@@ -1,7 +1,12 @@
 <template>
-  <div class="hello">
-    <web-site-input @update="updateUids"></web-site-input>
-    <uid-selection @uid="getUid" ref="uidSelect"></uid-selection>
+  <div class="content">
+    <div class="top-bar">
+      <div class="selection-title">
+        玩家：
+      </div>
+      <uid-selection @uid="getUid" ref="uidSelect" class="selection"></uid-selection>
+      <web-site-input @update="updateUids"></web-site-input>
+    </div>
     <total ref="totalref"></total>
     <div class="chart-item">
       <div class="left-chart">
@@ -38,7 +43,7 @@ import PieChart from './Data/PieChart'
 import Total from './Data/Total'
 export default {
   name: 'Content',
-  components: {PieChart, WebSiteInput, UidSelection, Total, BarChart},
+  components: {PieChart, WebSiteInput, Total, BarChart, UidSelection},
   data () {
     return {
       msg: 'Welcome to Your Vue.js App',
@@ -79,7 +84,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.hello{
+.content{
   position: relative;
   width: 100%;
   height: 100%;
@@ -102,7 +107,7 @@ a {
   position: relative;
   width: 100%;
   height: 250px;
-  border-top: 2px solid #cccccc;
+  /*border-top: 2px solid #cccccc;*/
 }
   .left-chart{
     float: left;
@@ -114,4 +119,21 @@ a {
     width: 40%;
     height: 240px;
   }
+.top-bar{
+  height: 50px;
+  background: rgb(78,164,220);
+}
+.selection-title{
+  float: left;
+  padding-left: 3%;
+  line-height: 50px;
+  height: 50px;
+  font-weight: bold;
+  color: white;
+  font-size: 20px;
+}
+.selection{
+  padding-top: 5px;
+  float: left;
+}
 </style>

@@ -1,20 +1,12 @@
 <template>
-  <div style="width: 100px; height: 100px; position: absolute; right: 0">
-    <el-button class="el-icon-setting setting-icon" @click="dialogTableVisible = true" style=" width: 62px; height: 62px; padding: 5px; border-radius: 50%; border: unset"></el-button>
-    <el-dialog title="获取网址的方式" :visible.sync="dialogTableVisible" width="800px" :lock-scroll="true">
+  <div style="width: 56px; height: 56px; position: absolute; right: 0">
+    <div class="setting">
+      <el-button class="el-icon-setting setting-icon" @click="dialogTableVisible = true" style=" width: 52px; height: 52px; padding: 2px 2px 2px 2px; border-radius: 50%; border: unset"></el-button>
+    </div>
+    <el-dialog title="上传数据" :visible.sync="dialogTableVisible" width="800px" :lock-scroll="true">
       <el-tabs v-model="activeName" type="border-card" style="height: 350px;">
-        <el-tab-pane label="PC端（Windows）" name="first">
+        <el-tab-pane label="文件上传(PC端)" name="first">
           <div class="tips-words box-card">
-            <div>
-              第一步：登录原神（国服），打开【祈愿】界面
-            </div>
-            <div>
-              第二步：点击【历史记录】，关闭原神
-            </div>
-            <div>
-              第三步：点击【选取文件】，输入后打开：<b>%USERPROFILE%\AppData\LocalLow\miHoYo\原神\output_log.txt</b>
-              <img src="../../../static/enter.png" style="width: 700px">
-            </div>
             <form action='dic/uploadWord' enctype='multipart/form-data' method='post' id="fileUpload">
               <el-upload
                 drag
@@ -35,13 +27,25 @@
                 <!--<div slot="tip" class="el-upload__tip">点击按钮即可开导</div>-->
               </el-upload>
             </form>
+            <div>
+              第一步：登录原神（国服），打开【祈愿】界面
+            </div>
+            <div>
+              第二步：点击【历史记录】
+            </div>
+            <div>
+              第三步：点击【点击上传】，<br>
+              在文件名处输入：<b>%USERPROFILE%\AppData\LocalLow\miHoYo\原神\output_log.txt</b>
+              <el-button icon="el-icon-document-copy" @click="doCopy" class="copy"></el-button>
+              <img src="../../../static/enter.png" style="width: 700px; margin-top: 7px">
+            </div>
           </div>
         </el-tab-pane>
-        <el-tab-pane label="安卓端" name="second">
-          安卓端
+        <el-tab-pane label="网址(安卓, PC)" name="second">
+          <android @return="dataValidation"/>
         </el-tab-pane>
         <el-tab-pane label="IOS端" name="third">
-          IOS端
+          太麻烦了，要咱不换个设备？
         </el-tab-pane>
       </el-tabs>
     </el-dialog>
@@ -56,20 +60,23 @@
 </template>
 
 <script>
+import Android from './Android'
 export default {
   name: 'WebSiteInput',
   components: {
+    Android
   },
   data () {
     return {
       input: '',
       isActive: true,
       uid: undefined,
-      dialogTableVisible: true,
+      dialogTableVisible: false,
       activeName: 'first',
       fileList: [],
       textData: '',
-      file: ''
+      file: '',
+      message: '%USERPROFILE%\\AppData\\LocalLow\\miHoYo\\原神\\output_log.txt'
     }
   },
   methods: {
@@ -128,15 +135,10 @@ export default {
         processData: false,
         data: formdata
       })
-      this.$loading.service().close()
-      if (this.dataValidation(res) === true) {
-        this.uid = res.data.data
-        this.dialogTableVisible = false
-        this.$emit('update', this.uid)
-      }
+      this.dataValidation(res)
     },
     dataValidation (res) {
-      console.log(res)
+      this.$loading.service().close()
       switch (res.data.code) {
         case 500: {
           this.$message({
@@ -150,10 +152,30 @@ export default {
             message: '录入成功',
             type: 'success'
           })
-          console.log('这里')
+          this.uid = res.data.data
+          this.dialogTableVisible = false
+          this.$emit('update', this.uid)
           return true
         }
       }
+    },
+    doCopy () {
+      let that = this
+      this.$copyText(this.message).then(
+        function (e) {
+          console.log(e)
+          that.$message({
+            message: '复制成功',
+            type: 'success'
+          })
+        }, function (e) {
+          console.log(e)
+          that.$message({
+            message: '复制失败',
+            type: 'error'
+          })
+        }
+      )
     }
   }
 }
@@ -177,7 +199,7 @@ export default {
     margin-bottom: 10px;
   }
   .el-icon-setting{
-    font-size: 50px;
+    font-size: 35px;
     /*position: absolute;*/
     /*float: right;*/
   }
@@ -192,6 +214,24 @@ export default {
   }
   /deep/ .el-upload-dragger{
    width: 700px;
-    background: aliceblue;
+    height: 150px;
+    background: white;
+  }
+  .el-icon-upload{
+    margin: 26px 0 17px;
+  }
+  /deep/ .setting .el-button{
+    background: transparent;
+    color: white;
+  }
+  /deep/.el-button.is-circle{
+    padding: 6px;
+  }
+  .copy{
+    height: 22px;
+    width: 22px;
+    padding: 1px;
+    border: unset;
+    color: rgb(78,164,220);
   }
 </style>

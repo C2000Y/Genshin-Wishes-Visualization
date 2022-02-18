@@ -1,8 +1,8 @@
 <template>
   <div>
-    <el-select v-model="uid" @change="UidChangeHandler">
+    <el-select v-model="uid" @change="UidChangeHandler" placeholder="选个玩家才能看数据分析">
       <el-option v-for="item in uids" :value="item.uid" :key="item.uid">
-        {{item.uid}}
+        {{item.name}} - [{{item.uid}}]
       </el-option>
     </el-select>
   </div>

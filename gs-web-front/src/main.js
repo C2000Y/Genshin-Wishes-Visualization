@@ -7,8 +7,12 @@ import router from './router'
 import {Input, Icon, Button, Loading, Message, Select, Option, Dialog, Tabs, TabPane, Card, Upload} from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import * as echarts from 'echarts'
+import VueClipboard from 'vue-clipboard2'
 
 var axios = require('axios')
+
+VueClipboard.config.autoSetContainer = true // add this line
+Vue.use(VueClipboard)
 
 Vue.prototype.$axios = axios
 Vue.prototype.$loading = Loading

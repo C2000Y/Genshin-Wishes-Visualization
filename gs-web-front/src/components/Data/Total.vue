@@ -1,13 +1,13 @@
 <template>
-  <div>
-    <div>
-      标配池：共{{count200}}次
+  <div class="total">
+    <div class="item">
+      常驻祈愿：{{count200}}
     </div>
-    <div>
-      角色池：共{{count301}}次{{detail301}}
+    <div class="item">
+      角色祈愿：{{count301}}
     </div>
-    <div>
-      武器池：共{{count302}}次
+    <div class="item">
+      武器祈愿：{{count302}}
     </div>
   </div>
 </template>
@@ -17,9 +17,9 @@ export default {
   name: 'Total',
   data () {
     return {
-      count301: '-',
-      count302: '-',
-      count200: '-',
+      count301: '',
+      count302: '',
+      count200: '',
       detail301: '',
       detail302: '',
       detail200: ''
@@ -72,5 +72,20 @@ export default {
 </script>
 
 <style scoped>
-
+  .item{
+    border: 2px solid rgb(78,164,220);
+    width: 200px;
+    height: 35px;
+    line-height: 35px;
+    margin-right: 100px;
+    border-radius: 10px;
+    background-color: rgb(78,164,220);
+    color: white;
+    font-weight: bold;
+    font-size: 17px;
+    display: inline-block;
+  }
+  .total{
+    margin-top: 15px;
+  }
 </style>

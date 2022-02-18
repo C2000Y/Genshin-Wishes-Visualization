@@ -1,5 +1,6 @@
 package com.cygs.gsweb.connectGachaUser.entity;
 
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -22,6 +23,7 @@ public class ConnectGachaUserEntity {
     /**
      *  uid
      */
+    @TableId
     private Integer uid;
 
     /**
