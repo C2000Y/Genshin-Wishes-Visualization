@@ -30,15 +30,19 @@ export default {
           code: code
         }
       }).then(res => {
-        this.data = res.data.data
-        for (let i = this.data.length - 1; i > 0; i--) {
-          this.data[i].count -= this.data[i - 1].count
+        const data = res.data.data
+        let count = []
+        // 抽到最后一个五星的总计数量
+        const rs = data[data.length - 1]
+        this.$emit('lastFiveStar', rs, code)
+        count[0] = {count: data[0].count, name: data[0].name}
+        for (let i = data.length - 1; i > 0; i--) {
+          count[i] = {count: data[i].count - data[i - 1].count, name: data[i].name}
         }
-        // console.log(this.data)
-        this.chart()
+        this.chart(count)
       })
     },
-    chart () {
+    chart (value) {
       if (this.echarts != null && this.echarts !== '' && this.echarts !== undefined) {
         this.echarts.dispose()
       }
@@ -51,7 +55,7 @@ export default {
         xAxis: {
           name: '',
           type: 'category',
-          data: this.data.filter(v => v.name).map((item) => {
+          data: value.filter(v => v.name).map((item) => {
             return item.name
           })
         },
@@ -79,14 +83,14 @@ export default {
         //   // return str;
         // },
         yAxis: {
-          name: '抽卡次数',
+          name: '祈愿次数',
           type: 'value',
           max: 90
         },
         series: [
           {
-            name: '抽卡次数',
-            data: this.data.filter(v => v.count).map((item) => {
+            name: '祈愿次数',
+            data: value.filter(v => v.count).map((item) => {
               return item.count
             }),
             type: 'line'
@@ -100,15 +104,15 @@ export default {
     title () {
       switch (this.code) {
         case 301: {
-          this.text = '角色up池'
+          this.text = '角色祈愿'
           break
         }
         case 302: {
-          this.text = '武器up池'
+          this.text = '武器祈愿'
           break
         }
         case 200: {
-          this.text = '标配池'
+          this.text = '常驻祈愿'
           break
         }
       }
