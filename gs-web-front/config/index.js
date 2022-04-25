@@ -21,11 +21,6 @@ proxyObj['/'] = {
 },
 
 module.exports = {
-  // externals: {
-  //   'vue' : 'Vue',
-  //   'vue-router': 'VueRouter',
-  //   'vuex': 'Vuex'
-  // },
   dev: {
     // Paths
     assetsSubDirectory: 'static',
@@ -85,7 +80,7 @@ module.exports = {
      * Source Maps
      */
 
-    productionSourceMap: false,
+    productionSourceMap: true,
     // https://webpack.js.org/configuration/devtool/#production
     devtool: '#source-map',
 

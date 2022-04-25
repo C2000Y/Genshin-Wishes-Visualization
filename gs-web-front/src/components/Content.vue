@@ -10,7 +10,7 @@
     <total ref="totalref"></total>
     <div class="chart-item">
       <div class="left-chart">
-        <bar-chart ref="charaBarData" id="301" @lastFiveStar="getLastFiveStar"></bar-chart>
+        <bar-chart ref="charaBarData" id="301"></bar-chart>
       </div>
       <div class="right-chart">
         <pie-chart ref="charaPieData" id="301" @data="getData"></pie-chart>
@@ -18,7 +18,7 @@
     </div>
     <div class="chart-item">
       <div class="left-chart">
-        <bar-chart ref="weaponBarData" id="302" @lastFiveStar="getLastFiveStar"></bar-chart>
+        <bar-chart ref="weaponBarData" id="302"></bar-chart>
       </div>
       <div class="right-chart">
         <pie-chart ref="weaponPieData" id="302" @data="getData"></pie-chart>
@@ -26,7 +26,7 @@
     </div>
     <div class="chart-item">
       <div class="left-chart">
-        <bar-chart ref="standardBarData" id="200" @lastFiveStar="getLastFiveStar"></bar-chart>
+        <bar-chart ref="standardBarData" id="200"></bar-chart>
       </div>
       <div class="right-chart">
         <pie-chart ref="standardPieData" id="200" @data="getData"></pie-chart>
@@ -53,26 +53,21 @@ export default {
   methods: {
     async getUid (uid) {
       this.uid = uid
-      await this.$refs.totalref.uidChanged(uid)
       this.$refs.charaBarData.getData(uid, 301)
       this.$refs.charaPieData.getData(uid, 301)
       this.$refs.weaponBarData.getData(uid, 302)
       this.$refs.weaponPieData.getData(uid, 302)
       this.$refs.standardBarData.getData(uid, 200)
       this.$refs.standardPieData.getData(uid, 200)
+      this.endLoading()
     },
     async getData (data, code) {
-      // console.log(data)
       let count = 0
       for (let i = 0; i < data.length; i++) {
         count += data[i].count
       }
       await this.$refs.totalref.getTotal(count, code)
       // this.$refs.totalref.charaDetail(data)
-    },
-    async getLastFiveStar (data, code) {
-      // console.log(data, code)
-      await this.$refs.totalref.getBaoDi(data.count, code)
     },
     // 更新uid下拉列表
     updateUids (uid) {
