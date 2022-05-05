@@ -19,4 +19,4 @@ Modify part of the layout
 新增显示每个祈愿池距离保底的次数   
 **Version 1.0.3 - 2022/05/05**  
 调整前端的请求方式  
-减少vendor包大小  
+优化打包方式，减少vendor包大小  
