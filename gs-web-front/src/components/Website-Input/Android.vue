@@ -1,5 +1,6 @@
 <template>
   <div>
+    <!--<Loading :isLoading="isLoading" text="加载时间取决于您近6个月的抽卡次数(1000抽需要20秒)，请耐心等待~"/>-->
     <el-input placeholder="请输入网址" v-model="input" clearable class="web-input">
     <el-button slot="append" @click="clickHandler"><i class="el-icon-search"></i> 查找</el-button>
     </el-input>
@@ -9,8 +10,12 @@
 </template>
 
 <script>
+// import Loading from '../Effect/Loading'
 export default {
   name: 'Android',
+  // components: {
+  //   Loading
+  // },
   data () {
     return {
       input: ''
@@ -25,7 +30,7 @@ export default {
         })
         return
       }
-      this.$loading.service({fullscreen: true, text: '加载时间取决于您近6个月的抽卡次数(1000抽需要20秒)，请耐心等待~'})
+      ELEMENT.Loading.service({fullscreen: true, text: '加载时间取决于您近6个月的抽卡次数(1000抽需要20秒)，请耐心等待~'})
       const res = await this.$axios({
         url: '/summon/writeIn?url=' + this.input,
         method: 'get',

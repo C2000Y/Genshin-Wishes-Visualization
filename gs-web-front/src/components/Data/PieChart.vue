@@ -20,21 +20,21 @@ export default {
     this.chartName += this.id
   },
   methods: {
-    getData (uid, code) {
-      this.code = code
-      this.$axios.get('/summon/rankType', {
-        params: {
-          uid: uid,
-          code: code
-        }
-      }).then(res => {
-        // console.log(res)
-        this.data = res.data.data
-        this.$emit('data', this.data, code)
-        this.chart()
-      })
-    },
-    chart () {
+    // getData (uid, code) {
+    //   this.code = code
+    //   this.$axios.get('/summon/rankType', {
+    //     params: {
+    //       uid: uid,
+    //       code: code
+    //     }
+    //   }).then(res => {
+    //     // console.log(res)
+    //     this.data = res.data.data
+    //     this.$emit('data', this.data, code)
+    //     this.chart(this.data)
+    //   })
+    // },
+    chart (data) {
       if (this.echarts != null && this.echarts !== '' && this.echarts !== undefined) {
         this.echarts.dispose()
       }
@@ -80,7 +80,7 @@ export default {
             labelLine: {
               show: true
             },
-            data: this.data.filter(v => v.itemType).map((item) => {
+            data: data.filter(v => v.itemType).map((item) => {
               // console.log(item)
               return {
                 value: item.count,

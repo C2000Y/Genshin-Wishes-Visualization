@@ -1,19 +1,19 @@
 <template>
   <div class="content">
     <div class="top-bar">
-      <div class="selection-title">
-        玩家：
-      </div>
-      <uid-selection @uid="getUid" ref="uidSelect" class="selection"></uid-selection>
+      <!--<div class="selection-title">-->
+        <!--玩家：-->
+      <!--</div>-->
+      <Total :total="totalWishes" :chara="charaWishes" :charaLeft="charaLeft" :weapon="weaponWishes" :weaponLeft="weaponLeft" :stand="standardWishes" :standLeft="standardLeft"/>
       <web-site-input @update="updateUids"></web-site-input>
+      <uid-selection @uid="getUid" ref="uidSelect" class="selection"></uid-selection>
     </div>
-    <total ref="totalref"></total>
     <div class="chart-item">
       <div class="left-chart">
         <bar-chart ref="charaBarData" id="301"></bar-chart>
       </div>
       <div class="right-chart">
-        <pie-chart ref="charaPieData" id="301" @data="getData"></pie-chart>
+        <pie-chart ref="charaPieData" id="301"></pie-chart>
       </div>
     </div>
     <div class="chart-item">
@@ -21,7 +21,7 @@
         <bar-chart ref="weaponBarData" id="302"></bar-chart>
       </div>
       <div class="right-chart">
-        <pie-chart ref="weaponPieData" id="302" @data="getData"></pie-chart>
+        <pie-chart ref="weaponPieData" id="302"></pie-chart>
       </div>
     </div>
     <div class="chart-item">
@@ -29,7 +29,7 @@
         <bar-chart ref="standardBarData" id="200"></bar-chart>
       </div>
       <div class="right-chart">
-        <pie-chart ref="standardPieData" id="200" @data="getData"></pie-chart>
+        <pie-chart ref="standardPieData" id="200"></pie-chart>
       </div>
     </div>
   </div>
@@ -41,33 +41,115 @@ import UidSelection from './Website-Input/UidSelection'
 import BarChart from './Data/BarChart'
 import PieChart from './Data/PieChart'
 import Total from './Data/Total'
+import Loading from './Effect/Loading'
 export default {
   name: 'Content',
-  components: {PieChart, WebSiteInput, Total, BarChart, UidSelection},
+  components: {PieChart, WebSiteInput, Total, BarChart, UidSelection, Loading},
   data () {
     return {
       msg: 'Welcome to Your Vue.js App',
-      uid: 0
+      uid: 0,
+      finishCount: 0,
+      text: '',
+      loadingText: ['让我康康！', '转啊，转~', '♪好运来，祝你好运来♪', '今天的爆率那叫一个高啊.jpg'],
+      totalWishes: 0,
+      charaWishes: 0,
+      charaLeft: 0,
+      weaponWishes: 0,
+      weaponLeft: 0,
+      standardWishes: 0,
+      standardLeft: 0
     }
   },
   methods: {
+    /**
+     * @param: uid
+     * @desc: 由UidSelection触发，当uid更新
+      */
     async getUid (uid) {
+      // 显示加载过场
+      this.startLoading()
       this.uid = uid
-      this.$refs.charaBarData.getData(uid, 301)
-      this.$refs.charaPieData.getData(uid, 301)
-      this.$refs.weaponBarData.getData(uid, 302)
-      this.$refs.weaponPieData.getData(uid, 302)
-      this.$refs.standardBarData.getData(uid, 200)
-      this.$refs.standardPieData.getData(uid, 200)
-      this.endLoading()
+      // await this.$refs.totalref.uidChanged(uid)
+      // 初始化图表
+      this.reInitChart()
+      await this.getChartData(uid, 301)
+      await this.getChartData(uid, 302)
+      await this.getChartData(uid, 200)
+      // 结束加载过场
+      await this.endLoading()
     },
-    async getData (data, code) {
-      let count = 0
-      for (let i = 0; i < data.length; i++) {
-        count += data[i].count
-      }
-      await this.$refs.totalref.getTotal(count, code)
-      // this.$refs.totalref.charaDetail(data)
+    /**
+     * @param: uid, code(池子的代码,200标配池，301角色池，302武器池)
+     * @desc: 由getUid触发，获取特定uid下某个池子的信息
+     */
+    async getChartData (uid, code) {
+      let count = []
+      let wishes = 0
+      let left = 0
+      this.uid = uid
+      this.code = code
+      await this.$axios.get('summon/SummonCount', {
+        params: {
+          uid: uid,
+          code: code
+        }
+      }).then(res => {
+        this.finishCount += 1
+        const data = res.data.data
+        // 抽到最后一个五星的总计数量
+        count[0] = {count: data[0].count, name: data[0].name}
+        left = data[data.length - 1].count
+        for (let i = data.length - 1; i > 0; i--) {
+          count[i] = {count: data[i].count - data[i - 1].count, name: data[i].name}
+        }
+        switch (code) {
+          case 301: {
+            this.$refs.charaBarData.chart(count, code)
+            break
+          }
+          case 302: {
+            this.$refs.weaponBarData.chart(count, code)
+            break
+          }
+          case 200: {
+            this.$refs.standardBarData.chart(count, code)
+            break
+          }
+        }
+      })
+      await this.$axios.get('/summon/rankType', {
+        params: {
+          uid: uid,
+          code: code
+        }
+      }).then(res => {
+        let data = res.data.data
+        for (let i = 0; i < data.length; i++) {
+          wishes += data[i].count
+        }
+        this.finishCount += 1
+        switch (code) {
+          case 301: {
+            this.$refs.charaPieData.chart(data)
+            this.charaWishes = wishes
+            this.charaLeft = 90 - wishes + left
+            break
+          }
+          case 302: {
+            this.$refs.weaponPieData.chart(data)
+            this.weaponWishes = wishes
+            this.weaponLeft = 90 - wishes + left
+            break
+          }
+          case 200: {
+            this.$refs.standardPieData.chart(data)
+            this.standardWishes = wishes
+            this.standardLeft = 90 - wishes + left
+            break
+          }
+        }
+      })
     },
     // 更新uid下拉列表
     updateUids (uid) {
@@ -75,8 +157,31 @@ export default {
       this.$refs.uidSelect.getUids(uid)
       this.getUid(uid)
     },
-    endLoading () {
-      this.$loading.service().close()
+    async endLoading () {
+      while (this.finishCount <= 5) {
+        // this.finishCount++
+        await new Promise(resolve => setTimeout(resolve, 400))
+      }
+      await new Promise(resolve => setTimeout(resolve, 400))
+      this.totalWishes = this.charaWishes + this.weaponWishes + this.standardWishes
+      ELEMENT.Loading.service().close()
+    },
+    startLoading () {
+      this.text = this.loadingText[Math.floor(Math.random() * this.loadingText.length)]
+      ELEMENT.Loading.service({ fullscreen: true, text: this.text })
+    },
+    reInitChart () {
+      this.totalWishes = 0
+      this.charaWishes = 0
+      this.weaponWishes = 0
+      this.standardWishes = 0
+      this.finishCount = 0
+      this.$refs.charaBarData.chart([])
+      this.$refs.weaponBarData.chart([])
+      this.$refs.standardBarData.chart([])
+      this.$refs.charaPieData.chart([{itemType: '', rankType: ''}])
+      this.$refs.weaponPieData.chart([{itemType: '', rankType: ''}])
+      this.$refs.standardPieData.chart([{itemType: '', rankType: ''}])
     }
   }
 }
@@ -85,9 +190,14 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .content{
-  position: relative;
-  width: 100%;
+  /*position: relative;*/
+  /*width: 100%;*/
   height: 100%;
+  background: rgba(245,245,245,0.9);
+  width: 1330px;
+  margin-right: auto;
+  margin-left: auto;
+  /*-webkit-backdrop-filter: blur(10px);*/
 }
 h1, h2 {
   font-weight: normal;
@@ -105,8 +215,10 @@ a {
 }
 .chart-item{
   position: relative;
-  width: 100%;
-  height: 250px;
+  /*width: 100%;*/
+  height: 265px;
+  margin-top: 5px;
+  padding: 0px 20px 0px 20px;
   /*border-top: 2px solid #cccccc;*/
 }
   .left-chart{
@@ -119,21 +231,26 @@ a {
     width: 40%;
     height: 240px;
   }
-.top-bar{
-  height: 50px;
-  background: rgb(78,164,220);
-}
-.selection-title{
-  float: left;
-  padding-left: 3%;
-  line-height: 50px;
-  height: 50px;
-  font-weight: bold;
-  color: white;
-  font-size: 20px;
-}
-.selection{
-  padding-top: 5px;
-  float: left;
-}
+  .top-bar{
+    padding: 10px 5px 0px 25px;
+    height: 52px;
+    /*background: rgb(78,164,220);*/
+  }
+  .selection-title{
+    float: left;
+    padding-left: 3%;
+    line-height: 50px;
+    height: 50px;
+    font-weight: bold;
+    color: white;
+    font-size: 20px;
+  }
+  .selection{
+    padding-top: 8px;
+    float: right;
+  }
+  .records{
+    float: left;
+    line-height: 55px;
+  }
 </style>

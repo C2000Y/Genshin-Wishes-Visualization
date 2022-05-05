@@ -1,16 +1,19 @@
 <template>
   <div id="app">
+    <Navigate/>
     <Content/>
   </div>
 </template>
 
 <script>
 import Content from './components/Content'
+import Navigate from './components/Navi/Navi'
 
 export default {
   name: 'App',
   components: {
-    Content
+    Content,
+    Navigate
   }
 }
 </script>
@@ -24,7 +27,7 @@ export default {
   color: #2c3e50;
   /*margin-top: 60px;*/
   overflow: hidden;
-  min-width: 1200px;
+  width: 100%;
 }
 ::-webkit-scrollbar
 {
@@ -42,4 +45,5 @@ export default {
   border-radius: 5px;
   border: 2px solid white;
 }
+
 </style>

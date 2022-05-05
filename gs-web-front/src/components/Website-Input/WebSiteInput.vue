@@ -1,7 +1,7 @@
 <template>
-  <div style="width: 56px; height: 56px; position: absolute; right: 0">
+  <div style="width: 56px; height: 56px; position: relative; float: right">
     <div class="setting">
-      <el-button class="el-icon-setting setting-icon" @click="dialogTableVisible = true" style=" width: 52px; height: 52px; padding: 2px 2px 2px 2px; border-radius: 50%; border: unset"></el-button>
+      <el-button class="el-icon-setting" @click="dialogTableVisible = true" style=" width: 52px; height: 52px; padding: 2px 2px 2px 2px; border-radius: 50%; border: unset"></el-button>
     </div>
     <el-dialog title="上传数据" :visible.sync="dialogTableVisible" width="800px" :lock-scroll="true">
       <el-tabs v-model="activeName" type="border-card" style="height: 350px;">
@@ -42,10 +42,11 @@
           </div>
         </el-tab-pane>
         <el-tab-pane label="网址(安卓, PC)" name="second">
-          <android @return="dataValidation"/>
+          <!--<android @return="dataValidation"/>-->
+          关闭维修中...
         </el-tab-pane>
         <el-tab-pane label="IOS端" name="third">
-          太麻烦了，要咱不换个设备？
+          开发中...
         </el-tab-pane>
       </el-tabs>
     </el-dialog>
@@ -61,10 +62,11 @@
 
 <script>
 import Android from './Android'
+import Loading from '../Effect/Loading'
 export default {
   name: 'WebSiteInput',
   components: {
-    Android
+    Android, Loading
   },
   data () {
     return {
@@ -76,6 +78,7 @@ export default {
       fileList: [],
       textData: '',
       file: '',
+      isLoading: false,
       message: '%USERPROFILE%\\AppData\\LocalLow\\miHoYo\\原神\\output_log.txt'
     }
   },
@@ -102,7 +105,7 @@ export default {
       // }
     },
     handleExceed () {
-      this.$message({message: '一次只能上传一个哦', type: 'warning'})
+      ELEMENT.Message.warning('一次只能上传一个哦')
     },
     handleUpload (file) {
       // reader.readAsText(file)
@@ -119,7 +122,7 @@ export default {
       // }
     },
     handleFileChange () {
-      this.$loading.service({ fullscreen: true, text: '加载时间取决于您近6个月的抽卡次数(1000抽需要20秒)，请耐心等待~' })
+      ELEMENT.Loading.service({ fullscreen: true, text: '加载时间取决于您近6个月的抽卡次数(1000抽需要20秒)，请耐心等待~' })
       var form = document.getElementById('fileUpload')
       console.log(form)
       const formdata = new FormData(form)
@@ -138,20 +141,14 @@ export default {
       this.dataValidation(res)
     },
     dataValidation (res) {
-      this.$loading.service().close()
+      ELEMENT.Loading.service().close()
       switch (res.data.code) {
         case 500: {
-          this.$message({
-            message: '录入失败，失败原因：' + res.data.msg + '',
-            type: 'error'
-          })
+          ELEMENT.Message.error('录入失败，失败原因：' + res.data.msg)
           return false
         }
         case 0: {
-          this.$message({
-            message: '录入成功',
-            type: 'success'
-          })
+          ELEMENT.Message.success('录入成功')
           this.uid = res.data.data
           this.dialogTableVisible = false
           this.$emit('update', this.uid)
@@ -160,20 +157,13 @@ export default {
       }
     },
     doCopy () {
-      let that = this
       this.$copyText(this.message).then(
         function (e) {
           console.log(e)
-          that.$message({
-            message: '复制成功',
-            type: 'success'
-          })
+          ELEMENT.Message.success('复制成功')
         }, function (e) {
           console.log(e)
-          that.$message({
-            message: '复制失败',
-            type: 'error'
-          })
+          ELEMENT.Message.error('复制失败')
         }
       )
     }
@@ -203,15 +193,6 @@ export default {
     /*position: absolute;*/
     /*float: right;*/
   }
-  @keyframes rotate {
-    100% {
-      transform: rotate(120deg);
-    }
-  }
-  .setting-icon:hover{
-    animation: rotate .5s;
-    cursor: pointer;
-  }
   /deep/ .el-upload-dragger{
    width: 700px;
     height: 150px;
@@ -222,7 +203,7 @@ export default {
   }
   /deep/ .setting .el-button{
     background: transparent;
-    color: white;
+    /*color: white;*/
   }
   /deep/.el-button.is-circle{
     padding: 6px;
