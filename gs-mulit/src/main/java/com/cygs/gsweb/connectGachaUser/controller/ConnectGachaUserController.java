@@ -36,4 +36,18 @@ public class ConnectGachaUserController implements Serializable {
         return new Result<List<ConnectGachaUserEntity>>().ok(connectGachaUserEntityList);
     }
 
+    @CrossOrigin
+    @GetMapping("rewriteName")
+    public Result<Integer> updateName(@RequestParam HashMap map)throws Exception {
+        connectGachaUserService.rewriteName(map);
+        return new Result<Integer>().ok(0);
+    }
+
+    @CrossOrigin
+    @GetMapping("getName")
+    public Result<String> getName(@RequestParam("uid") Integer uid)throws Exception {
+        String name = connectGachaUserService.getNameByUid(uid);
+        return new Result<String>().ok(name);
+    }
+
 }

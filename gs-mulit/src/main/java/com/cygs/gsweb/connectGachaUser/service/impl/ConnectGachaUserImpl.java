@@ -30,7 +30,21 @@ public class ConnectGachaUserImpl implements ConnectGachaUserService {
     }
 
     @Override
+    public void rewriteName(HashMap map) {
+//        ConnectGachaUserEntity user = new ConnectGachaUserEntity(uid, name);
+//        connectGachaUserDao.updateById(user);
+        connectGachaUserDao.rewriteName(map);
+    }
+
+    @Override
     public void insertUid(Integer uid) {
         connectGachaUserDao.insertUid(uid);
     }
+
+    @Override
+    public String getNameByUid(Integer uid) {
+        return connectGachaUserDao.getNameByUid(uid);
+    }
+
+
 }

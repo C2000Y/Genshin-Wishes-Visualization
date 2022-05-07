@@ -182,7 +182,6 @@ export default {
   .Nav-items{
     display: flex;
     align-items: center;
-    line-height: 22px;
     font-size: 14px;
     list-style: none;
     margin: 5px 0px 0px 0px;
@@ -196,5 +195,15 @@ export default {
     color: #537fb5;
     text-align: left;
     /*font-family: 华文细黑;*/
+  }
+  @media screen and (max-width: 1200px){
+    .Nav-items{
+      margin: unset;
+      padding: unset;
+    }
+    .item{
+      margin: 0 0.5rem 0 0.5rem;
+      font-size: 0.73rem;
+    }
   }
 </style>

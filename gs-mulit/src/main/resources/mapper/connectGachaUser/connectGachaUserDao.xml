@@ -7,4 +7,12 @@
         insert ignore into gs.connect_gacha_user(uid) values (#{uid})
     </insert>
 
+    <update id="rewriteName" parameterType="map">
+      UPDATE gs.connect_gacha_user set name = #{name} where uid = #{uid}
+    </update>
+
+    <select id="getNameByUid" parameterType="Integer" resultType="String">
+        select name from gs.connect_gacha_user where uid = #{uid}
+    </select>
+
 </mapper>

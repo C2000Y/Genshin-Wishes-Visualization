@@ -6,6 +6,7 @@ import com.cygs.gsweb.character301.entity.PickupEntity;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
+import java.util.HashMap;
 import java.util.List;
 
 /**

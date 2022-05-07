@@ -9,5 +9,7 @@ import java.util.List;
 
 public interface ConnectGachaUserService {
     List<ConnectGachaUserEntity> getUids();
+    void rewriteName(HashMap map);
     void insertUid(Integer uid);
+    String getNameByUid(Integer uid);
 }

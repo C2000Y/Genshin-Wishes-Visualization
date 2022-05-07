@@ -5,6 +5,7 @@ import com.cygs.gsweb.connectGachaUser.entity.ConnectGachaUserEntity;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -16,4 +17,6 @@ public interface ConnectGachaUserDao extends BaseMapper<ConnectGachaUserEntity> 
     List<ConnectGachaUserEntity> getUids();
 
     void insertUid(Integer uid);
+    void rewriteName(HashMap map);
+    String getNameByUid(Integer uid);
 }

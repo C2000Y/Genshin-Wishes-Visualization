@@ -24,7 +24,7 @@ export default {
   methods: {
     async clickHandler () {
       if (this.input === '') {
-        this.$message({
+        ELEMENT.Message({
           message: '录入失败，失败原因：输入不能为空',
           type: 'error'
         })

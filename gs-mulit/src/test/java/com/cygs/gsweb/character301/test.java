@@ -2,6 +2,7 @@ package com.cygs.gsweb.character301;
 
 import com.cygs.gsweb.character301.dao.PickupDao;
 import com.cygs.gsweb.character301.entity.PickupEntity;
+import com.cygs.gsweb.connectGachaUser.service.ConnectGachaUserService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -15,6 +16,7 @@ public class test {
 
     @Autowired
     private PickupDao pickupDao;
+    private ConnectGachaUserService connectGachaUserService;
 
     @Test
     void listAll() {
@@ -46,4 +48,13 @@ public class test {
         Integer integer20 = pickupDao.get200CountById(100105164);
 //        System.out.println(integer);
     }
+
+    @Test
+    public void updateName(){
+        HashMap map = new HashMap<>();
+        map.put("name","a");
+        map.put("uid",111);
+        connectGachaUserService.rewriteName(map);
+    }
+
 }

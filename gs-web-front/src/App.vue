@@ -46,4 +46,16 @@ export default {
   border: 2px solid white;
 }
 
+/*@media screen and (max-width: 550px){*/
+  /*.a{*/
+    /*background-color:#6633FF;*/
+  /*}*/
+/*}*/
+
+/*@media screen and (max-width: 320px){*/
+  /*.a{*/
+    /*background-color:#FFFF00;*/
+  /*}*/
+/*}*/
+
 </style>

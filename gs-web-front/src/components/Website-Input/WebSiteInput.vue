@@ -92,7 +92,7 @@ export default {
       //     }
       //   }).then(res => {
       //     this.input = ''
-      //     this.$message({
+      //     ELEMENT.Message({
       //       message: res.data.data === 0 ? '录入失败' : '录入完成',
       //       type: res.data.data === 0 ? 'error' : 'success'
       //     })
@@ -101,7 +101,7 @@ export default {
       //     this.$emit('update', this.uid)
       //   })
       // } else {
-      //   this.$message({message: '请输入网址', type: 'warning'})
+      //   ELEMENT.Message({message: '请输入网址', type: 'warning'})
       // }
     },
     handleExceed () {
@@ -140,10 +140,10 @@ export default {
       })
       this.dataValidation(res)
     },
-    dataValidation (res) {
-      ELEMENT.Loading.service().close()
+    async dataValidation (res) {
       switch (res.data.code) {
         case 500: {
+          ELEMENT.Loading.service().close()
           ELEMENT.Message.error('录入失败，失败原因：' + res.data.msg)
           return false
         }
@@ -151,7 +151,15 @@ export default {
           ELEMENT.Message.success('录入成功')
           this.uid = res.data.data
           this.dialogTableVisible = false
-          this.$emit('update', this.uid)
+          const name = await this.$axios({
+            url: '/uid/getName?uid=' + this.uid,
+            method: 'get',
+            contentType: false,
+            processData: false
+          })
+          await this.open(name.data.data, this.uid)
+          ELEMENT.Loading.service().close()
+          this.$emit('update', this.uid, 0)
           return true
         }
       }
@@ -166,6 +174,34 @@ export default {
           ELEMENT.Message.error('复制失败')
         }
       )
+    },
+    async open (name, uid) {
+      this.$prompt('输入昵称', '提示', {
+        inputValue: name,
+        confirmButtonText: '确定',
+        cancelButtonText: '取消'
+      }).then(({ value }) => {
+        if (value === name) {
+          ELEMENT.Message.info('取消修改')
+        } else {
+          this.$axios({
+            url: '/uid/rewriteName?uid=' + this.uid + '&name=' + value,
+            method: 'get',
+            contentType: false,
+            processData: false
+          }).then(res => {
+            console.log(res)
+            if (res.data.data === 0) {
+              ELEMENT.Message.success('昵称修改为: ' + value)
+              this.$emit('update', uid, -1)
+            } else {
+              ELEMENT.Message.error('修改失败')
+            }
+          })
+        }
+      }).catch(() => {
+        ELEMENT.Message.info('取消修改')
+      })
     }
   }
 }

@@ -73,9 +73,9 @@ export default {
       // await this.$refs.totalref.uidChanged(uid)
       // 初始化图表
       this.reInitChart()
-      await this.getChartData(uid, 301)
-      await this.getChartData(uid, 302)
-      await this.getChartData(uid, 200)
+      this.getChartData(uid, 301)
+      this.getChartData(uid, 302)
+      this.getChartData(uid, 200)
       // 结束加载过场
       await this.endLoading()
     },
@@ -96,12 +96,15 @@ export default {
         }
       }).then(res => {
         this.finishCount += 1
+        console.log(this.finishCount)
         const data = res.data.data
         // 抽到最后一个五星的总计数量
-        count[0] = {count: data[0].count, name: data[0].name}
-        left = data[data.length - 1].count
-        for (let i = data.length - 1; i > 0; i--) {
-          count[i] = {count: data[i].count - data[i - 1].count, name: data[i].name}
+        if (data.length > 0) {
+          count[0] = {count: data[0].count, name: data[0].name}
+          left = data[data.length - 1].count
+          for (let i = data.length - 1; i > 0; i--) {
+            count[i] = {count: data[i].count - data[i - 1].count, name: data[i].name}
+          }
         }
         switch (code) {
           case 301: {
@@ -152,14 +155,18 @@ export default {
       })
     },
     // 更新uid下拉列表
-    updateUids (uid) {
+    updateUids (uid, status) {
       this.uid = uid
-      this.$refs.uidSelect.getUids(uid)
-      this.getUid(uid)
+      if (status >= 0) {
+        this.getUid(uid)
+      } else {
+        this.$refs.uidSelect.getUids(uid)
+      }
     },
     async endLoading () {
       while (this.finishCount <= 5) {
         // this.finishCount++
+        console.log(this.finishCount)
         await new Promise(resolve => setTimeout(resolve, 400))
       }
       await new Promise(resolve => setTimeout(resolve, 400))
@@ -176,6 +183,9 @@ export default {
       this.weaponWishes = 0
       this.standardWishes = 0
       this.finishCount = 0
+      this.charaLeft = 0
+      this.weaponLeft = 0
+      this.standardLeft = 0
       this.$refs.charaBarData.chart([])
       this.$refs.weaponBarData.chart([])
       this.$refs.standardBarData.chart([])
@@ -194,7 +204,9 @@ export default {
   /*width: 100%;*/
   height: 100%;
   background: rgba(245,245,245,0.9);
-  width: 1330px;
+  max-width: 1330px;
+  width: 90%;
+  min-width: 1200px;
   margin-right: auto;
   margin-left: auto;
   /*-webkit-backdrop-filter: blur(10px);*/
@@ -226,16 +238,37 @@ a {
     width: 55%;
     height: 240px;
   }
+.right-chart{
+  float: right;
+  width: 40%;
+  height: 240px;
+}
+.top-bar{
+  padding: 10px 5px 0px 25px;
+  height: 52px;
+  /*background: rgb(78,164,220);*/
+}
+@media screen and (max-width: 1200px){
+  .content{
+    width: 100%;
+    min-width: unset;
+  }
+  .left-chart{
+    float: unset;
+    width: 100%;
+  }
   .right-chart{
-    float: right;
-    width: 40%;
-    height: 240px;
+    float: unset;
+    width: 100%;
+  }
+  .chart-item{
+    height: unset;
   }
   .top-bar{
-    padding: 10px 5px 0px 25px;
-    height: 52px;
-    /*background: rgb(78,164,220);*/
+    height: 110px;
+    padding: 5px 5px 0px 5px;
   }
+}
   .selection-title{
     float: left;
     padding-left: 3%;
