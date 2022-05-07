@@ -25,5 +25,5 @@ Optimized packaging method to reduce vendor package size
 **Version 1.0.3.1 2022/05/07**  
 增加修改昵称功能  
 移动端页面适应（大屏）  
-Add nickname modification function
-Mobile page adaptation
+Add nickname modification function  
+Mobile page adaptation  
