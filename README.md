@@ -20,3 +20,10 @@ Modify part of the layout
 **Version 1.0.3 - 2022/05/05**  
 调整前端的请求方式  
 优化打包方式，减少vendor包大小  
+Adjusted the way the front end request data  
+Optimized packaging method to reduce vendor package size  
+**Version 1.0.3.1 2022/05/07**  
+增加修改昵称功能  
+移动端页面适应（大屏）  
+Add nickname modification function
+Mobile page adaptation
