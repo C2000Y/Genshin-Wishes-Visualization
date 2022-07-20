@@ -2,11 +2,12 @@
 Only Support CN Server For Now  
 Version 1.0.3.2 
 http://175.24.165.47/#/
-![image](https://user-images.githubusercontent.com/67337861/166915310-f5661465-6206-480e-a732-cd506b6f2d99.png)
+![image](https://user-images.githubusercontent.com/67337861/180053478-520bea2e-0256-43a1-9cb8-fd1f6512826d.png)
+
 
 **Version 1.0.0 - 2022/2/3**  
 初始部署  
-First Deploy  
+Initial Deploy  
   
 **Version 1.0.1 - 2022/2/6**  
 优化了每个祈愿池的统计速度  
@@ -22,9 +23,11 @@ Modify part of the layout
 新增显示每个祈愿池距离保底的次数   
   
 **Version 1.0.3 - 2022/05/05**  
-调整前端的请求方式  
+美化了网页UI  
+调整前端的请求基本逻辑  
 优化打包方式，减少vendor包大小  
-Adjusted the way the front end request data  
+Redesigned the front-end UI
+Adjusted the base logic of requesting data in front end
 Optimized packaging method to reduce vendor package size  
   
 **Version 1.0.3.1 2022/05/07**  
@@ -38,3 +41,4 @@ Mobile page adaptation
 重新开放安卓网页输入功能  
 Redesigned File Upload Logic, now upload URL instead of File  
 Reopened Android Website URL entry function  
+  
