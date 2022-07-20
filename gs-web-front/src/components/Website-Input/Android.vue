@@ -1,11 +1,11 @@
 <template>
   <div>
     <!--<Loading :isLoading="isLoading" text="加载时间取决于您近6个月的抽卡次数(1000抽需要20秒)，请耐心等待~"/>-->
-    <el-input placeholder="请输入网址" v-model="input" clearable class="web-input">
-    <el-button slot="append" @click="clickHandler"><i class="el-icon-search"></i> 查找</el-button>
+    <el-input placeholder="在这儿输入链接" v-model="input" clearable class="web-input">
+    <el-button slot="append" @click="clickHandler"><i class="el-icon-search"></i> 上传</el-button>
     </el-input>
-    <el-dialog title="获取网址的方式" :visible.sync="dialogTableVisible" width="800px">
-    </el-dialog>
+    <!--<el-dialog title="获取网址的方式" :visible.sync="dialogTableVisible" width="800px">-->
+    <!--</el-dialog>-->
   </div>
 </template>
 
@@ -30,14 +30,15 @@ export default {
         })
         return
       }
-      ELEMENT.Loading.service({fullscreen: true, text: '加载时间取决于您近6个月的抽卡次数(1000抽需要20秒)，请耐心等待~'})
-      const res = await this.$axios({
-        url: '/summon/writeIn?url=' + this.input,
-        method: 'get',
-        contentType: false,
-        processData: false
-      })
-      this.$emit('return', res)
+      // ELEMENT.Loading.service({fullscreen: true, text: '加载时间取决于您近6个月的抽卡次数(1000抽需要20秒)，请耐心等待~'})
+      // const res = await this.$axios({
+      //   url: '/summon/writeIn?url=' + this.input,
+      //   method: 'get',
+      //   contentType: false,
+      //   processData: false
+      // })
+      this.$emit('return', this.input)
+      this.input = ''
     }
   }
 }

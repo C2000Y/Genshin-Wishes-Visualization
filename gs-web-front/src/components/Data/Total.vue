@@ -203,7 +203,23 @@ export default {
     }
     .item{
       margin: 0 0.5rem 0 0.5rem;
+      font-size: 1rem;
+    }
+  }
+
+  @media screen and (max-width: 550px){
+    .item{
+      /*margin: 0 0.5rem 0 0.5rem;*/
       font-size: 0.73rem;
+    }
+  }
+
+  @media screen and (max-width: 420px){
+    .Nav-items{
+      flex-wrap: wrap;
+    }
+    .item{
+      margin: 0 0.3rem 0 0.3rem;
     }
   }
 </style>

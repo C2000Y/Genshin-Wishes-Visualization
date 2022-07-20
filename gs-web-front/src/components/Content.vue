@@ -10,7 +10,7 @@
     </div>
     <div class="chart-item">
       <div class="left-chart">
-        <bar-chart ref="charaBarData" id="301"></bar-chart>
+        <bar-chart ref="charaBarData" id="301" style="width: 100%"></bar-chart>
       </div>
       <div class="right-chart">
         <pie-chart ref="charaPieData" id="301"></pie-chart>
@@ -269,6 +269,7 @@ a {
     padding: 5px 5px 0px 5px;
   }
 }
+
   .selection-title{
     float: left;
     padding-left: 3%;

@@ -90,7 +90,7 @@ public class WriteInServiceImpl implements WriteInService {
                     reader.close();
                 }catch (Exception e){
                     System.out.println(e);
-                    break;
+                    return -2;
                 }
             } else {
                 break;

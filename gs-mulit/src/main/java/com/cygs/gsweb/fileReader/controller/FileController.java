@@ -15,6 +15,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.InputStreamReader;
 import java.io.Serializable;
+import java.net.URLDecoder;
 import java.util.List;
 
 /**
@@ -31,29 +32,34 @@ public class FileController implements Serializable {
 
     /**
      * localhost:6480/uid/list
+     *
      * @param
      * @return
      */
     @CrossOrigin
-    @RequestMapping("/reader")
-    @ResponseBody
-    public Result<Integer> getFile(HttpServletRequest request) throws Exception {
-        MultipartHttpServletRequest multipartHttpServletRequest = (MultipartHttpServletRequest) request;
-        MultipartFile file = multipartHttpServletRequest.getFile("file");
-        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(file.getInputStream()));
-        String lineTxt;
+    @PostMapping("/reader")
+    public Result<Integer> getUrl(@RequestBody String url) throws Exception {
+//        System.out.println(url);
+//        System.out.println(url.getParameter("url"));
+//        MultipartHttpServletRequest multipartHttpServletRequest = (MultipartHttpServletRequest) request;
+//        MultipartFile file = multipartHttpServletRequest.getFile("file");
+//        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(file.getInputStream()));
+//        String lineTxt;
+        url = URLDecoder.decode(url,"UTF-8");
+        System.out.println(url);
         System.out.println("before get");
-        while ((lineTxt=bufferedReader.readLine())!=null){
-            if(lineTxt.contains("#/log")){
-                System.out.println(lineTxt);
-                Integer uid = writeInService.writeIn(lineTxt);
-                if(uid > 0){
-                    connectGachaUserService.insertUid(uid);
-                    return new Result<Integer>().ok(uid);
-                } else {
-                    return new Result<Integer>().error(new InsertError().getInsertError(uid));
-                }
+//        while ((lineTxt=bufferedReader.readLine())!=null){
+        if (url.contains("#/log")) {
+            System.out.println(url);
+            Integer uid = writeInService.writeIn(url);
+            System.out.println(uid);
+            if (uid > 0) {
+                connectGachaUserService.insertUid(uid);
+                return new Result<Integer>().ok(uid);
+            } else {
+                return new Result<Integer>().error(new InsertError().getInsertError(uid));
             }
+//            }
         }
         return new Result<Integer>().error("文件有误");
     }

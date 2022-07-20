@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <style lang="css">
+    #area{
+      width: 500px;
+      height: 500px;
+      border: 1px solid black;
+    }
+    #box1{
+      width: 30px;
+      height: 30px;
+      background-color: red;
+      position: absolute;
+    }
+  </style>
+</head>
+<body>
+<div id="area">
+  <div id="box1"></div>
+</div>
+</body>
+<script>
+  var box1 = document.getElementById("box1");
+  var area = document.getElementById("area");
+  // 初始化移动速度
+  var speed = 3;
+  // 控制方向(上、左、下、右)
+  var dir = [false,false,false,false];
+  // 设置定时器控制元素全方位移动
+  setInterval(function(){
+    // 向左
+    if(dir[3]) box1.style.left = box1.offsetLeft - speed + 'px';
+    // 向右
+    if(dir[1]) box1.style.left = box1.offsetLeft + speed + 'px';
+    // 向上
+    if(dir[0]) box1.style.top = box1.offsetTop - speed + 'px';
+    // 向下
+    if(dir[2]) box1.style.top = box1.offsetTop + speed + 'px';
+    limit();
+  },10)
+  // 鼠标按下设置速度和方向
+  document.onkeydown = function(event){
+    var e = event || window.event;
+    switch(e.key){
+      case 'a':dir[3]=true;
+        break;
+      case 'w':dir[0]=true;
+        break;
+      case 'd':dir[1]=true;
+        break;
+      case 's':dir[2]=true;
+        break;
+      case ' ':
+        speed = 5;
+        break;
+    }
+
+  }
+  // 松开鼠标停止移动
+  document.onkeyup = function(event){
+    var e = event || window.event;
+    switch(e.key){
+      case 'a':dir[3]=false;
+        break;
+      case 'w':dir[0]=false;
+        break;
+      case 'd':dir[1]=false;
+        break;
+      case 's':dir[2]=false;
+        break;
+      case ' ':  speed= 3;
+        break;
+    }
+  }
+  function limit(){
+    //防止左溢出
+    if (box1.offsetLeft<=area.offsetLeft) {(box1.style.left = area.offsetLeft + 1 + "px");}
+    //防止上溢出
+    (box1.offsetTop<=area.offsetTop)&&(box1.style.top= area.offsetTop + 1 + "px");
+    //防止右溢出
+    let width = area.offsetWidth + area.offsetLeft;
+    let height = area.offsetHeight + area.offsetTop;
+    (box1.offsetLeft+box1.offsetWidth>=width)&&(box1.style.left=width-box1.offsetWidth +"px");
+    //防止下溢出
+    (box1.offsetTop+box1.offsetHeight>=height)&&(box1.style.top=height-box1.offsetWidth+"px");
+  }
+</script>
+</html>
