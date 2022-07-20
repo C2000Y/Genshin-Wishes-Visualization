@@ -1,6 +1,6 @@
 # Genshin Wishes Visualization
 Only Support CN Server For Now  
-Version 1.0.2.1  
+Version 1.0.3.2 
 http://175.24.165.47/#/
 ![image](https://user-images.githubusercontent.com/67337861/166915310-f5661465-6206-480e-a732-cd506b6f2d99.png)
 
@@ -33,3 +33,8 @@ Optimized packaging method to reduce vendor package size
 Add nickname modification function  
 Mobile page adaptation  
   
+**Version 1.0.3.2 2022/07/20**  
+修改了文件上传逻辑，现在只上传URL而不是文件  
+重新开放安卓网页输入功能  
+Redesigned File Upload Logic, now upload URL instead of File  
+Reopened Android Website URL entry function  
