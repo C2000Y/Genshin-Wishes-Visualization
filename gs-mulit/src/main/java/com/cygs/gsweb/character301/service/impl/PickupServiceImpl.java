@@ -5,10 +5,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.cygs.gsweb.character301.dao.PickupDao;
-import com.cygs.gsweb.character301.dto.DataJson;
-import com.cygs.gsweb.character301.dto.Gacha;
-import com.cygs.gsweb.character301.dto.ListJson;
-import com.cygs.gsweb.character301.dto.PickupDTO;
+import com.cygs.gsweb.character301.dto.*;
 import com.cygs.gsweb.character301.entity.PickupEntity;
 import com.cygs.gsweb.character301.service.PickupService;
 import org.apache.ibatis.session.SqlSession;
@@ -68,6 +65,11 @@ public class PickupServiceImpl implements PickupService{
     }
 
     @Override
+    public Integer getWishSum() {
+        return null;
+    }
+
+    @Override
     public List<PickupDTO> getSummonCountByUid(HashMap map) {
         return pickupDao.getSummonCountByUid(map);
     }
@@ -75,6 +77,11 @@ public class PickupServiceImpl implements PickupService{
     @Override
     public List<PickupDTO> getItemsByLevel(HashMap map) {
         return pickupDao.getItemsByLevel(map);
+    }
+
+    @Override
+    public List<TotalPickupDTO> getTotalSummonCountByUid(Integer uid) {
+        return pickupDao.getTotalSummonCountByUid(uid);
     }
 
     @Override

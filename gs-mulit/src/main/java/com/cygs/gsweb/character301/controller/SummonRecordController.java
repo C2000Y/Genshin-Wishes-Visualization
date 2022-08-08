@@ -1,6 +1,7 @@
 package com.cygs.gsweb.character301.controller;
 
 import com.cygs.gsweb.character301.dto.PickupDTO;
+import com.cygs.gsweb.character301.dto.TotalPickupDTO;
 import com.cygs.gsweb.character301.entity.PickupEntity;
 import com.cygs.gsweb.character301.service.PickupService;
 import com.cygs.gsweb.character301.service.WriteInService;
@@ -78,5 +79,17 @@ public class SummonRecordController implements Serializable {
         List<PickupDTO> pickupDTOList = pickupService.getItemsByLevel(map);
         return new Result<List<PickupDTO>>().ok(pickupDTOList);
     }
+
+//    抽到5星所花费的次数（总）
+//    localhost:6480/summon/TotalSummonCount?uid=100105164
+    @CrossOrigin
+    @GetMapping("TotalSummonCount")
+//    @ResponseBody
+    public Result<List<TotalPickupDTO>> TotalSummonCount(@RequestParam("uid") Integer uid) throws Exception {
+        List<TotalPickupDTO> pickupDTOList = pickupService.getTotalSummonCountByUid(uid);
+        return new Result<List<TotalPickupDTO>>().ok(pickupDTOList);
+    }
+
+
 
 }

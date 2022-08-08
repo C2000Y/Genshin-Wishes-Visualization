@@ -1,19 +1,22 @@
 <template>
   <div id="app">
     <Navigate/>
-    <Content/>
+<!--    <Content/>-->
+    <MainPage/>
   </div>
 </template>
 
 <script>
 import Content from './components/Content'
 import Navigate from './components/Navi/Navi'
+import MainPage from './components/MainPage'
 
 export default {
   name: 'App',
   components: {
     Content,
-    Navigate
+    Navigate,
+    MainPage
   }
 }
 </script>

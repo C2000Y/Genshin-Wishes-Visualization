@@ -77,4 +77,109 @@
         order by rank_type, item_type asc
     </select>
 
+    <select id="getTotalSummonCountByUid" resultType="com.cygs.gsweb.character301.dto.TotalPickupDTO">
+                select
+                    rank_type,
+                    name,
+                    item_type,
+                    uid,
+                    id,
+                    `time`,
+                    count,
+                                type
+                from
+                    (
+                    select
+                        rank_type,
+                        name,
+                        item_type,
+                        uid,
+                        id,
+                        `time`,
+                        row_number() over (
+                        order by id) as count,
+                                        301 as type
+                    from
+                        gacha_cn_301 g
+                    where
+                        uid = #{uid}) t
+                where
+                    t.rank_type = 5
+
+        union all
+        (
+        select
+                    rank_type,
+                    name,
+                    item_type,
+                    uid,
+                    id,
+                    `time`,
+                    count,
+                                type
+                from
+                    (
+                    select
+                        rank_type,
+                        name,
+                        item_type,
+                        uid,
+                        id,
+                        `time`,
+                        row_number() over (
+                        order by id) as count,
+                                        200 as type
+                    from
+                        gacha_cn_200 g
+                    where
+                        uid = #{uid}) t
+                where
+                    t.rank_type = 5
+
+        )
+        union all
+        (
+        select
+                    rank_type,
+                    name,
+                    item_type,
+                    uid,
+                    id,
+                    `time`,
+                    count,
+                                type
+                from
+                    (
+                    select
+                        rank_type,
+                        name,
+                        item_type,
+                        uid,
+                        id,
+                        `time`,
+                        row_number() over (
+                        order by id) as count,
+                                        302 as type
+                    from
+                        gacha_cn_302 g
+                    where
+                        uid = #{uid}) t
+                where
+                    t.rank_type = 5
+
+        )
+        ORDER BY id, time asc
+    </select>
+
+    <select id="getWishSum" resultType="Integer">
+        SELECT
+            sum( table_rows ) AS count
+        FROM
+            information_schema.`tables`
+        WHERE
+            table_name = 'gacha_cn_200'
+            OR table_name = 'gacha_cn_301'
+            OR table_name = 'gacha_cn_302';
+    </select>
+
 </mapper>

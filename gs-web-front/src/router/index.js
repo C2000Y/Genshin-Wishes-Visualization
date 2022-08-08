@@ -1,14 +1,15 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 // // 导入组件
-import main from '../components/Content'
+// import Main from '../components/Main'
 // import Login from "../views/Login";
 // import NotFound from "../views/NotFound";
 //
 // import UserList from "../views/user/List";
 // import UserProfile from "../views/user/Profile";
 // import Index from "../views/chpts/index";
-// import c1 from "../views/chpts/c1";
+import OverallData from '../components/Data/OverallData'
+import Default from '../components/Data/Default'
 // import c2 from "../views/chpts/c2";
 // import c3 from "../views/chpts/c3";
 // import c4 from "../views/chpts/c4";
@@ -28,9 +29,20 @@ export default new VueRouter({
   mode: 'hash',
   routes: [
     {
-      path: '/main',
-      component: main,
-      props: true
+      path: '/',
+      redirect: '/default'
+    },
+    // {
+    //   path: '/main',
+    //   component: main
+    // },
+    {
+      path: '/overall',
+      component: OverallData
+    },
+    {
+      path: '/default',
+      component: Default
     }
   ]
 })

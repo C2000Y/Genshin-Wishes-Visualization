@@ -1,7 +1,7 @@
 <template>
   <div>
-    <el-select v-model="uid" @change="UidChangeHandler" placeholder="选个玩家才能看数据分析">
-      <el-option v-for="item in uids" :value="item.uid" :key="item.uid">
+    <el-select filterable v-model="uid" @change="UidChangeHandler" placeholder="选个玩家才能看数据分析">
+      <el-option v-for="item in uids" :value="item.uid" :key="item.uid" :label="item.name">
         {{item.name}} - [{{item.uid}}]
       </el-option>
     </el-select>
@@ -19,10 +19,10 @@ export default {
     }
   },
   mounted () {
-    this.getUids()
+    this.getUid()
   },
   methods: {
-    getUids (uid) {
+    getUid (uid) {
       this.$axios.get('uid/list').then(res => {
         this.uids = res.data.data
         this.uid = uid

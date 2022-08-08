@@ -7,12 +7,20 @@
         insert ignore into gs.connect_gacha_user(uid) values (#{uid})
     </insert>
 
+    <update id="updateByUid" parameterType="Integer">
+        update gs.connect_gacha_user set last_update = now() where uid = #{uid}
+    </update>
+
     <update id="rewriteName" parameterType="map">
       UPDATE gs.connect_gacha_user set name = #{name} where uid = #{uid}
     </update>
 
     <select id="getNameByUid" parameterType="Integer" resultType="String">
         select name from gs.connect_gacha_user where uid = #{uid}
+    </select>
+
+    <select id="getLastUpdateByUid" parameterType="Integer" resultType="Date">
+        select last_update from gs.connect_gacha_user where uid = #{uid}
     </select>
 
 </mapper>

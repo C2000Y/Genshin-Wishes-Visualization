@@ -93,6 +93,9 @@ export default {
       window.onresize = () => {
         this.$echarts.init(document.getElementById(this.chartName)).resize()
       }
+      window.addEventListener('resize', () => {
+        this.echarts.resize()
+      })
     },
     title () {
       switch (this.code) {

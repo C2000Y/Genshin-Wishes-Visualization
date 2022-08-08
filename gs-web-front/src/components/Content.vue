@@ -1,5 +1,5 @@
 <template>
-  <div class="content">
+  <div class="content" v-bind:style="{backgroundColor:'rgba('+245+','+245+','+245+','+opacityLevel/100+')'}">
     <div class="top-bar">
       <!--<div class="selection-title">-->
         <!--玩家：-->
@@ -7,6 +7,27 @@
       <Total :total="totalWishes" :chara="charaWishes" :charaLeft="charaLeft" :weapon="weaponWishes" :weaponLeft="weaponLeft" :stand="standardWishes" :standLeft="standardLeft"/>
       <web-site-input @update="updateUids"></web-site-input>
       <uid-selection @uid="getUid" ref="uidSelect" class="selection"></uid-selection>
+      <div class="slider-opacity">
+        <div>
+          <el-slider
+            v-model="opacityLevel"
+            :step="5"
+            :max="95"
+            :format-tooltip="formatTooltip">
+          </el-slider>
+        </div>
+      </div>
+      <div class="switch-mark">
+        <span>
+          显示头像：
+        </span>
+        <el-switch
+          @change = "changeMarkStatus"
+          v-model="showMark"
+          active-color="#13ce66"
+          inactive-color="#ff4949">
+        </el-switch>
+      </div>
     </div>
     <div class="chart-item">
       <div class="left-chart">
@@ -50,6 +71,7 @@ export default {
       msg: 'Welcome to Your Vue.js App',
       uid: 0,
       finishCount: 0,
+      opacityLevel: 80,
       text: '',
       loadingText: ['让我康康！', '转啊，转~', '♪好运来，祝你好运来♪', '今天的爆率那叫一个高啊.jpg'],
       totalWishes: 0,
@@ -58,7 +80,8 @@ export default {
       weaponWishes: 0,
       weaponLeft: 0,
       standardWishes: 0,
-      standardLeft: 0
+      standardLeft: 0,
+      showMark: true
     }
   },
   methods: {
@@ -66,6 +89,11 @@ export default {
      * @param: uid
      * @desc: 由UidSelection触发，当uid更新
       */
+    changeMarkStatus () {
+      if (this.uid > 0) {
+        this.getUid(this.uid)
+      }
+    },
     async getUid (uid) {
       // 显示加载过场
       this.startLoading()
@@ -73,9 +101,9 @@ export default {
       // await this.$refs.totalref.uidChanged(uid)
       // 初始化图表
       this.reInitChart()
-      this.getChartData(uid, 301)
-      this.getChartData(uid, 302)
-      this.getChartData(uid, 200)
+      this.getChartData(uid, 301, this.showMark)
+      this.getChartData(uid, 302, this.showMark)
+      this.getChartData(uid, 200, this.showMark)
       // 结束加载过场
       await this.endLoading()
     },
@@ -83,7 +111,7 @@ export default {
      * @param: uid, code(池子的代码,200标配池，301角色池，302武器池)
      * @desc: 由getUid触发，获取特定uid下某个池子的信息
      */
-    async getChartData (uid, code) {
+    async getChartData (uid, code, showMark) {
       let count = []
       let wishes = 0
       let left = 0
@@ -108,15 +136,15 @@ export default {
         }
         switch (code) {
           case 301: {
-            this.$refs.charaBarData.chart(count, code)
+            this.$refs.charaBarData.chart(count, code, showMark)
             break
           }
           case 302: {
-            this.$refs.weaponBarData.chart(count, code)
+            this.$refs.weaponBarData.chart(count, code, showMark)
             break
           }
           case 200: {
-            this.$refs.standardBarData.chart(count, code)
+            this.$refs.standardBarData.chart(count, code, showMark)
             break
           }
         }
@@ -142,7 +170,7 @@ export default {
           case 302: {
             this.$refs.weaponPieData.chart(data)
             this.weaponWishes = wishes
-            this.weaponLeft = 90 - wishes + left
+            this.weaponLeft = 80 - wishes + left
             break
           }
           case 200: {
@@ -192,6 +220,9 @@ export default {
       this.$refs.charaPieData.chart([{itemType: '', rankType: ''}])
       this.$refs.weaponPieData.chart([{itemType: '', rankType: ''}])
       this.$refs.standardPieData.chart([{itemType: '', rankType: ''}])
+    },
+    formatTooltip (val) {
+      return '透明度：' + (100 - val)
     }
   }
 }
@@ -202,8 +233,8 @@ export default {
 .content{
   /*position: relative;*/
   /*width: 100%;*/
+  /*background: rgba(245,245,245,0.8);*/
   height: 100%;
-  background: rgba(245,245,245,0.9);
   max-width: 1330px;
   width: 90%;
   min-width: 1200px;
@@ -286,5 +317,23 @@ a {
   .records{
     float: left;
     line-height: 55px;
+  }
+  .slider-opacity{
+    float: right;
+    width: 250px;
+    padding-top: 8px;
+  }
+  .slider-opacity div{
+    position: relative;
+    margin: 0 auto;
+    width: 200px;
+  }
+  .switch-mark{
+    position: relative;
+    float: right;
+    padding-top: 13px;
+    color: #537fb5;
+    font-weight: bold;
+    font-size: 1rem;
   }
 </style>

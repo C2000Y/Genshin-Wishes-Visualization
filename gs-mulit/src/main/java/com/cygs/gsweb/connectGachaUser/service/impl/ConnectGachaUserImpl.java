@@ -12,6 +12,7 @@ import com.cygs.gsweb.connectGachaUser.service.ConnectGachaUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -38,12 +39,19 @@ public class ConnectGachaUserImpl implements ConnectGachaUserService {
 
     @Override
     public void insertUid(Integer uid) {
+        connectGachaUserDao.updateByUid(uid);
         connectGachaUserDao.insertUid(uid);
     }
 
     @Override
     public String getNameByUid(Integer uid) {
         return connectGachaUserDao.getNameByUid(uid);
+    }
+
+    @Override
+//    获取时间戳，转换成天
+    public Long getLastUpdateByUid(Integer uid) {
+        return (new Date().getTime() - connectGachaUserDao.getLastUpdateByUid(uid).getTime()) /1000/60/60/24;
     }
 
 

@@ -36,4 +36,10 @@ public class ConnectGachaUserEntity {
      */
     private String name;
 
+
+    /**
+     * 上次更新的日期
+     */
+    private Date lastUpdate;
+
 }
