@@ -40,6 +40,8 @@ export default {
         '钟离': 'https://patchwiki.biligame.com/images/ys/a/a4/eewy674lo37jwuq9qozyszhz8vo0d8j.png',
         '阿贝多': 'https://patchwiki.biligame.com/images/ys/e/e9/k1zod68cqa6e89r0poxm9ihfmqfmgvw.png',
         '荒泷一斗': 'https://patchwiki.biligame.com/images/ys/0/0c/5sdwiryq6bjb3tjxxtg1e8njdmggirp.png',
+        '柯莱': 'https://patchwiki.biligame.com/images/ys/2/21/s0xi3unv8y860tefgz49gi56vf0or8z.png',
+        '提纳里': 'https://patchwiki.biligame.com/images/ys/3/3b/9bq657i9ork1vn2uzv3fpd7p5q8dlqc.png',
         '波乱月白经津': 'https://patchwiki.biligame.com/images/ys/e/e7/dgf1tthftk1ctxpapenad77tdb5g9k5.png',
         '风鹰剑': 'https://patchwiki.biligame.com/images/ys/f/f3/ifgr7v6spw00py7cvib4z4vjjprqfvy.png',
         '雾切之回光': 'https://patchwiki.biligame.com/images/ys/8/80/fvlvamw1kcodwxexze8svm89r9ju4zw.png',
@@ -77,7 +79,7 @@ export default {
     this.chartName += this.id
   },
   methods: {
-    // getData (uid, code) {
+    // getData (uid, code) { 
     //   this.uid = uid
     //   this.code = code
     //   this.$axios.get('summon/SummonCount', {
