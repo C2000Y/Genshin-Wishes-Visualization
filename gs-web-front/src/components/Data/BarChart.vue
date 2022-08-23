@@ -79,7 +79,7 @@ export default {
     this.chartName += this.id
   },
   methods: {
-    // getData (uid, code) {
+    // getData (uid, code) { 
     //   this.uid = uid
     //   this.code = code
     //   this.$axios.get('summon/SummonCount', {
