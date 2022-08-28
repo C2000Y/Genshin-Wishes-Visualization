@@ -18,4 +18,5 @@ public interface PickupService {
     List<PickupDTO> getSummonCountByUid(HashMap map);
     List<PickupDTO> getItemsByLevel(HashMap map);
     List<TotalPickupDTO> getTotalSummonCountByUid(Integer uid);
+    List<TotalPickupDTO> getPickUpTimesForAllByUid(Integer uid);
 }

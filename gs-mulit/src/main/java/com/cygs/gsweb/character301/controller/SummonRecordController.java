@@ -90,6 +90,14 @@ public class SummonRecordController implements Serializable {
         return new Result<List<TotalPickupDTO>>().ok(pickupDTOList);
     }
 
-
+//    所有角色以及5星武器的出货次数
+//    localhost:6480/summon/TotalPickUpCount?uid=100105164
+    @CrossOrigin
+    @GetMapping("TotalPickUpCount")
+//    @ResponseBody
+    public Result<List<TotalPickupDTO>> TotalPickUpCount(@RequestParam("uid") Integer uid) throws Exception {
+        List<TotalPickupDTO> pickupDTOList = pickupService.getPickUpTimesForAllByUid(uid);
+        return new Result<List<TotalPickupDTO>>().ok(pickupDTOList);
+    }
 
 }

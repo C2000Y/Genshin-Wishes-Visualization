@@ -12,6 +12,7 @@ public class InsertError {
     }};
 
     public InsertError(){
+
     }
 
     public String getInsertError(Integer integer){

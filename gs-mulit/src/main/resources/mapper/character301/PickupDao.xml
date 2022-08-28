@@ -182,4 +182,25 @@
             OR table_name = 'gacha_cn_302';
     </select>
 
+    <select id="getPickUpTimesForAllByUid" resultType="com.cygs.gsweb.character301.dto.PickupDTO">
+        SELECT
+	b.NAME,
+	count( b.NAME ) AS count
+FROM
+	(
+	SELECT NAME
+		,
+		item_type,
+		rank_type
+	FROM
+		( SELECT NAME, item_type, rank_type FROM gacha_cn_301 WHERE uid = #{uid} AND item_type = '角色' ) a UNION ALL
+		( SELECT NAME, item_type, rank_type FROM gacha_cn_200 WHERE uid = #{uid} AND ( item_type = '角色' OR ( item_type = '武器' AND rank_type = '5' )) ) UNION ALL
+		( SELECT NAME, item_type, rank_type FROM gacha_cn_302 WHERE uid = #{uid} AND ( item_type = '角色' OR ( item_type = '武器' AND rank_type = '5' )) )
+	ORDER BY
+		 item_type DESC, rank_type DESC
+	) b
+GROUP BY
+	b.NAME
+    </select>
+
 </mapper>

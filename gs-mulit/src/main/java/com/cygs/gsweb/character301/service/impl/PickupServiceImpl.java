@@ -85,6 +85,11 @@ public class PickupServiceImpl implements PickupService{
     }
 
     @Override
+    public List<TotalPickupDTO> getPickUpTimesForAllByUid(Integer uid) {
+        return pickupDao.getPickUpTimesForAllByUid(uid);
+    }
+
+    @Override
     public List<PickupEntity> list() {
         return pickupDao.list();
     }

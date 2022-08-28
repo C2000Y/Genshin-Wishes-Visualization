@@ -32,11 +32,11 @@
       </div>
     </div>
     <div class="data-display-area">
-      <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect" router>
-        <el-menu-item index="default">
+      <el-menu router :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
+        <el-menu-item index="/default">
           观星台
         </el-menu-item>
-        <el-menu-item index="overall">
+        <el-menu-item index="/overall">
           全部祈愿
         </el-menu-item>
         <el-menu-item index="2">
@@ -84,8 +84,11 @@ export default {
       standardWishes: 0,
       standardLeft: 0,
       showMark: true,
-      activeIndex: 'default'
+      activeIndex: '/default'
     }
+  },
+  mounted () {
+    this.activeIndex = this.$route.path
   },
   methods: {
     // 更新uid下拉列表

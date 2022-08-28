@@ -29,4 +29,8 @@
         </foreach >
     </insert>
 
+    <select id="getGachaDataByUid">
+        SELECT COUNT(name), name from gacha_cn_301 WHERE item_type = '角色' and uid=#{uid} GROUP BY name
+    </select>
+
 </mapper>
