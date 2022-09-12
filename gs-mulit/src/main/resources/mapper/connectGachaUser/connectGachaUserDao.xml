@@ -4,7 +4,7 @@
 <mapper namespace="com.cygs.gsweb.connectGachaUser.dao.ConnectGachaUserDao">
 
     <insert id="insertUid" parameterType="Integer">
-        insert ignore into gs.connect_gacha_user(uid) values (#{uid})
+        insert ignore into gs.connect_gacha_user(uid,last_update) values (#{uid},now())
     </insert>
 
     <update id="updateByUid" parameterType="Integer">

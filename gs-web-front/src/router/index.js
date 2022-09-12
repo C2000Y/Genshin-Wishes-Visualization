@@ -10,6 +10,9 @@ import VueRouter from 'vue-router'
 // import Index from "../views/chpts/index";
 import OverallData from '../components/Data/OverallData'
 import Default from '../components/Data/Default'
+import CharacterData from '../components/Data/CharacterData'
+import WeaponData from '../components/Data/WeaponData'
+import StandardData from '../components/Data/StandardData'
 // import c2 from "../views/chpts/c2";
 // import c3 from "../views/chpts/c3";
 // import c4 from "../views/chpts/c4";
@@ -37,12 +40,24 @@ export default new VueRouter({
     //   component: main
     // },
     {
+      path: '/default',
+      component: Default
+    },
+    {
       path: '/overall',
       component: OverallData
     },
     {
-      path: '/default',
-      component: Default
+      path: '/character',
+      component: CharacterData
+    },
+    {
+      path: '/weapon',
+      component: WeaponData
+    },
+    {
+      path: '/standard',
+      component: StandardData
     }
   ]
 })

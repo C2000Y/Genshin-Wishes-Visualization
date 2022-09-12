@@ -1,30 +1,49 @@
 <template>
-    <div style="padding: 10px 0 10px 0">
-      <div class="last-update-text-box">
-        上次更新在
-        <span class="last-update-text">
+    <div  v-loading="isLoading" element-loading-background="rgba(255, 255, 255, 0.5)" :element-loading-text="loadingTextValue">
+      <div class="stat-box">
+        <div class="last-update-text-box">
+          上次更新在
+          <span class="last-update-text">
           {{lastUpdate}}
         </span>
-        ，{{tipsForUpdate}}
+          ，{{tipsForUpdate}}
+        </div>
+        <div class="stat">
+          <div class="avg-stat-left">
+            <!--5星平均抽卡次数-->
+            <div class="text-box">
+              五星平均出货次数：
+              <span class="text-value">
+              {{avgGachaCount}}
+            </span>
+            </div>
+            <!--5星抽卡次数-->
+            <div class="text-box">
+              五星出货次数：
+              <span class="text-value">
+              {{totalGachaCount}}
+            </span>
+            </div>
+          </div>
+          <div class="avg-stat-right">
+            <!--5星角色抽卡次数-->
+            <div class="text-box">
+              五星角色平均出货次数：
+              <span class="text-value">
+              {{avgCharaGachaCount}}
+            </span>
+            </div>
+            <!--5星武器抽卡次数-->
+            <div class="text-box">
+              五星武器平均出货次数：
+              <span class="text-value">
+              {{avgWeaponGachaCount}}
+            </span>
+            </div>
+          </div>
+        </div>
       </div>
-      <!--TODO： 显示所有角色以及五星武器抽到的数量，以卡片的形式显示，后端已经有了，前端还没做-->
-      <div>
-      </div>
-      <!--5星平均抽卡次数-->
-      <div class="text-box">
-        五星平均出货次数：
-        <span class="text-value">
-          {{avgGachaCount}}
-        </span>
-      </div>
-      <!--5星抽卡次数-->
-      <div class="text-box">
-        五星出货次数：
-        <span class="text-value">
-          {{totalGachaCount}}
-        </span>
-      </div>
-      <!--角色列表-->
+      <!--角色列表,显示所有角色以及五星武器抽到的数量，以卡片的形式显示-->
       <CharaList ref="charaList"/>
       <div class="tool-bar">
         <div class="mark-change">
@@ -49,6 +68,7 @@
     <!--TODO：历史最非（两发内最少出货数）-->
     <!--TODO：近6个月最欧（两发内最少出货数）-->
     <!--TODO：近6个月最非（两发内最少出货数）-->
+    <!--TODO：武器出货平均次数-->
     </div>
 </template>
 
@@ -65,11 +85,15 @@ export default {
       updateTips: ['建议上传数据后再来', '哦？最近又抽到什么了', '有段时间没上传了，来看看最近运气如何？', '你知道吗？原神官方的抽卡数据只保留6个月哦。', '建议赶紧更新！！'],
       loadingCount: 0,
       showMark: true,
+      isLoading: false,
       chartData: [{}],
       lastUpdate: '不知道多少',
       tipsForUpdate: '不选中玩家的话，就没法提供数据了哦~',
       avgGachaCount: '计算中~',
-      totalGachaCount: '计算中~'
+      avgCharaGachaCount: '计算中~',
+      avgWeaponGachaCount: '计算中~',
+      totalGachaCount: '计算中~',
+      loadingTextValue: ''
     }
   },
   computed: {
@@ -88,6 +112,9 @@ export default {
     this.changeInUrl()
   },
   methods: {
+    update () {
+      this.changeInUrl()
+    },
     async changeInUrl () {
       if (this.uid > 0) {
         this.loading()
@@ -105,7 +132,7 @@ export default {
       // 初始化图表
       this.reInitChart()
       this.getLastUpdate()
-      this.getPickUpCountForAll()
+      await this.getPickUpCountForAll()
       await this.getChartData()
       // this.getChartData(this.uid, 302, this.showMark)
       // this.getChartData(this.uid, 200, this.showMark)
@@ -130,7 +157,12 @@ export default {
       }).then(res => {
         this.loadingCount++
         let data = res.data.data
+        // console.log(data)
+        let avgCharCost = 0
+        let avgWeaponCost = 0
         let avgCost = 0
+        let charaCount = 0
+        let WeaponCount = 0
         let count = {'301': 0, '302': 0, '200': 0}
         // 简单算法优化查询结果
         this.chartData = data.map((data) => {
@@ -138,6 +170,13 @@ export default {
           let tmp = data.count - count[data.type]
           // 取平均值的分子
           avgCost += tmp
+          if (data.itemType === '角色') {
+            avgCharCost += tmp
+            charaCount++
+          } else {
+            avgWeaponCost += tmp
+            WeaponCount++
+          }
           // 更新 previous
           count[data.type] = data.count
           return {
@@ -145,9 +184,15 @@ export default {
           }
         })
         this.totalGachaCount = res.data.data.length
-        this.avgGachaCount = Math.round(avgCost / res.data.data.length * 100) / 100
-        // console.log(this.avgGachaCount)
-        // console.log(this.chartData)
+        // avg all
+        let tmp = avgCost / res.data.data.length
+        this.avgGachaCount = tmp.toFixed(2)
+        // avg Character
+        tmp = avgCharCost / charaCount
+        charaCount === 0 ? this.avgCharaGachaCount = '无' : this.avgCharaGachaCount = tmp.toFixed(2) + ' (' + charaCount + ')'
+        // avg Weapon
+        tmp = avgWeaponCost / WeaponCount
+        WeaponCount === 0 ? this.avgWeaponGachaCount = '无' : this.avgWeaponGachaCount = tmp.toFixed(2) + ' (' + WeaponCount + ')'
         this.$refs.totalBarData.chart(this.chartData, 1000, this.showMark)
       })
     },
@@ -187,19 +232,21 @@ export default {
       })
     },
     // 获得所有以及抽到的角色以及次数
-    getPickUpCountForAll () {
-      this.$axios.get('summon/TotalPickUpCount', {
+    async getPickUpCountForAll () {
+      this.$axios.get('summon/GetPickUps', {
         params: {
-          uid: this.uid
+          uid: this.uid,
+          type: 0
         }
       }).then(res => {
-        console.log(res)
+        // console.log(res)
         this.$refs.charaList.getCharaListData(res.data.data)
       })
     },
     loading () {
-      this.text = this.loadingText[Math.floor(Math.random() * this.loadingText.length)]
-      ELEMENT.Loading.service({ fullscreen: true, text: this.text })
+      this.loadingTextValue = this.loadingText[Math.floor(Math.random() * this.loadingText.length)]
+      this.isLoading = true
+      // ELEMENT.Loading.service({ fullscreen: true, text: this.text })
     },
     async endLoading () {
       while (this.loadingCount < 1) {
@@ -208,15 +255,19 @@ export default {
         await new Promise(resolve => setTimeout(resolve, 400))
       }
       await new Promise(resolve => setTimeout(resolve, 400))
-      ELEMENT.Loading.service().close()
+      // ELEMENT.Loading.service().close()
+      this.isLoading = false
     },
     reInitChart () {
+      this.$refs.charaList.getCharaListData({'': [{}]})
       this.loadingCount = 0
       this.lastUpdate = '?'
       this.tipsForUpdate = '不选中玩家的话，就没法提供数据了哦~'
       this.$refs.totalBarData.chart([])
       this.avgGachaCount = '计算中~'
       this.totalGachaCount = '计算中~'
+      this.avgCharaGachaCount = '计算中~'
+      this.avgWeaponGachaCount = '计算中~'
     }
   }
 }
@@ -237,7 +288,6 @@ export default {
   .last-update-text-box{
     font-size: 1.2rem;
     color: #61b5b0;
-    font-weight: bold;
     height: 30px;
     line-height: 30px;
   }
@@ -256,11 +306,45 @@ export default {
   .text-box {
     font-size: 1rem;
     color: #61b5b0;
-    font-weight: bold;
+    /*font-weight: bold;*/
   }
   .text-value {
     font-size: 1rem;
     color: #537fb5;
     font-weight: bold;
+  }
+  .stat{
+    position: relative;
+    margin: 0 auto;
+    width: 40%;
+    height: 50px;
+    text-align: left;
+  }
+  .avg-stat-left{
+    float: left;
+  }
+  .avg-stat-right{
+    float: right;
+  }
+  @media screen and (max-width: 1180px){
+    .stat{
+      height: unset;
+      width: 300px;
+    }
+    .avg-stat-left{
+      float: unset;
+    }
+    .avg-stat-right{
+      float: unset;
+    }
+  }
+  @media screen and (max-width: 600px){
+    .last-update-text-box{
+      font-size: 1rem;
+      height: 60px;
+    }
+    .stat{
+      width: 260px;
+    }
   }
 </style>

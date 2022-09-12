@@ -26,4 +26,7 @@ public interface PickupDao extends BaseMapper<PickupEntity> {
     List<PickupDTO> getItemsByLevel(HashMap map);
     List<TotalPickupDTO> getTotalSummonCountByUid(Integer uid);
     List<TotalPickupDTO> getPickUpTimesForAllByUid(Integer uid);
+    List<TotalPickupDTO> getPickUpTimesForCodeByUid(Integer uid, String code);
+    List<PickupDTO> getLastCountForAllByUid(Integer uid);
+    List<PickupDTO> getCountForAllByUid(Integer uid);
 }

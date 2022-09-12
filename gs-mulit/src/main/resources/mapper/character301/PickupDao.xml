@@ -191,16 +191,137 @@ FROM
 	SELECT NAME
 		,
 		item_type,
-		rank_type
+		rank_type,
+		time
 	FROM
-		( SELECT NAME, item_type, rank_type FROM gacha_cn_301 WHERE uid = #{uid} AND item_type = '角色' ) a UNION ALL
-		( SELECT NAME, item_type, rank_type FROM gacha_cn_200 WHERE uid = #{uid} AND ( item_type = '角色' OR ( item_type = '武器' AND rank_type = '5' )) ) UNION ALL
-		( SELECT NAME, item_type, rank_type FROM gacha_cn_302 WHERE uid = #{uid} AND ( item_type = '角色' OR ( item_type = '武器' AND rank_type = '5' )) )
+		( SELECT NAME, item_type, rank_type, time FROM gacha_cn_301 WHERE uid = #{uid} AND item_type = '角色' ) a UNION ALL
+		( SELECT NAME, item_type, rank_type, time FROM gacha_cn_200 WHERE uid = #{uid} AND ( item_type = '角色' OR ( item_type = '武器' AND rank_type = '5' )) ) UNION ALL
+		( SELECT NAME, item_type, rank_type, time FROM gacha_cn_302 WHERE uid = #{uid} AND ( item_type = '角色' OR ( item_type = '武器' AND rank_type = '5' )) )
 	ORDER BY
-		 item_type DESC, rank_type DESC
+		 item_type DESC, rank_type DESC, time ASC
 	) b
 GROUP BY
 	b.NAME
+    </select>
+
+    <select id="getPickUpTimesForCodeByUid" resultType="com.cygs.gsweb.character301.dto.PickupDTO">
+        SELECT
+            b.NAME,
+            count( b.NAME ) AS count
+        FROM
+            (
+            SELECT NAME
+                ,
+            item_type,
+            rank_type,
+            TIME
+            FROM
+            ( SELECT NAME, item_type, rank_type, TIME FROM gacha_cn_${code} WHERE uid = #{uid} AND (item_type = '角色' OR (item_type = '武器' and rank_type = 5 ))) a UNION ALL
+            ( SELECT NAME, item_type, rank_type, TIME FROM gacha_empty_table)
+            ORDER BY
+            rank_type DESC,
+            TIME ASC
+            ) b
+        GROUP BY
+            b.NAME
+    </select>
+
+<!--    抽到最后一个五星时花费的次数（所有池子）-->
+    <select id="getLastCountForAllByUid" resultType="com.cygs.gsweb.character301.dto.PickupDTO">
+        (SELECT
+             rank_type,
+             item_type,
+             id,
+             count
+         FROM
+             (
+                 SELECT
+                     rank_type,
+                     item_type,
+                     id,
+                     rank() over ( ORDER BY id ) AS count
+                 FROM
+                     gacha_cn_301 g
+                 WHERE
+                     uid = #{uid}
+             ) t
+         WHERE
+             t.rank_type = 5
+         ORDER BY
+             count DESC
+             LIMIT 1)
+        Union All
+        (
+            SELECT
+                rank_type,
+                item_type,
+                id,
+                count
+            FROM
+                (
+                    SELECT
+                        rank_type,
+                        item_type,
+                        id,
+                        rank() over ( ORDER BY id ) AS count
+                    FROM
+                        gacha_cn_302 g
+                    WHERE
+                        uid = #{uid}
+                ) t
+            WHERE
+                t.rank_type = 5
+            ORDER BY
+                count DESC
+                LIMIT 1
+        )
+        Union All
+        (
+            SELECT
+                rank_type,
+                item_type,
+                id,
+                count
+            FROM
+                (
+                    SELECT
+                        rank_type,
+                        item_type,
+                        id,
+                        rank() over ( ORDER BY id ) AS count
+                    FROM
+                        gacha_cn_200 g
+                    WHERE
+                        uid = #{uid}
+                ) t
+            WHERE
+                t.rank_type = 5
+            ORDER BY
+                count DESC
+                LIMIT 1
+        )
+    </select>
+
+<!--    抽了多少发（所有池子）-->
+    <select id="getCountForAllByUid" resultType="com.cygs.gsweb.character301.dto.PickupDTO">
+        SELECT
+            count( id ) as count
+        FROM
+            gacha_cn_301
+        WHERE
+            uid = #{uid} UNION ALL
+        SELECT
+            count( id ) as count
+        FROM
+            gacha_cn_302
+        WHERE
+            uid = #{uid}  UNION ALL
+        SELECT
+            count( id ) as count
+        FROM
+            gacha_cn_200
+        WHERE
+            uid = #{uid}
     </select>
 
 </mapper>

@@ -15,6 +15,6 @@ import java.util.List;
 @Repository
 @Mapper
 public interface CommentDao extends BaseMapper<CommentEntity> {
-    List<CommentEntity> getCommentsByUid(Integer uid);
+    List<CommentEntity> getCommentsByUid(HashMap map);
     Integer sendComment(HashMap map);
 }

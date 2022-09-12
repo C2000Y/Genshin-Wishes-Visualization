@@ -49,7 +49,7 @@ public class FileController implements Serializable {
         System.out.println(url);
         System.out.println("before get");
 //        while ((lineTxt=bufferedReader.readLine())!=null){
-        if (url.contains("#/log")) {
+        if (url.contains("#/log") || (url.contains("https://hk4e-api"))) {
             System.out.println(url);
             Integer uid = writeInService.writeIn(url);
             System.out.println(uid);

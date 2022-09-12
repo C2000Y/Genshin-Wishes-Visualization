@@ -7,7 +7,7 @@
         <!--</div>-->
         <ul class="Nav-items">
           <li class="item">
-            祈愿记录查询
+            提瓦特观星台
           </li>
           <li class="item">
             <!--小游戏-->
@@ -49,16 +49,15 @@ export default {
   .Nav-items{
     display: flex;
     align-items: center;
-    line-height: 22px;
-    font-size: 14px;
+    line-height: 1.3rem;
+    font-size: 1.3rem;
     list-style: none;
   }
   .item{
     box-sizing: border-box;
     margin: 0 1rem 0 1rem;
     padding: 0;
-    font-size: 1rem;
-    font-weight: bold;
+    /*font-weight: bold;*/
     color: white;
     /*font-family: 华文细黑;*/
   }

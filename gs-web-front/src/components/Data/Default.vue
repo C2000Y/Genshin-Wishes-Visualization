@@ -1,7 +1,7 @@
 <template>
     <div>
       <div class="announcement">
-        提供直观的原神抽卡数据分析
+        观星台讨论区
       </div>
       <div>
       </div>

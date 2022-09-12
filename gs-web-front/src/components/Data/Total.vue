@@ -2,54 +2,83 @@
   <div style="float: left">
     <ul class="Nav-items">
       <li class="item">
-        <div v-if="total !== 0">
-          总计祈愿：{{total}}
+        <div>
+          总计：
+          <el-tooltip effect="dark" :content='total >= 0 ? "相当于 " + total * 150  + " 原石" : total' placement="right">
+            <span class="item-value">
+              {{total}}
+            </span>
+          </el-tooltip>
         </div>
-        <div v-else>
-          总计祈愿：暂无
-        </div>
+<!--        <div v-else>-->
+<!--          总计祈愿：暂无-->
+<!--        </div>-->
       </li>
       <li class="item">
-        <div v-if="chara !== 0">
-          角色祈愿：{{chara}}
+        <div>
+          角色祈愿：
+          <span class="item-value">
+            {{count301}}
+          </span>
         </div>
-        <div v-else>
-          角色祈愿：暂无
+<!--        <div v-else>-->
+<!--          角色祈愿：暂无-->
+<!--        </div>-->
+        <div>
+          距离保底：
+          <el-tooltip effect="dark" :content='detail301 >= 0 ? "还需 " + detail301 * 150  + " 原石" : detail301' placement="right">
+            <span class="item-value">
+              {{detail301}}
+            </span>
+          </el-tooltip>
         </div>
-        <div v-if="charaLeft !== 0">
-          距离保底：{{charaLeft}}
-        </div>
-        <div v-else>
-          距离保底：暂无
-        </div>
+<!--        <div v-else>-->
+<!--          距离保底：暂无-->
+<!--        </div>-->
       </li>
       <li class="item">
-        <div v-if="weapon !== 0">
-          武器祈愿：{{weapon}}
+        <div>
+          武器祈愿：
+          <span class="item-value">
+            {{count302}}
+          </span>
         </div>
-        <div v-else>
-          武器祈愿：暂无
+<!--        <div v-else>-->
+<!--          武器祈愿：暂无-->
+<!--        </div>-->
+        <div>
+          距离保底：
+          <el-tooltip effect="dark" :content='detail302 >= 0 ? "还需 " + detail302 * 150  + " 原石" : detail302' placement="right">
+            <span class="item-value">
+              {{detail302}}
+            </span>
+          </el-tooltip>
         </div>
-        <div v-if="weaponLeft !== 0">
-          距离保底：{{weaponLeft}}
-        </div>
-        <div v-else>
-          距离保底：暂无
-        </div>
+<!--        <div v-else>-->
+<!--          距离保底：暂无-->
+<!--        </div>-->
       </li>
       <li class="item">
-        <div v-if="stand !== 0">
-          常驻祈愿：{{stand}}
+        <div>
+          常驻祈愿：
+          <span class="item-value">
+           {{count200}}
+          </span>
         </div>
-        <div v-else>
-          常驻祈愿：暂无
+<!--        <div v-else>-->
+<!--          常驻祈愿：暂无-->
+<!--        </div>-->
+        <div>
+          距离保底：
+          <el-tooltip effect="dark" :content='detail200 >= 0 ? "还需 " + detail200 * 150  + " 原石" : detail200' placement="right">
+            <span class="item-value">
+              {{detail200}}
+            </span>
+          </el-tooltip>
         </div>
-        <div v-if="standLeft !== 0">
-          距离保底：{{standLeft}}
-        </div>
-        <div v-else>
-          距离保底：暂无
-        </div>
+<!--        <div v-else>-->
+<!--          距离保底：暂无-->
+<!--        </div>-->
       </li>
     </ul>
   </div>
@@ -58,19 +87,35 @@
 <script>
 export default {
   name: 'Total',
-  props: ['total', 'chara', 'charaLeft', 'weapon', 'weaponLeft', 'stand', 'standLeft'],
   data () {
     return {
-      count301: '',
-      count302: '',
-      count200: '',
-      detail301: '',
-      detail302: '',
-      detail200: '',
-      count: 0
+      count301: '暂无',
+      count302: '暂无',
+      count200: '暂无',
+      detail301: '暂无',
+      detail302: '暂无',
+      detail200: '暂无',
+      total: '暂无'
     }
   },
   methods: {
+    changeUid (uid) {
+      this.$axios.get('summon/GetTotalCount', {
+        params: {
+          uid: uid
+        }
+      }).then(res => {
+        const data = res.data.data
+        console.log(data)
+        this.total = data[0].count
+        this.count301 = data[1].count
+        this.count302 = data[2].count
+        this.count200 = data[3].count
+        this.detail301 = data[1].left
+        this.detail302 = data[2].left
+        this.detail200 = data[3].left
+      })
+    }
     // getTotal (data, code) {
     //   switch (code) {
     //     case 301: {
@@ -119,15 +164,15 @@ export default {
     //     }
     //   }
     // },
-    uidChanged (uid) {
-      this.count301 = ''
-      this.count302 = ''
-      this.count200 = ''
-      this.detail301 = ''
-      this.detail302 = ''
-      this.detail200 = ''
-      this.count = 0
-    }
+    // uidChanged (uid) {
+    //   this.count301 = ''
+    //   this.count302 = ''
+    //   this.count200 = ''
+    //   this.detail301 = ''
+    //   this.detail302 = ''
+    //   this.detail200 = ''
+    //   this.count = 0
+    // }
     // charaDetail (chData) {
     //   this.clean()
     //   this.$axios.get('summon/totalCount', {
@@ -190,11 +235,14 @@ export default {
     box-sizing: border-box;
     margin: 0 1rem 0 1rem;
     padding: 0;
-    font-size: 1rem;
-    font-weight: bold;
+    font-size: 1.1rem;
+    /*font-weight: bold;*/
     color: #537fb5;
     text-align: left;
     /*font-family: 华文细黑;*/
+  }
+  .item-value {
+    font-weight: bold;
   }
   @media screen and (max-width: 1200px){
     .Nav-items{

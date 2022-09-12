@@ -7,10 +7,11 @@
     <style>
       body{
         margin: 0;
-        background: url("http://175.24.165.47:8080/background.jpg") fixed no-repeat 50% 0 #d1d1d1;
+        /*font-family: JXZK;*/
+        /*background: url("http://175.24.165.47:8080/background.jpg") fixed no-repeat 50% 0 #d1d1d1;*/
         /*background: url("http://175.24.165.47:8080/tim.jpg") fixed no-repeat 50% 0 #d1d1d1;*/
         /*background-size: 1920px 1080px;*/
-        background-color: rgb(140,202,227);
+        /*background-color: rgb(140,202,227);*/
       }
     </style>
     <title>提瓦特观星台</title>
@@ -38,5 +39,9 @@
     <!-- built files will be auto injected -->
   </body>
   <script>
+    const background = ["http://175.24.165.47:8080/background.jpg","http://175.24.165.47:8080/background2.jpg","http://175.24.165.47:8080/background3.jpg"]
+    const ranNum = Math.floor(Math.random() * background.length)
+    document.body.style.background ="url(" + background[ranNum] + ") fixed no-repeat 50% 0 #d1d1d1";
+    document.body.style.backgroundColor = 'rgb(140,202,227)';
   </script>
 </html>

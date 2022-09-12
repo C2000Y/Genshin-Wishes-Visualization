@@ -4,62 +4,109 @@
       <el-button class="el-icon-setting" @click="dialogTableVisible = true" style=" width: 52px; height: 52px; padding: 2px 2px 2px 2px; border-radius: 50%; border: unset"></el-button>
     </div>
     <el-dialog title="上传数据" :visible.sync="dialogTableVisible" :lock-scroll="true" class="web-upload-dialog-box">
-      <el-tabs v-model="activeName" type="border-card" style="height: 350px;" class="web-upload-dialog">
-        <el-tab-pane label="文件上传(PC端)" name="first">
+      <el-tabs v-model="activeName" type="border-card" style="height: 450px;" class="web-upload-dialog">
+        <el-tab-pane label="网址上传(国服PC端)" name="pcFirst" class="web-input">
+          <android @return="insertData" class="web-input-bar"/>
           <div class="tips-words box-card">
-            <form action='dic/uploadWord' enctype='multipart/form-data' method='post' id="fileUpload">
-              <el-upload
-                drag
-                name='file'
-                ref="upload"
-                :file-list="fileList"
-                accept=".txt"
-                action=""
-                :limit="1"
-                :on-exceed="handleExceed"
-                :auto-upload="false"
-                :on-change="handleFileChange"
-                :http-request="handleUpload"
-              >
-                <!--<el-button slot="trigger" size="small" type="primary">选取文件</el-button>-->
-                <i class="el-icon-upload"></i>
-                <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
-                <!--<div slot="tip" class="el-upload__tip">点击按钮即可开导</div>-->
-              </el-upload>
-            </form>
+            <!--            <form action='dic/uploadWord' enctype='multipart/form-data' method='post' id="fileUpload">-->
+            <!--              <el-upload-->
+            <!--                drag-->
+            <!--                name='file'-->
+            <!--                ref="upload"-->
+            <!--                :file-list="fileList"-->
+            <!--                accept=".txt"-->
+            <!--                action=""-->
+            <!--                :limit="1"-->
+            <!--                :on-exceed="handleExceed"-->
+            <!--                :auto-upload="false"-->
+            <!--                :on-change="handleFileChange"-->
+            <!--                :http-request="handleUpload"-->
+            <!--              >-->
+            <!--                &lt;!&ndash;<el-button slot="trigger" size="small" type="primary">选取文件</el-button>&ndash;&gt;-->
+            <!--                <i class="el-icon-upload"></i>-->
+            <!--                <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>-->
+            <!--                &lt;!&ndash;<div slot="tip" class="el-upload__tip">点击按钮即可开导</div>&ndash;&gt;-->
+            <!--              </el-upload>-->
+            <!--            </form>-->
+            <div>
+              （被米哈游背刺了，如果嫌以下方法麻烦可以去右边的 【国服/国际服PC】 ，操作更简单)
+            </div>
             <div>
               第一步：登录原神，打开【祈愿】界面
             </div>
             <div>
-              第二步：点击【历史记录】
+              第二步：打开Window的系统设置，找到“网络和Internet“->”代理“，然后做以下操作
+              <img src="../../../static/setting.jpg" style="width: 100%; margin-top: 7px">
             </div>
             <div>
-              第三步：点击【点击上传】，<br>
-              在文件名处输入：<b>%USERPROFILE%\AppData\LocalLow\miHoYo\原神\output_log.txt</b>
-              <el-button icon="el-icon-document-copy" @click="doCopy" class="copy"></el-button>
-              <img src="../../../static/enter.png" style="width: 100%; margin-top: 7px">
+              第三步：回到原神点击【历史记录】，点击右上角的刷新，复制以下网址结果，并提交到上面的输入框
+              <img src="../../../static/outcome.png" style="width: 100%; margin-top: 7px">
+            </div>
+            <div>
+              第四步：记得将系统设置的”代理“关闭
+            </div>
+            <div>
+              <!--              第三步：点击【点击上传】，<br>-->
+              <!--              在文件名处输入：<b>%USERPROFILE%\AppData\LocalLow\miHoYo\原神\output_log.txt</b>-->
+              <!--              <el-button icon="el-icon-document-copy" @click="doCopy" class="copy"></el-button>-->
+              <!--              <img src="../../../static/enter.png" style="width: 100%; margin-top: 7px">-->
             </div>
           </div>
         </el-tab-pane>
-        <el-tab-pane label="网址(安卓, PC)" name="second" id="web-input">
-          <android @return="insertData" id="web-input-bar"/>
+        <el-tab-pane label="网址上传(国服/国际服PC端)" name="pcSecond" class="web-input">
+          <android @return="insertData" class="web-input-bar"/>
           <div class="tips-words box-card">
             <div>
-              第一步：登录原神，打开【祈愿】界面，点击【历史记录】
+              第一步：登录原神，打开【祈愿】界面，进入【历史记录】
             </div>
             <div>
-              第二步：关闭所有网络连接（例，飞行模式）
+              第二步：按住WIN键+R，或者在开始菜单中搜索“运行”
+              <div>
+                <img src="../../../static/win+r.png" style="width: 50%; margin-top: 7px">
+              </div>
             </div>
             <div>
-              第三步：点击【历史记录】右上角的刷新按钮
+              第三步：输入以下字符后，点击【确定】<br/>
+              powershell iex (irm 'https://gist.githubusercontent.com/jogerj/0339e61a92e0de2e360c5212a94854e8/raw/eeba0fb7e47303353065c321ff2afd75b195f715/get_wish_url_from_cache.ps1')
+              <el-button icon="el-icon-document-copy" @click="doCopy" class="copy"></el-button>
+              <div>
+                <img src="../../../static/winrun.png" style="width: 50%; margin-top: 7px">
+              </div>
             </div>
             <div>
-              第四步：【历史记录】界面出现错误，并显示一串链接
-              <img src="static/link-min.jpg" style="width: 95%; margin-top: 7px">
+              第四步：等待蓝框（PowerShell）弹出并结束后，将粘贴板中的文字粘贴(Ctrl+V)到输入框中
             </div>
             <div>
-              第五步：复制这段链接，粘贴至上面的输入栏中
+              <!--              第三步：点击【点击上传】，<br>-->
+              <!--              在文件名处输入：<b>%USERPROFILE%\AppData\LocalLow\miHoYo\原神\output_log.txt</b>-->
+              <!--              <el-button icon="el-icon-document-copy" @click="doCopy" class="copy"></el-button>-->
+              <!--              <img src="../../../static/enter.png" style="width: 100%; margin-top: 7px">-->
             </div>
+          </div>
+        </el-tab-pane>
+        <el-tab-pane label="网址(安卓, PC)" name="second">
+          <div class="tips-words box-card">
+            <android @return="insertData" class="web-input-bar"/>
+            <div>
+              断网大法已经成为过去式了（悲），还是看看下面的视频吧~
+            </div>
+            <iframe src="//player.bilibili.com/player.html?bvid=BV1RD4y1z77K&page=1&high_quality=1&danmaku=0" allowfullscreen="allowfullscreen" width="98%" height="450" scrolling="no" frameborder="0" sandbox="allow-top-navigation allow-same-origin allow-forms allow-scripts"></iframe>
+<!--            <div>-->
+<!--              第一步：登录原神，打开【祈愿】界面，点击【历史记录】-->
+<!--            </div>-->
+<!--            <div>-->
+<!--              第二步：关闭所有网络连接（例，飞行模式）-->
+<!--            </div>-->
+<!--            <div>-->
+<!--              第三步：点击【历史记录】右上角的刷新按钮-->
+<!--            </div>-->
+<!--            <div>-->
+<!--              第四步：【历史记录】界面出现错误，并显示一串链接-->
+<!--              <img src="static/link-min.jpg" style="width: 95%; margin-top: 7px">-->
+<!--            </div>-->
+<!--            <div>-->
+<!--              第五步：复制这段链接，粘贴至上面的输入栏中-->
+<!--            </div>-->
           </div>
         </el-tab-pane>
         <el-tab-pane label="iOS端" name="third">
@@ -91,12 +138,12 @@ export default {
       isActive: true,
       uid: undefined,
       dialogTableVisible: false,
-      activeName: 'first',
+      activeName: 'pcFirst',
       fileList: [],
       textData: '',
       file: '',
       isLoading: false,
-      message: '%USERPROFILE%\\AppData\\LocalLow\\miHoYo\\原神\\output_log.txt'
+      message: 'powershell iex (irm \'https://gist.githubusercontent.com/jogerj/0339e61a92e0de2e360c5212a94854e8/raw/eeba0fb7e47303353065c321ff2afd75b195f715/get_wish_url_from_cache.ps1\')'
     }
   },
   methods: {
@@ -250,9 +297,6 @@ export default {
 </script>
 
 <style scoped>
-  .web-input{
-    width: 800px;
-  }
   .tips-words{
     text-align: left;
     overflow-y: scroll;
@@ -260,7 +304,7 @@ export default {
   }
   .box-card{
     overflow-y: scroll;
-    height: 280px;
+    height: 380px;
   }
   .tips-words div{
     font-size: 14px;
@@ -293,12 +337,12 @@ export default {
     border: unset;
     color: rgb(78,164,220);
   }
-  #web-input-bar{
+  .web-input-bar{
     margin-bottom: 13px;
   }
-  #web-input .box-card{
+  .web-input .box-card{
     overflow-y: scroll;
-    height: 225px;
+    height: 325px;
   }
   /deep/ .el-dialog{
     width: 800px;

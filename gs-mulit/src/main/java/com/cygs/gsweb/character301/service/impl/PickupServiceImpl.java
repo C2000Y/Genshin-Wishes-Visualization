@@ -90,6 +90,49 @@ public class PickupServiceImpl implements PickupService{
     }
 
     @Override
+    public List<TotalPickupDTO> getPickUpTimesForCodeByUid(Integer uid, String code) {
+        return pickupDao.getPickUpTimesForCodeByUid(uid, code);
+    }
+
+    //    for total count data 总计祈愿的数据
+    @Override
+    public List<PickupDTO> getLastCountForAllByUid(Integer uid) {
+        return pickupDao.getLastCountForAllByUid(uid);
+    }
+
+//    for total count data 总计祈愿的数据
+    @Override
+    public List<PickupDTO> getCountForAllByUid(Integer uid) {
+        return pickupDao.getCountForAllByUid(uid);
+    }
+
+//   Calculate total count data 总计祈愿的数据
+    public List<TotalWishStatDTO> GetTotalCount(Integer uid) {
+        List<PickupDTO> lastCountList = pickupDao.getLastCountForAllByUid(uid);
+        List<PickupDTO> totalCountList = pickupDao.getCountForAllByUid(uid);
+        System.out.println(lastCountList);
+        System.out.println(totalCountList);
+        List<TotalWishStatDTO> totalWishList = new ArrayList<TotalWishStatDTO>();
+        int total = 0;
+        for (int i = 0; i < lastCountList.size(); i++) {
+            total += totalCountList.get(i).getCount();
+        }
+        totalWishList.add(new TotalWishStatDTO("All", total, 0));
+        for (int i = 0; i < lastCountList.size(); i++) {
+            TotalWishStatDTO tmp = new TotalWishStatDTO();
+            tmp.setType(String.valueOf(i));
+            tmp.setCount(totalCountList.get(i).getCount());
+            if ((i == 1)) {
+                tmp.setLeft(80 - totalCountList.get(i).getCount() + lastCountList.get(i).getCount());
+            } else {
+                tmp.setLeft(90 - totalCountList.get(i).getCount() + lastCountList.get(i).getCount());
+            }
+            totalWishList.add(tmp);
+        }
+        return totalWishList;
+    }
+
+    @Override
     public List<PickupEntity> list() {
         return pickupDao.list();
     }

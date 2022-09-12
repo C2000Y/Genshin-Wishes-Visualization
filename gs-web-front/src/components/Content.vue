@@ -152,7 +152,7 @@ export default {
       await this.$axios.get('/summon/rankType', {
         params: {
           uid: uid,
-          code: code
+          csde: code
         }
       }).then(res => {
         let data = res.data.data

@@ -3,8 +3,8 @@
 
 <mapper namespace="com.cygs.gsweb.comment.dao.CommentDao">
 
-    <select id="getCommentsByUid" parameterType="Integer" resultType="com.cygs.gsweb.comment.entity.CommentEntity">
-        select pid, id, uid, comment, post_date, rate from gs.comments where uid = #{uid} ORDER BY post_date DESC
+    <select id="getCommentsByUid" parameterType="map" resultType="com.cygs.gsweb.comment.entity.CommentEntity">
+        select pid, id, uid, comment, post_date, rate from gs.comments where uid = #{uid} ORDER BY post_date DESC limit ${(page - 1) * pageSize}, ${pageSize}
     </select>
 
     <insert id="sendComment">

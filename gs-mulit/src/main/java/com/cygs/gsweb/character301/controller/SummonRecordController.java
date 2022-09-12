@@ -2,6 +2,7 @@ package com.cygs.gsweb.character301.controller;
 
 import com.cygs.gsweb.character301.dto.PickupDTO;
 import com.cygs.gsweb.character301.dto.TotalPickupDTO;
+import com.cygs.gsweb.character301.dto.TotalWishStatDTO;
 import com.cygs.gsweb.character301.entity.PickupEntity;
 import com.cygs.gsweb.character301.service.PickupService;
 import com.cygs.gsweb.character301.service.WriteInService;
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -72,13 +74,13 @@ public class SummonRecordController implements Serializable {
 
 //    星级分类
 //    localhost:6480/summon/rankType?uid=100105164&code=301
-    @CrossOrigin
-    @GetMapping("rankType")
-//    @ResponseBody
-    public Result<List<PickupDTO>> summonLevel(@RequestParam HashMap map) throws Exception {
-        List<PickupDTO> pickupDTOList = pickupService.getItemsByLevel(map);
-        return new Result<List<PickupDTO>>().ok(pickupDTOList);
-    }
+//    @CrossOrigin
+//    @GetMapping("rankType")
+////    @ResponseBody
+//    public Result<List<PickupDTO>> summonLevel(@RequestParam HashMap map) throws Exception {
+//        List<PickupDTO> pickupDTOList = pickupService.getItemsByLevel(map);
+//        return new Result<List<PickupDTO>>().ok(pickupDTOList);
+//    }
 
 //    抽到5星所花费的次数（总）
 //    localhost:6480/summon/TotalSummonCount?uid=100105164
@@ -92,12 +94,29 @@ public class SummonRecordController implements Serializable {
 
 //    所有角色以及5星武器的出货次数
 //    localhost:6480/summon/TotalPickUpCount?uid=100105164
+//    type 0 所有， type 301 角色up， type 302 武器up， type 200 标配
     @CrossOrigin
-    @GetMapping("TotalPickUpCount")
+    @GetMapping("GetPickUps")
 //    @ResponseBody
-    public Result<List<TotalPickupDTO>> TotalPickUpCount(@RequestParam("uid") Integer uid) throws Exception {
-        List<TotalPickupDTO> pickupDTOList = pickupService.getPickUpTimesForAllByUid(uid);
+    public Result<List<TotalPickupDTO>> TotalPickUpCount(@RequestParam("uid") Integer uid, @RequestParam("type") Integer type) throws Exception {
+        List<TotalPickupDTO> pickupDTOList;
+
+        if (type == 0) {
+            pickupDTOList = pickupService.getPickUpTimesForAllByUid(uid);
+        } else {
+            pickupDTOList = pickupService.getPickUpTimesForCodeByUid(uid, type.toString());
+        }
         return new Result<List<TotalPickupDTO>>().ok(pickupDTOList);
+    }
+
+//    抽到最后一个五星花费的总次数（所有池子）
+//    localhost:6480/summon/TotalPickUpCount?uid=100105164
+    @CrossOrigin
+    @GetMapping("GetTotalCount")
+//    @ResponseBody
+    public Result<List<TotalWishStatDTO>> GetTotalCount(@RequestParam("uid") Integer uid) throws Exception {
+        List<TotalWishStatDTO> pickupDTOList = pickupService.GetTotalCount(uid);
+        return new Result<List<TotalWishStatDTO>>().ok(pickupDTOList);
     }
 
 }

@@ -1,7 +1,7 @@
 <template>
   <div class="content" v-bind:style="{backgroundColor:'rgba('+245+','+245+','+245+','+opacityLevel/100+')'}">
     <div class="tool-bar">
-      <Total :total="totalWishes" :chara="charaWishes" :charaLeft="charaLeft" :weapon="weaponWishes" :weaponLeft="weaponLeft" :stand="standardWishes" :standLeft="standardLeft"/>
+      <Total ref="uidForTotal"/>
       <web-site-input @update="updateUid"></web-site-input>
       <div class="tool-bar-right">
 <!--        <div id="switch-mark">-->
@@ -15,16 +15,18 @@
 <!--            inactive-color="#ff4949">-->
 <!--          </el-switch>-->
 <!--        </div>-->
-        <div id="slider-opacity">
-          <div>
-            <el-slider
-              v-model="opacityLevel"
-              :step="5"
-              :max="95"
-              :format-tooltip="formatTooltip">
-            </el-slider>
-          </div>
-        </div>
+
+<!--        调整透明度-->
+<!--        <div id="slider-opacity">-->
+<!--          <div>-->
+<!--            <el-slider-->
+<!--              v-model="opacityLevel"-->
+<!--              :step="5"-->
+<!--              :max="95"-->
+<!--              :format-tooltip="formatTooltip">-->
+<!--            </el-slider>-->
+<!--          </div>-->
+<!--        </div>-->
         <uid-selection
           @uid="getUid"
           ref="uidSelect"
@@ -32,26 +34,26 @@
       </div>
     </div>
     <div class="data-display-area">
-      <el-menu router :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
+      <el-menu router :default-active="activeIndex" class="el-menu-demo" mode="horizontal">
         <el-menu-item index="/default">
           观星台
         </el-menu-item>
         <el-menu-item index="/overall">
           全部祈愿
         </el-menu-item>
-        <el-menu-item index="2">
+        <el-menu-item index="/character">
           角色祈愿
         </el-menu-item>
-        <el-menu-item index="3">
+        <el-menu-item index="/weapon">
           武器祈愿
         </el-menu-item>
-        <el-menu-item index="4">
+        <el-menu-item index="/standard">
           常驻祈愿
         </el-menu-item>
       </el-menu>
       <div>
       </div>
-      <router-view :uid="uid"/>
+      <router-view :uid="uid" ref="views"/>
     </div>
   </div>
 </template>
@@ -93,12 +95,14 @@ export default {
   methods: {
     // 更新uid下拉列表
     updateUid (uid, status) {
-      console.log(uid, status)
+      // console.log(uid, status)
       this.uid = uid
       if (status >= 0) {
         this.getUid(uid)
+        this.$refs.views.update()
+        this.$refs.uidSelect.getUid(uid)
       } else {
-        this.$refs.uidSelect.getUids(uid)
+        this.$refs.uidSelect.getUid(uid)
       }
     },
     handleSelect (index) {
@@ -108,6 +112,7 @@ export default {
       // 显示加载过场
       // this.startLoading()
       this.uid = uid
+      this.$refs.uidForTotal.changeUid(uid)
       // this.reInitChart()
       // this.getChartData(uid, 301, this.showMark)
       // this.getChartData(uid, 302, this.showMark)
@@ -237,8 +242,44 @@ export default {
       min-width: unset;
     }
     .tool-bar{
-      height: 110px;
       padding: 5px 5px 0 5px;
     }
   }
+  @media screen and (max-width: 790px){
+    .content{
+      width: 100%;
+      min-width: unset;
+    }
+    .tool-bar{
+      height: 100px;
+      padding: 5px 5px 0 5px;
+    }
+  }
+  @media screen and (max-width: 640px){
+    .data-display-area{
+      padding: unset;
+    }
+    .el-menu-item{
+      width: 90px !important;
+    }
+  }
+  @media screen and (max-width: 450px){
+    .tool-bar{
+      height: 80px;
+    }
+    .el-menu-item{
+      width: 70px !important;
+      padding: unset;
+    }
+  }
+@media screen and (max-width: 380px){
+  .el-menu-item{
+    width: 65px !important;
+    padding: unset;
+  }
+}
+</style>
+
+<style>
+
 </style>

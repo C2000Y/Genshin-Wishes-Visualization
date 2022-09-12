@@ -1,13 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="bf6d6f06-fbec-4e2a-a588-1b626ef7f323" name="Default" comment="" />
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
-    <option name="TRACKING_ENABLED" value="true" />
+    <list default="true" id="bf6d6f06-fbec-4e2a-a588-1b626ef7f323" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/../gs-mulit/src/main/java/com/cygs/gsweb/character301/dto/TotalWishStatDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gs-web-front/src/assets/font/JiangXiZhuoKai.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gs-web-front/src/assets/font/text.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gs-web-front/src/components/Data/CharacterData.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gs-web-front/src/components/Data/StandardData.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gs-web-front/src/components/Data/WeaponData.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gs-web-front/static/setting.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gs-web-front/static/win+r.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gs-web-front/static/winrun.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gs-mulit/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../gs-mulit/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gs-mulit/src/main/java/com/cygs/gsweb/character301/controller/SummonRecordController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../gs-mulit/src/main/java/com/cygs/gsweb/character301/controller/SummonRecordController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gs-mulit/src/main/java/com/cygs/gsweb/character301/dao/PickupDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/../gs-mulit/src/main/java/com/cygs/gsweb/character301/dao/PickupDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gs-mulit/src/main/java/com/cygs/gsweb/character301/dto/Gacha.java" beforeDir="false" afterPath="$PROJECT_DIR$/../gs-mulit/src/main/java/com/cygs/gsweb/character301/dto/Gacha.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gs-mulit/src/main/java/com/cygs/gsweb/character301/service/PickupService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../gs-mulit/src/main/java/com/cygs/gsweb/character301/service/PickupService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gs-mulit/src/main/java/com/cygs/gsweb/character301/service/impl/PickupServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../gs-mulit/src/main/java/com/cygs/gsweb/character301/service/impl/PickupServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gs-mulit/src/main/java/com/cygs/gsweb/fileReader/controller/FileController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../gs-mulit/src/main/java/com/cygs/gsweb/fileReader/controller/FileController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gs-mulit/src/main/java/com/cygs/gsweb/utils/summon/HTMLPageParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/../gs-mulit/src/main/java/com/cygs/gsweb/utils/summon/HTMLPageParser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gs-mulit/src/main/resources/mapper/character301/PickupDao.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../gs-mulit/src/main/resources/mapper/character301/PickupDao.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gs-mulit/src/main/resources/mapper/connectGachaUser/connectGachaUserDao.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../gs-mulit/src/main/resources/mapper/connectGachaUser/connectGachaUserDao.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gs-web-front/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../gs-web-front/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gs-web-front/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../gs-web-front/src/App.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gs-web-front/src/assets/CharacterImage.json" beforeDir="false" afterPath="$PROJECT_DIR$/../gs-web-front/src/assets/CharacterImage.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gs-web-front/src/components/CharaList/CharaList.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../gs-web-front/src/components/CharaList/CharaList.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gs-web-front/src/components/Chat/Comment.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../gs-web-front/src/components/Chat/Comment.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gs-web-front/src/components/Content.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../gs-web-front/src/components/Content.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gs-web-front/src/components/Data/Default.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../gs-web-front/src/components/Data/Default.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gs-web-front/src/components/Data/OverallData.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../gs-web-front/src/components/Data/OverallData.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gs-web-front/src/components/Data/Total.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../gs-web-front/src/components/Data/Total.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gs-web-front/src/components/Effect/Loading.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../gs-web-front/src/components/Effect/Loading.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gs-web-front/src/components/MainPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../gs-web-front/src/components/MainPage.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gs-web-front/src/components/Website-Input/WebSiteInput.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../gs-web-front/src/components/Website-Input/WebSiteInput.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gs-web-front/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/../gs-web-front/src/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gs-web-front/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../gs-web-front/src/router/index.js" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
   <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
@@ -23,6 +59,8 @@
     <option name="width" value="1940" />
     <option name="height" value="1040" />
   </component>
+  <component name="ProjectId" id="2EbkPHGFkxo2ySCX4Q96UhZcDjK" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
@@ -44,7 +82,12 @@
       <pane id="Scope" />
     </panes>
   </component>
+  <component name="ProjectViewState">
+    <option name="showLibraryContents" value="true" />
+  </component>
   <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="go.gopath.indexing.explicitly.defined" value="true" />
@@ -55,62 +98,33 @@
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="editor.preferences.gutterIcons" />
-  </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
+    <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RunManager">
     <configuration default="true" type="Application" factoryName="Application">
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
     <configuration default="true" type="JUnit" factoryName="JUnit">
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="METHOD_NAME" />
       <option name="TEST_OBJECT" value="class" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
       <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <patterns />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
-    <configuration default="true" type="TestNG" factoryName="TestNG">
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="SUITE_NAME" />
-      <option name="PACKAGE_NAME" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="METHOD_NAME" />
-      <option name="GROUP_NAME" />
+    <configuration default="true" type="TestNG">
       <option name="TEST_OBJECT" value="CLASS" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
       <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
-      <option name="OUTPUT_DIRECTORY" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <option name="USE_DEFAULT_REPORTERS" value="false" />
-      <option name="PROPERTIES_FILE" />
       <properties />
       <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
   </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -122,6 +136,7 @@
       <option name="presentableId" value="Default" />
       <updated>1648795364811</updated>
       <workItem from="1648795366788" duration="36000" />
+      <workItem from="1662871647913" duration="14000" />
     </task>
     <servers />
   </component>
@@ -163,7 +178,7 @@
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="1" />
+    <option name="version" value="3" />
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />

@@ -20,8 +20,8 @@ public class CommentImpl implements CommentService {
     CommentDao commentDao;
 
     @Override
-    public List<CommentEntity> getCommentsByUid(Integer uid) {
-        return commentDao.getCommentsByUid(uid);
+    public List<CommentEntity> getCommentsByUid(HashMap map) {
+        return commentDao.getCommentsByUid(map);
     }
 
     @Override

@@ -9,6 +9,7 @@ import axios from 'axios'
 // import VueElementLoading from 'vue-element-loading'
 import * as echarts from 'echarts'
 import VueClipboard from 'vue-clipboard2'
+import './assets/font/text.css'
 
 VueClipboard.config.autoSetContainer = true // add this line
 Vue.use(VueClipboard)
@@ -19,8 +20,8 @@ Vue.prototype.$axios = axios
 Vue.prototype.$echarts = echarts
 
 // axios.defaults.withCredentials = true
-// axios.defaults.baseURL = 'http://175.24.165.47:6480/'
-axios.defaults.baseURL = 'http://localhost:6480/'
+axios.defaults.baseURL = 'http://175.24.165.47:6480/'
+// axios.defaults.baseURL = 'http://localhost:6480/'
 Vue.config.productionTip = false
 Vue.use(router)
 // // element-ui

@@ -29,17 +29,21 @@ public class CommentController implements Serializable {
      */
     @CrossOrigin
     @GetMapping("getCommentList")
-    public Result<List<CommentEntity>> getCommentList(@RequestParam("uid") Integer uid)throws Exception {
-        List<CommentEntity> CommentEntity = commentService.getCommentsByUid(uid);
+    public Result<List<CommentEntity>> getCommentList(@RequestParam HashMap map)throws Exception {
+        map.put("pageSize", 10);
+        map.put("page",new Integer(map.get("page").toString()));
+//        System.out.println(map);
+        List<CommentEntity> CommentEntity = commentService.getCommentsByUid(map);
         return new Result<List<CommentEntity>>().ok(CommentEntity);
     }
 
     @CrossOrigin
-    @GetMapping("sendComment")
+    @PostMapping("sendComment")
     //    @ResponseBody
-    public Result<Integer> sendComment(@RequestParam HashMap map) throws Exception {
-        Integer uid = commentService.sendComment(map);
-        return new Result<Integer>().ok(uid);
+    public Result<Integer> sendComment(@RequestBody HashMap map) throws Exception {
+        System.out.println(map);
+        Integer res = commentService.sendComment(map);
+        return new Result<Integer>().ok(res);
     }
 
 }

@@ -2,6 +2,7 @@ package com.cygs.gsweb.character301.service;
 
 import com.cygs.gsweb.character301.dto.PickupDTO;
 import com.cygs.gsweb.character301.dto.TotalPickupDTO;
+import com.cygs.gsweb.character301.dto.TotalWishStatDTO;
 import com.cygs.gsweb.character301.entity.PickupEntity;
 
 import java.util.HashMap;
@@ -19,4 +20,8 @@ public interface PickupService {
     List<PickupDTO> getItemsByLevel(HashMap map);
     List<TotalPickupDTO> getTotalSummonCountByUid(Integer uid);
     List<TotalPickupDTO> getPickUpTimesForAllByUid(Integer uid);
+    List<TotalPickupDTO> getPickUpTimesForCodeByUid(Integer uid, String code);
+    List<PickupDTO> getLastCountForAllByUid(Integer uid);
+    List<PickupDTO> getCountForAllByUid(Integer uid);
+    List<TotalWishStatDTO> GetTotalCount(Integer uid);
 }
