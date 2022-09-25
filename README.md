@@ -1,8 +1,8 @@
 # Genshin Wishes Visualization
-Only Support CN Server For Now  
-Version 1.0.3.2 
-http://175.24.165.47/#/
-![image](https://user-images.githubusercontent.com/67337861/183532539-13b7883a-7b17-4915-a1c1-a41ed4ac550c.png)
+Support All Servers
+Version 1.0.4 
+http://www.genshin-stargazing.site/#/overall
+![image](https://user-images.githubusercontent.com/67337861/192159015-2b367434-229f-482e-894c-e53386ae16d1.png)
 
 
 **Version 1.0.0 - 2022/2/3**  
@@ -42,3 +42,13 @@ Mobile page adaptation
 Redesigned File Upload Logic, now upload URL instead of File  
 Reopened Android Website URL entry function  
   
+**Version 1.0.4 2022/09/12**  
+重新设计了页面  
+现在用卡片形式显示所有的角色和5星武器的数量  
+修改了不同设备的导入方式  
+增加了讨论区功能  
+Redesigned website layout  
+Display all the characters and weapons in card format  
+Changed data input method  
+Add comment area  
+
