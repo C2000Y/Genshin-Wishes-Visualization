@@ -53,4 +53,10 @@ Redesigned website layout
 Display all the characters and weapons in card format  
 Changed data input method  
 Add comment area  
+  
+**Version 1.0.4。1 - 2022/10/15**  
+修改了导入时莫名报错的问题  
+新增后台角色和武器的图片管理      
+Fixed unknown error during input data  
+Add a background management system for images of characters and weapons 
 
