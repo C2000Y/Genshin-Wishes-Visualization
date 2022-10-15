@@ -72,7 +72,7 @@ public class Gacha {
     public String toString() {
         return "Gacha{" +
                 "id='" + id + '\'' +
-                ", User='" + uid + '\'' +
+                ", UserEntity='" + uid + '\'' +
                 ", name='" + name + '\'' +
                 ", itemType='" + itemType + '\'' +
                 ", rankType='" + rankType + '\'' +

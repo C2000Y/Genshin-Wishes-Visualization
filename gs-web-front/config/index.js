@@ -4,21 +4,40 @@
 
 const path = require('path')
 
-let proxyObj = {};
-proxyObj['/ws'] = {
+let proxyObjPrd = {};
+let proxyObjDev = {};
+proxyObjPrd['/ws'] = {
   ws: true,
-  target: "ws://175.24.165.47:6480"
-  // target: "ws://localhost:6480"
-};
-proxyObj['/'] = {
-  ws: false,
-  target: 'http://175.24.165.47:6480',
   // target: "ws://localhost:6480",
+  target: 'http://175.24.165.47:6480',
+  changeOrigin: true
+};
+proxyObjPrd['/'] = {
+  ws: false,
+  // target: "ws://localhost:6480",
+  target: 'http://175.24.165.47:6480',
+
   changeOrigin: true,
   pathRewrite: {
     '^/': ''
   }
-},
+};
+
+proxyObjDev['/ws'] = {
+  ws: true,
+  // target: "ws://localhost:6480",
+  target: 'http://175.24.165.47:6480',
+  changeOrigin: true
+};
+proxyObjDev['/'] = {
+  ws: false,
+  // target: "ws://localhost:6480",
+  target: 'http://175.24.165.47:6480',
+  changeOrigin: true,
+  pathRewrite: {
+    '^/': ''
+  }
+};
 
 module.exports = {
   // externals: {
@@ -30,16 +49,8 @@ module.exports = {
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-    proxyTable: proxyObj,
-    //   {
-    //   '/api': {
-    //     target: 'http://localhost:6480/',
-    //     changeOrigin: true,
-    //     pathRewrite: {
-    //       '^/api': ''
-    //     }
-    //   }
-    // },
+    // proxyTable: proxyObjDev,
+    proxyTable: proxyObjDev,
 
     // Various Dev Server settings
     host: 'localhost', // can be overwritten by process.env.HOST

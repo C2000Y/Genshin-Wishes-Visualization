@@ -35,25 +35,27 @@
     </div>
     <div class="data-display-area">
       <el-menu router :default-active="activeIndex" class="el-menu-demo" mode="horizontal">
-        <el-menu-item index="/default">
+        <el-menu-item index="/main/default">
           观星台
         </el-menu-item>
-        <el-menu-item index="/overall">
+        <el-menu-item index="/main/overall">
           全部祈愿
         </el-menu-item>
-        <el-menu-item index="/character">
+        <el-menu-item index="/main/character">
           角色祈愿
         </el-menu-item>
-        <el-menu-item index="/weapon">
+        <el-menu-item index="/main/weapon">
           武器祈愿
         </el-menu-item>
-        <el-menu-item index="/standard">
+        <el-menu-item index="/main/standard">
           常驻祈愿
         </el-menu-item>
       </el-menu>
       <div>
       </div>
+<!--      <keep-alive>-->
       <router-view :uid="uid" ref="views"/>
+<!--      </keep-alive>-->
     </div>
   </div>
 </template>
@@ -89,9 +91,17 @@ export default {
       activeIndex: '/default'
     }
   },
-  mounted () {
-    this.activeIndex = this.$route.path
-  },
+  // mounted () {
+  //   // this.$axios.get('file/getImgJson', {params: {}}).then(res => {
+  //   //   console.log(res.data.data)
+  //   //   let js = JSON.parse(res.data.data)
+  //   //   console.log(js)
+  //   //   this.$refs.charaList.getCharaListData(res.data.data)
+  //   // })
+  //   console.log(common.setUrl().then(
+  //     console.log
+  //   )
+  // },
   methods: {
     // 更新uid下拉列表
     updateUid (uid, status) {
@@ -166,9 +176,8 @@ export default {
 
   .content{
     height: 100%;
-    max-width: 1330px;
+    max-width: 1920px;
     width: 90%;
-    min-width: 1200px;
     margin-right: auto;
     margin-left: auto;
   }
@@ -236,6 +245,14 @@ export default {
     font-weight: bold;
   }
 
+  @media screen and (max-width: 1920px){
+    .content{
+      height: 100%;
+      max-width: 1330px;
+      width: 90%;
+      min-width: 1200px;
+    }
+  }
   @media screen and (max-width: 1200px){
     .content{
       width: 100%;

@@ -15,8 +15,9 @@
       </div>
       <div class="commentArea" v-loading="commentLoading" element-loading-background="rgba(255, 255, 255, 0.5)" :element-loading-text="loadingText">
         <div v-for="(x, index) in data" :key="index">
-          <div class = "aComment">
-            <div class="timeStamp">[{{x.postDate}}]</div>
+          <div :class="x.isTop===1 ? 'aComment topComment' : 'aComment'">
+            <div class="timeStamp" v-if="x.isTop===1" style="color: azure">[置顶 {{x.postDate}}]</div>
+            <div class="timeStamp" v-else>[{{x.postDate}}]</div>
             <div class="commentText">{{x.comment}}</div>
           </div>
           <div class="bottomLine"></div>
@@ -44,7 +45,6 @@ export default {
       placeholderTextData: [
         '说点什么好呢?',
         '欧吃矛！',
-        // '你知道吗？在稻妻大火的《沉秋拾剑录》曾在璃月别人调侃为字典',
         '骚话在嘴边说不出来的感觉如何？'
       ],
       commentInCD: false,
@@ -226,6 +226,9 @@ export default {
   }
   .el-button{
     line-height: 28px;
+  }
+  .topComment{
+    background-image: linear-gradient(rgba(83,127,181,0.4), rgba(83,127,181,0.2), transparent);
   }
   /deep/
   .el-timeline-item__tail{

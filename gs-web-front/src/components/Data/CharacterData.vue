@@ -39,7 +39,7 @@
       <!--          </div>-->
     </div>
     <div class="chart-item">
-      <bar-chart ref="totalBarData" size="35" id="1000" style="width: 100%;"></bar-chart>
+      <bar-chart ref="totalBarData" size="30" id="1000" style="width: 100%;"></bar-chart>
     </div>
   </div>
 </template>
@@ -181,7 +181,7 @@ export default {
 .chart-item{
   position: relative;
   /*width: 100%;*/
-  height: 280px;
+  height: 350px;
   margin-top: 5px;
   padding: 0px 20px 0px 20px;
   /*border-top: 2px solid #cccccc;*/

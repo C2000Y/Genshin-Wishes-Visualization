@@ -49,6 +49,11 @@ public class CommentEntity {
      */
     private Integer rate;
 
+    /**
+     * 是否置顶
+     */
+    private Integer isTop;
+
     public String getId() {
         return id;
     }
@@ -95,5 +100,13 @@ public class CommentEntity {
 
     public void setRate(Integer rate) {
         this.rate = rate;
+    }
+
+    public Integer getIsTop() {
+        return isTop;
+    }
+
+    public void setIsTop(int isTop) {
+        this.isTop = isTop;
     }
 }

@@ -23,6 +23,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import static com.cygs.gsweb.utils.summon.HTMLPageParser.convertUrl;
+import static com.cygs.gsweb.utils.summon.HTMLPageParser.getSummon;
 
 /**
  * @author 赛勒一点也不努力
@@ -58,47 +59,13 @@ public class WriteInServiceImpl implements WriteInService {
     public Integer writeIn(String url) throws Exception {
         System.out.println(url);
         System.out.println("开始读取...");
-        Integer res = insertSummon(convertUrl(url,"200"),"200");
-        res = Math.max(res, insertSummon(convertUrl(url,"301"),"301"));
-        res = Math.max(res, insertSummon(convertUrl(url,"302"),"302"));
+        Integer res = insertSummon(getSummon(convertUrl(url,"200")),"200");
+        res = Math.max(res, insertSummon(getSummon(convertUrl(url,"301")),"301"));
+        res = Math.max(res, insertSummon(getSummon(convertUrl(url,"302")),"302"));
         return res;
     }
 
-    private Integer insertSummon(String urlInfo, String type) throws Exception{
-        String endId = "0";
-        int count = 0;
-        Boolean flag = true;
-        List<Gacha> gachaList = new ArrayList<Gacha>();
-
-        while(flag) {
-            URL url = new URL(urlInfo + endId);
-            System.out.println(url);
-            BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream()));
-            String line;
-            if ((line = reader.readLine()) != null) {
-                DataJson data = JSON.parseObject(line, DataJson.class);
-                if(data.getRetcode() < 0) { return -1;}
-                try {
-                    Integer total = data.getData().getList().size();
-                    flag = total >= Integer.valueOf(data.getData().getSize());
-                    for (int i = 0; i < total; i++) {
-                        ListJson listJson = data.getData().getList().get(i);
-                        Gacha gacha = new Gacha(listJson.getId(),listJson.getUid(),listJson.getName(),listJson.getItem_type(),listJson.getRank_type(),listJson.getTime());
-                        gachaList.add(gacha);
-                    }
-                    endId = data.getData().getList().get(total - 1).getId();
-                    reader.close();
-                }catch (Exception e){
-                    System.out.println(e);
-                    return -2;
-                }
-            } else {
-                break;
-            }
-            count++;
-            System.out.println("进度：第"+count+"页，解析中...");
-            try{Thread.sleep(400);}catch(Exception e){}
-        }
+    private Integer insertSummon(List<Gacha> gachaList, String type) throws Exception{
         if(!gachaList.isEmpty()) {
 //        角色up
             if(type.compareTo("301") == 0){

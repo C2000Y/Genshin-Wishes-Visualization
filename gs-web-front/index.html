@@ -3,15 +3,29 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.proxy.ustclug.org">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.proxy.ustclug.org/css2?family=Noto+Sans+SC&display=swap" rel="stylesheet">
+
     <link rel="icon" type="image/x-icon" href="static/Web.png" rel="external nofollow" >
     <style>
+      html{
+        overflow-x:hidden;
+      }
       body{
+        padding-right: 0px !important;
         margin: 0;
-        /*font-family: JXZK;*/
+
         /*background: url("http://175.24.165.47:8080/background.jpg") fixed no-repeat 50% 0 #d1d1d1;*/
         /*background: url("http://175.24.165.47:8080/tim.jpg") fixed no-repeat 50% 0 #d1d1d1;*/
         /*background-size: 1920px 1080px;*/
         /*background-color: rgb(140,202,227);*/
+        background-size: 100% !important;
+      }
+      @media screen and (max-width: 1920px){
+        body{
+          background-size: unset !important;
+        }
       }
     </style>
     <title>提瓦特观星台</title>
@@ -39,7 +53,7 @@
     <!-- built files will be auto injected -->
   </body>
   <script>
-    const background = ["http://175.24.165.47:8080/background.jpg","http://175.24.165.47:8080/background2.jpg","http://175.24.165.47:8080/background3.jpg"]
+    const background = ["http://175.24.165.47:8080/background.jpg","http://175.24.165.47:8080/background2.jpg","http://175.24.165.47:8080/background3.jpg","http://175.24.165.47:8080/background4.jpg","http://175.24.165.47:8080/background5.jpg"]
     const ranNum = Math.floor(Math.random() * background.length)
     document.body.style.background ="url(" + background[ranNum] + ") fixed no-repeat 50% 0 #d1d1d1";
     document.body.style.backgroundColor = 'rgb(140,202,227)';

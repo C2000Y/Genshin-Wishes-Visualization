@@ -62,7 +62,7 @@
         <!--          </div>-->
       </div>
       <div class="chart-item">
-        <bar-chart ref="totalBarData" size="35" id="1000" style="width: 100%;"></bar-chart>
+        <bar-chart ref="totalBarData" :size=30 id="1000" style="width: 100%;"></bar-chart>
       </div>
     <!--TODO：历史最欧（两发内最少出货数）-->
     <!--TODO：历史最非（两发内最少出货数）-->
@@ -93,7 +93,8 @@ export default {
       avgCharaGachaCount: '计算中~',
       avgWeaponGachaCount: '计算中~',
       totalGachaCount: '计算中~',
-      loadingTextValue: ''
+      loadingTextValue: '',
+      iconSize: 30
     }
   },
   computed: {
@@ -298,7 +299,7 @@ export default {
   .chart-item{
     position: relative;
     /*width: 100%;*/
-    height: 280px;
+    height: 350px;
     margin-top: 5px;
     padding: 0px 20px 0px 20px;
     /*border-top: 2px solid #cccccc;*/

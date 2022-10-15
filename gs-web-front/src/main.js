@@ -10,6 +10,9 @@ import axios from 'axios'
 import * as echarts from 'echarts'
 import VueClipboard from 'vue-clipboard2'
 import './assets/font/text.css'
+import common from './components/Common'
+
+Vue.prototype.$common = common
 
 VueClipboard.config.autoSetContainer = true // add this line
 Vue.use(VueClipboard)
@@ -23,7 +26,8 @@ Vue.prototype.$echarts = echarts
 axios.defaults.baseURL = 'http://175.24.165.47:6480/'
 // axios.defaults.baseURL = 'http://localhost:6480/'
 Vue.config.productionTip = false
-Vue.use(router)
+// Vue.use(router)
+// Vue.prototype.$route = router
 // // element-ui
 // Vue.use(Input)
 // Vue.use(Icon)

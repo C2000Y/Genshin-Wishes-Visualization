@@ -1,11 +1,42 @@
 <template>
-  <div style="width: 56px; height: 56px; position: relative; float: right">
+  <div style="width: 56px; height: 56px; position: relative; float: right; font-family: 微软雅黑">
     <div class="setting">
       <el-button class="el-icon-setting" @click="dialogTableVisible = true" style=" width: 52px; height: 52px; padding: 2px 2px 2px 2px; border-radius: 50%; border: unset"></el-button>
     </div>
     <el-dialog title="上传数据" :visible.sync="dialogTableVisible" :lock-scroll="true" class="web-upload-dialog-box">
       <el-tabs v-model="activeName" type="border-card" style="height: 450px;" class="web-upload-dialog">
-        <el-tab-pane label="网址上传(国服PC端)" name="pcFirst" class="web-input">
+        <el-tab-pane label="网址上传(全服务器PC端)" name="pcFirst" class="web-input">
+          <android @return="insertData" class="web-input-bar"/>
+          <div class="tips-words box-card">
+            <div>
+              第一步：登录原神，打开【祈愿】界面，进入【历史记录】
+            </div>
+            <div>
+              第二步：按住WIN键+R，或者在开始菜单中搜索“运行”
+              <div>
+                <img src="../../../static/win+r.png" style="width: 50%; margin-top: 7px">
+              </div>
+            </div>
+            <div>
+              第三步：输入以下字符后，点击【确定】<br/>
+              powershell iex (irm 'http://175.24.165.47:8080/wishURL.ps1')
+              <el-button icon="el-icon-document-copy" @click="doCopy" class="copy"></el-button>
+              <div>
+                <img src="../../../static/winrun.png" style="width: 50%; margin-top: 7px">
+              </div>
+            </div>
+            <div>
+              第四步：等待蓝框（PowerShell）弹出并结束后，将粘贴板中的文字粘贴(Ctrl+V)到输入框中
+            </div>
+            <div>
+              <!--              第三步：点击【点击上传】，<br>-->
+              <!--              在文件名处输入：<b>%USERPROFILE%\AppData\LocalLow\miHoYo\原神\output_log.txt</b>-->
+              <!--              <el-button icon="el-icon-document-copy" @click="doCopy" class="copy"></el-button>-->
+              <!--              <img src="../../../static/enter.png" style="width: 100%; margin-top: 7px">-->
+            </div>
+          </div>
+        </el-tab-pane>
+        <el-tab-pane label="网址上传(国服PC端)" name="pcSecond" class="web-input">
           <android @return="insertData" class="web-input-bar"/>
           <div class="tips-words box-card">
             <!--            <form action='dic/uploadWord' enctype='multipart/form-data' method='post' id="fileUpload">-->
@@ -44,37 +75,6 @@
             </div>
             <div>
               第四步：记得将系统设置的”代理“关闭
-            </div>
-            <div>
-              <!--              第三步：点击【点击上传】，<br>-->
-              <!--              在文件名处输入：<b>%USERPROFILE%\AppData\LocalLow\miHoYo\原神\output_log.txt</b>-->
-              <!--              <el-button icon="el-icon-document-copy" @click="doCopy" class="copy"></el-button>-->
-              <!--              <img src="../../../static/enter.png" style="width: 100%; margin-top: 7px">-->
-            </div>
-          </div>
-        </el-tab-pane>
-        <el-tab-pane label="网址上传(国服/国际服PC端)" name="pcSecond" class="web-input">
-          <android @return="insertData" class="web-input-bar"/>
-          <div class="tips-words box-card">
-            <div>
-              第一步：登录原神，打开【祈愿】界面，进入【历史记录】
-            </div>
-            <div>
-              第二步：按住WIN键+R，或者在开始菜单中搜索“运行”
-              <div>
-                <img src="../../../static/win+r.png" style="width: 50%; margin-top: 7px">
-              </div>
-            </div>
-            <div>
-              第三步：输入以下字符后，点击【确定】<br/>
-              powershell iex (irm 'https://gist.githubusercontent.com/jogerj/0339e61a92e0de2e360c5212a94854e8/raw/eeba0fb7e47303353065c321ff2afd75b195f715/get_wish_url_from_cache.ps1')
-              <el-button icon="el-icon-document-copy" @click="doCopy" class="copy"></el-button>
-              <div>
-                <img src="../../../static/winrun.png" style="width: 50%; margin-top: 7px">
-              </div>
-            </div>
-            <div>
-              第四步：等待蓝框（PowerShell）弹出并结束后，将粘贴板中的文字粘贴(Ctrl+V)到输入框中
             </div>
             <div>
               <!--              第三步：点击【点击上传】，<br>-->
@@ -143,7 +143,7 @@ export default {
       textData: '',
       file: '',
       isLoading: false,
-      message: 'powershell iex (irm \'https://gist.githubusercontent.com/jogerj/0339e61a92e0de2e360c5212a94854e8/raw/eeba0fb7e47303353065c321ff2afd75b195f715/get_wish_url_from_cache.ps1\')'
+      message: 'powershell iex (irm \'http://175.24.165.47:8080/wishURL.ps1\')'
     }
   },
   methods: {

@@ -1,15 +1,12 @@
 <template>
-  <div class="list">
-<!--    <li v-for="(char, index) of CharaList" :key="index" :class='charaImg[char.name].rank==5?"five-star":"four-star"'>-->
-<!--    <div>-->
+  <div class="list" v-if="jsonFlag">
       <div v-for='(char) in CharaList' :key="char.name" :class='charaImg[char.name].rank===5?"five-star list-item":"four-star list-item"'>
-        <el-button @click='clickPop(char.name)' :ref='`bt`+char.name'>
+        <el-button @click='clickPop(charaImg[char.name])' :ref='`bt`+char.name'>
           <div class="item-head">
             <div class="item-count">
               {{char.count}}
             </div>
-            <img class="img" :src='charaImg[char.name].site' :id="char.name"/>
-            <!--         {{char.name}}-->
+            <img class="img" :src='charaImg[char.name].url' :id="char.name"/>
           </div>
         </el-button>
       </div>
@@ -47,14 +44,13 @@
 </template>
 
 <script>
-import charaImgJson from '../../assets/CharacterImage.json'
 export default {
   name: 'CharaList',
   data () {
     return {
-      charaImgJson,
-      charaImg: {'胡桃': {site: '', rank: 5}},
+      charaImg: {},
       CharaList: '',
+      jsonFlag: false,
       visible: false,
       name: '',
       list: ['1', '2', '3'],
@@ -66,19 +62,30 @@ export default {
     }
   },
   mounted () {
-    // this.$axios.get('../../assets/CharacterImage.json').then(res => {
-    //   console.log(res)
-    // })
-    const {data} = this.charaImgJson
-    this.charaImg = data
-    // console.log(this.charaImg)
+  },
+  async created () {
+    while (this.$common.hasData() !== true) {
+      await new Promise(resolve => setTimeout(resolve, 300))
+    }
+    this.jsonFlag = this.$common.hasData()
+    this.charaImg = this.$common.getImgJson()
+    // console.log(this.$common.getImgJson())
   },
   methods: {
     getCharaListData (data) {
-      console.log('From character list')
-      console.log(data)
+      // console.log('From character list')
       this.CharaList = data
+      // this.test()
     },
+    // async test () {
+    //   while (this.$common.hasData() !== true) {
+    //     await new Promise(resolve => setTimeout(resolve, 300))
+    //   }
+    //   console.log(this.charaImg)
+    //   for (let i = 0; i < this.CharaList.length; i++) {
+    //     console.log(this.CharaList[i].name, this.charaImg[this.CharaList[i].name])
+    //   }
+    // },
     showDetail (e) {
       this.visible = true
       this.name = e.target.id
@@ -89,13 +96,13 @@ export default {
       console.log(e)
     },
     clickPop (item) {
-      this.name = item
+      this.name = item.name
       // 这个操作是为了避免与源码中的点击reference doToggle方法冲突
-      if (this.activeId === item && this.showPop) return
+      if (this.activeId === item.name && this.showPop) return
       this.showPop = false
-      this.activeId = item
+      this.activeId = item.name
       // 因为reference是需要获取dom的引用 所以需要是$el
-      this.reference = this.$refs['bt' + item][0].$el
+      this.reference = this.$refs['bt' + item.name][0].$el
       this.$nextTick(() => {
         // 等待显示的popover销毁后再 重新渲染新的popover
         this.showPop = true

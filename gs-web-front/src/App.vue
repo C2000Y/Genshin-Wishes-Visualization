@@ -2,22 +2,32 @@
   <div id="app">
     <Navigate/>
 <!--    <Content/>-->
-    <MainPage/>
+<!--    <MainPage/>-->
+<!--    <router-link to="/main"></router-link>-->
+    <router-view/>
   </div>
 </template>
 
 <script>
-import Content from './components/Content'
 import Navigate from './components/Navi/Navi'
 import MainPage from './components/MainPage'
+import common from './components/Common'
 
 export default {
   name: 'App',
   components: {
-    Content,
     Navigate,
     MainPage
+  },
+  created () {
+    common.getImgJson()
   }
+  // async mounted () {
+  //   while (this.$common.hasData() !== true) {
+  //     await new Promise(resolve => setTimeout(resolve, 300))
+  //   }
+  //   console.log(this.$common.getImgJson())
+  // }
 }
 </script>
 
@@ -31,6 +41,7 @@ export default {
   /*margin-top: 60px;*/
   overflow: hidden;
   width: 100%;
+  height: 100%;
 }
 ::-webkit-scrollbar
 {

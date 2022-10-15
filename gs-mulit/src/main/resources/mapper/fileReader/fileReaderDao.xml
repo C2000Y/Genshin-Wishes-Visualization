@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+        <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cygs.gsweb.fileReader.dao.FileReaderDao">
+
+<!--    <insert id="insertUid" parameterType="Integer">-->
+<!--        insert ignore into gs.dict(uid,last_update) values (#{uid},now())-->
+<!--    </insert>-->
+
+<!--    <update id="updateByUid" parameterType="Integer">-->
+<!--        update gs.connect_gacha_user set last_update = now() where uid = #{uid}-->
+<!--    </update>-->
+
+<!--    <update id="rewriteName" parameterType="map">-->
+<!--      UPDATE gs.connect_gacha_user set name = #{name} where uid = #{uid}-->
+<!--    </update>-->
+    <select id="getDictionary" resultType="com.cygs.gsweb.fileReader.entity.FileReaderEntity">
+        select id, `name`, url, `rank`, type, name_en from gs.dict
+    </select>
+
+    <select id="getAllItem" resultType="String">
+        SELECT DISTINCT NAME
+        FROM
+            (
+                SELECT DISTINCT NAME
+                        ,
+                                rank_type,
+                                item_type
+                FROM
+                    (
+                        SELECT DISTINCT NAME
+                                ,
+                                        rank_type,
+                                        item_type
+                        FROM
+                            gacha_cn_200
+                        WHERE
+                            ( item_type = "武器" AND rank_type = 5 )
+                           OR item_type = "角色" UNION
+                        SELECT DISTINCT NAME
+                                ,
+                                        rank_type,
+                                        item_type
+                        FROM
+                            gacha_cn_301
+                        WHERE
+                            ( item_type = "武器" AND rank_type = 5 )
+                           OR item_type = "角色" UNION
+                        SELECT DISTINCT NAME
+                                ,
+                                        rank_type,
+                                        item_type
+                        FROM
+                            gacha_cn_302
+                        WHERE
+                            ( item_type = "武器" AND rank_type = 5 )
+                           OR item_type = "角色" UNION
+                        SELECT
+                            `NAME` as NAME,
+                            `rank` AS rank_type,
+                            type AS item_type
+                        FROM
+                            dict
+                    ) a
+                ORDER BY
+                    item_type DESC,
+                    rank_type DESC
+            ) b
+    </select>
+
+    <update id="updateDictionaryById" parameterType="Map">
+        UPDATE dict SET `name` = #{name}, url = #{url},`rank` = #{rank}, type = #{type}, name_en = #{nameEn} where id = #{id}
+    </update>
+
+    <insert id="addDictionary" parameterType="Map">
+        INSERT into dict(`name`, url, `rank`, type, name_en) values (#{name},#{url},#{rank},#{type},#{nameEn})
+    </insert>
+
+    <delete id="deleteDictionaryByID" parameterType="Integer">
+        DELETE FROM dict WHERE id = #{id};
+    </delete>
+
+</mapper>

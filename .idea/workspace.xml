@@ -2,7 +2,27 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="80e52e6c-25e1-4953-a92a-88ee256e1626" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/gs-web-front/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/gs-web-front/package-lock.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gs-web-front/src/components/404.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gs-web-front/src/components/Admin/Login.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gs-web-front/src/components/Admin/Setting.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gs-web-front/src/store/action.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gs-web-front/src/store/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gs-web-front/src/store/mutation-types.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gs-web-front/src/store/mutations.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gs-web-front/src/util/http.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gs-web-front/src/util/util.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gs-web-front/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/gs-web-front/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gs-web-front/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/gs-web-front/src/App.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gs-web-front/src/components/CharaList/CharaList.vue" beforeDir="false" afterPath="$PROJECT_DIR$/gs-web-front/src/components/CharaList/CharaList.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gs-web-front/src/components/Data/BarChart.vue" beforeDir="false" afterPath="$PROJECT_DIR$/gs-web-front/src/components/Data/BarChart.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gs-web-front/src/components/Data/CharacterData.vue" beforeDir="false" afterPath="$PROJECT_DIR$/gs-web-front/src/components/Data/CharacterData.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gs-web-front/src/components/Data/OverallData.vue" beforeDir="false" afterPath="$PROJECT_DIR$/gs-web-front/src/components/Data/OverallData.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gs-web-front/src/components/Data/StandardData.vue" beforeDir="false" afterPath="$PROJECT_DIR$/gs-web-front/src/components/Data/StandardData.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gs-web-front/src/components/Data/WeaponData.vue" beforeDir="false" afterPath="$PROJECT_DIR$/gs-web-front/src/components/Data/WeaponData.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gs-web-front/src/components/MainPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/gs-web-front/src/components/MainPage.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gs-web-front/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/gs-web-front/src/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gs-web-front/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/gs-web-front/src/router/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -11,6 +31,9 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="2CfisEVec0NiCOl7sYGu3HTG3KW" />
   <component name="ProjectViewState">
@@ -22,12 +45,13 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/gs-web-front" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+    <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RunManager">
     <configuration name="run" type="js.build_tools.npm">
@@ -41,6 +65,7 @@
       <method v="2" />
     </configuration>
   </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -53,40 +78,11 @@
       <updated>1659200244265</updated>
       <workItem from="1659200246515" duration="687000" />
       <workItem from="1659200948285" duration="144000" />
+      <workItem from="1664144471090" duration="371000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="2" />
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="435" y="195" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1659201076995">
-      <screen x="0" y="0" width="1842" height="1080" />
-    </state>
-    <state x="435" y="195" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1842.1080@0.0.1842.1080" timestamp="1659201076995" />
-    <state x="701" y="297" key="FileChooserDialogImpl" timestamp="1659201090961">
-      <screen x="0" y="0" width="1842" height="1080" />
-    </state>
-    <state x="701" y="297" key="FileChooserDialogImpl/0.0.1842.1080@0.0.1842.1080" timestamp="1659201090961" />
-    <state width="1801" height="266" key="GridCell.Tab.0.bottom" timestamp="1659200933650">
-      <screen x="0" y="0" width="1842" height="1080" />
-    </state>
-    <state width="1801" height="266" key="GridCell.Tab.0.bottom/0.0.1842.1080@0.0.1842.1080" timestamp="1659200933650" />
-    <state width="1801" height="266" key="GridCell.Tab.0.center" timestamp="1659200933650">
-      <screen x="0" y="0" width="1842" height="1080" />
-    </state>
-    <state width="1801" height="266" key="GridCell.Tab.0.center/0.0.1842.1080@0.0.1842.1080" timestamp="1659200933650" />
-    <state width="1801" height="266" key="GridCell.Tab.0.left" timestamp="1659200933650">
-      <screen x="0" y="0" width="1842" height="1080" />
-    </state>
-    <state width="1801" height="266" key="GridCell.Tab.0.left/0.0.1842.1080@0.0.1842.1080" timestamp="1659200933650" />
-    <state width="1801" height="266" key="GridCell.Tab.0.right" timestamp="1659200933650">
-      <screen x="0" y="0" width="1842" height="1080" />
-    </state>
-    <state width="1801" height="266" key="GridCell.Tab.0.right/0.0.1842.1080@0.0.1842.1080" timestamp="1659200933650" />
-    <state x="807" y="181" key="SettingsEditor" timestamp="1659200986076">
-      <screen x="0" y="0" width="1842" height="1080" />
-    </state>
-    <state x="807" y="181" key="SettingsEditor/0.0.1842.1080@0.0.1842.1080" timestamp="1659200986076" />
+    <option name="version" value="3" />
   </component>
 </project>

@@ -13,7 +13,11 @@ import Default from '../components/Data/Default'
 import CharacterData from '../components/Data/CharacterData'
 import WeaponData from '../components/Data/WeaponData'
 import StandardData from '../components/Data/StandardData'
-// import c2 from "../views/chpts/c2";
+import Login from '../components/Admin/Login'
+import Setting from '../components/Admin/Setting'
+import MainPage from '../components/MainPage'
+import FourOFour from '../components/404'
+// import store from '../store/index'
 // import c3 from "../views/chpts/c3";
 // import c4 from "../views/chpts/c4";
 // import c5 from "../views/chpts/c5";
@@ -25,42 +29,133 @@ import StandardData from '../components/Data/StandardData'
 // import c11 from "../views/chpts/c11";
 // import c12 from "../views/chpts/c12";
 // import request from "../views/chpts/request"
+import {delCookie, getCookie} from '@/util/util'
 // // 使用
 Vue.use(VueRouter)
 // // 导出
-export default new VueRouter({
+const router = new VueRouter({
   mode: 'hash',
   routes: [
     {
       path: '/',
-      redirect: '/default'
-    },
-    // {
-    //   path: '/main',
-    //   component: main
-    // },
-    {
-      path: '/default',
-      component: Default
+      redirect: '/main/overall'
     },
     {
-      path: '/overall',
-      component: OverallData
+      path: '/main',
+      component: MainPage,
+      children: [
+        {
+          path: '/main/default',
+          component: Default
+        },
+        {
+          path: '/main/overall',
+          component: OverallData
+        },
+        {
+          path: '/main/character',
+          component: CharacterData
+        },
+        {
+          path: '/main/weapon',
+          component: WeaponData
+        },
+        {
+          path: '/main/standard',
+          component: StandardData
+        }
+      ]
     },
     {
-      path: '/character',
-      component: CharacterData
+      path: '/admin',
+      redirect: '/admin/setting'
     },
     {
-      path: '/weapon',
-      component: WeaponData
+      path: '/admin/login',
+      component: Login
     },
     {
-      path: '/standard',
-      component: StandardData
+      path: '/admin/setting',
+      meta: {
+        requireAuth: true
+      },
+      component: Setting
+    },
+    {
+      path: '/404',
+      component: FourOFour
+    },
+    {
+      path: '*',
+      redirect: '/404'
     }
+
+    // {
+    //   path: '/main/overall',
+    //   component: OverallData
+    // },
+    // {
+    //   path: '/main/character',
+    //   component: CharacterData
+    // },
+    // {
+    //   path: '/main/weapon',
+    //   component: WeaponData
+    // },
+    // {
+    //   path: '/main/standard',
+    //   component: StandardData
+    // },
+    // {
+    //   path: '/setting',
+    //   component: Login
+    // }
   ]
 })
+
+// router.beforeEach((to, from, next) => {
+//   // 全局钩子函数
+//   to.matched.some((route) => {
+//     // to.matched.forEach((route) => {
+//     // 通过此操作可以判断哪些页面需要登录
+//     if (route.meta.need2Login) {
+//       if (store.state.isLogin || sessionStorage.getItem('isLogin')) {
+//         next()
+//       } else {
+//         next({name: 'login', params: {path: route.path}})
+//       }
+//     } else {
+//       next()
+//     }
+//   })
+// })
+
+router.beforeEach((to, from, next) => {
+  if (to.meta.requireAuth) {
+    // console.log(to.meta.requireAuth)
+    // 获取
+    // fetch('admin/setting').then(res => {
+    if (getCookie('user') === 'admin' && getCookie('u_uuid') === '1') {
+      next()
+    } else {
+      if (getCookie('user')) {
+        delCookie('user')
+      }
+      if (getCookie('u_uuid')) {
+        delCookie('u_uuid')
+      }
+      next({
+        path: '/admin/login'
+      })
+    }
+    // })
+  } else {
+    next()
+  }
+})
+
+export default router
+
 // {
 //       //登录页
 //       path: '/main',
