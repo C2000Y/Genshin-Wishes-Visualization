@@ -1,5 +1,5 @@
 <template>
-    <div  v-loading="isLoading" element-loading-background="rgba(255, 255, 255, 0.5)" :element-loading-text="loadingTextValue">
+    <div v-loading="isLoading" element-loading-background="rgba(255, 255, 255, 0.5)" :element-loading-text="loadingTextValue">
       <div class="stat-box">
         <div class="last-update-text-box">
           上次更新在

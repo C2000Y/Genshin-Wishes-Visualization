@@ -88,8 +88,11 @@ export default {
       standardWishes: 0,
       standardLeft: 0,
       showMark: true,
-      activeIndex: '/default'
+      activeIndex: '/main/overall'
     }
+  },
+  created () {
+    this.activeIndex = this.$route.path
   },
   // mounted () {
   //   // this.$axios.get('file/getImgJson', {params: {}}).then(res => {
