@@ -1,13 +1,13 @@
 <template>
   <div class="Navigate">
     <div class="Navigate-main">
-      <div style="display: flex; align-items: center;">
+      <div style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
         <!--<div class="Logo">-->
           <!--<img style="width: 100%;" src="/static/Icon.png"/>-->
         <!--</div>-->
         <ul class="Nav-items">
           <li class="item">
-            提瓦特观星台
+            {{$t('header.teyvat_observatory')}}
           </li>
           <li class="item">
             <!--小游戏-->
@@ -16,6 +16,7 @@
         <div>
         </div>
         <div>
+          <Lang></Lang>
         </div>
       </div>
     </div>
@@ -23,8 +24,12 @@
 </template>
 
 <script>
+import Lang from '../Lang/lang'
 export default {
-  name: 'Navigate'
+  name: 'Navigate',
+  components: {
+    Lang
+  }
 }
 </script>
 

@@ -39,7 +39,7 @@
       <!--          </div>-->
     </div>
     <div class="chart-item">
-      <bar-chart ref="totalBarData" size="30" id="1000" style="width: 100%;"></bar-chart>
+      <bar-chart ref="totalBarData" size="30" id="200" style="width: 100%;"></bar-chart>
     </div>
   </div>
 </template>
@@ -134,7 +134,7 @@ export default {
         let tmp = avgCharCost / charaCount
         charaCount === 0 ? this.avgCharaGachaCount = '无' : this.avgCharaGachaCount = tmp.toFixed(2)
         total === 0 ? this.avgCharaGachaCount += '' : this.avgCharaGachaCount += ' (' + (this.totalGachaCount / total * 100).toFixed(2) + '%)'
-        this.$refs.totalBarData.chart(this.chartData, 1000, this.showMark)
+        this.$refs.totalBarData.chart(this.chartData, 200, this.showMark)
       })
     },
     // 查所有的角色抽卡数据

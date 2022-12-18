@@ -3,10 +3,10 @@
     <ul class="Nav-items">
       <li class="item">
         <div>
-          总计：
-          <el-tooltip effect="dark" :content='total >= 0 ? "相当于 " + total * 150  + " 原石" : total' placement="right">
+          {{ $t('stat.total') }}
+          <el-tooltip effect="dark" :content='total >= 0 ? $t("stat.equals_to") + total * 150 + $t("stat.primo_gem") : total' placement="right">
             <span class="item-value">
-              {{total}}
+              {{total === '' ? $t('stat.no_data') : total}}
             </span>
           </el-tooltip>
         </div>
@@ -16,19 +16,23 @@
       </li>
       <li class="item">
         <div>
-          角色祈愿：
+          {{ $t('stat.character_wishes') }}
           <span class="item-value">
-            {{count301}}
+            {{count301 === '' ? $t('stat.no_data') : count301}}
           </span>
         </div>
 <!--        <div v-else>-->
 <!--          角色祈愿：暂无-->
 <!--        </div>-->
         <div>
-          距离保底：
-          <el-tooltip effect="dark" :content='detail301 >= 0 ? "还需 " + detail301 * 150  + " 原石" : detail301' placement="right">
+          {{ $t('stat.to_pity') }}
+          <el-tooltip
+            effect="dark"
+            :content='detail301 >= 0 ? $t("stat.still_need") + detail301 * 150  + $t("stat.primo_gem") : detail301'
+            placement="right"
+          >
             <span class="item-value">
-              {{detail301}}
+              {{detail301 === '' ? $t('stat.no_data') : detail301}}
             </span>
           </el-tooltip>
         </div>
@@ -38,19 +42,23 @@
       </li>
       <li class="item">
         <div>
-          武器祈愿：
+          {{ $t('stat.weapon_wishes') }}
           <span class="item-value">
-            {{count302}}
+            {{count302 === '' ? $t('stat.no_data') : count302}}
           </span>
         </div>
 <!--        <div v-else>-->
 <!--          武器祈愿：暂无-->
 <!--        </div>-->
         <div>
-          距离保底：
-          <el-tooltip effect="dark" :content='detail302 >= 0 ? "还需 " + detail302 * 150  + " 原石" : detail302' placement="right">
+          {{ $t('stat.to_pity') }}
+          <el-tooltip
+            effect="dark"
+            :content='detail302 >= 0 ? $t("stat.still_need") + detail302 * 150  + $t("stat.primo_gem") : detail302'
+            placement="right"
+          >
             <span class="item-value">
-              {{detail302}}
+              {{detail302 === '' ? $t('stat.no_data') : detail302}}
             </span>
           </el-tooltip>
         </div>
@@ -60,19 +68,23 @@
       </li>
       <li class="item">
         <div>
-          常驻祈愿：
+          {{ $t('stat.standard_wishes') }}
           <span class="item-value">
-           {{count200}}
+            {{count200 === '' ? $t('stat.no_data') : count200}}
           </span>
         </div>
 <!--        <div v-else>-->
 <!--          常驻祈愿：暂无-->
 <!--        </div>-->
         <div>
-          距离保底：
-          <el-tooltip effect="dark" :content='detail200 >= 0 ? "还需 " + detail200 * 150  + " 原石" : detail200' placement="right">
+          {{ $t('stat.to_pity') }}
+          <el-tooltip
+            effect="dark"
+            :content='detail200 >= 0 ? $t("stat.still_need") + detail200 * 150  + $t("stat.primo_gem") : detail200'
+            placement="right"
+          >
             <span class="item-value">
-              {{detail200}}
+              {{detail200 === '' ? $t('stat.no_data') : detail200}}
             </span>
           </el-tooltip>
         </div>
@@ -85,17 +97,18 @@
 </template>
 
 <script>
+
 export default {
   name: 'Total',
   data () {
     return {
-      count301: '暂无',
-      count302: '暂无',
-      count200: '暂无',
-      detail301: '暂无',
-      detail302: '暂无',
-      detail200: '暂无',
-      total: '暂无'
+      count301: '',
+      count302: '',
+      count200: '',
+      detail301: '',
+      detail302: '',
+      detail200: '',
+      total: ''
     }
   },
   methods: {

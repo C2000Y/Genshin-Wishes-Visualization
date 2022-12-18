@@ -39,7 +39,7 @@
       <!--          </div>-->
     </div>
     <div class="chart-item">
-      <bar-chart ref="totalBarData" size="30" id="1000" style="width: 100%;"></bar-chart>
+      <bar-chart ref="totalBarData" size="30" id="301" style="width: 100%;"></bar-chart>
     </div>
   </div>
 </template>
@@ -53,13 +53,17 @@ export default {
   props: ['uid'],
   data () {
     return {
-      loadingText: ['查询非酋程度...', '你有过十连双黄吗？我有。', '今天的爆率那叫一个高啊.jpg'],
+      loadingText: [
+        this.$t('loading_text.text_5'),
+        this.$t('loading_text.text_6'),
+        this.$t('loading_text.text_7')
+      ],
       isLoading: false,
       loadingTextValue: '',
       chartData: [],
-      avgCharaGachaCount: '计算中~',
+      avgCharaGachaCount: this.$t('loading_text.calculating'),
       showMark: true,
-      totalGachaCount: '计算中~'
+      totalGachaCount: this.$t('loading_text.calculating')
     }
   },
   computed: {
@@ -137,7 +141,7 @@ export default {
         let tmp = avgCharCost / charaCount
         charaCount === 0 ? this.avgCharaGachaCount = '无' : this.avgCharaGachaCount = tmp.toFixed(2)
         total === 0 ? this.avgCharaGachaCount += '' : this.avgCharaGachaCount += ' (' + (this.totalGachaCount / total * 100).toFixed(2) + '%)'
-        this.$refs.totalBarData.chart(this.chartData, 1000, this.showMark)
+        this.$refs.totalBarData.chart(this.chartData, 301, this.showMark)
       })
     },
     // 查所有的角色抽卡数据

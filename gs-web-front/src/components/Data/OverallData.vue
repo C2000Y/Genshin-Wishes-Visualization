@@ -2,43 +2,43 @@
     <div v-loading="isLoading" element-loading-background="rgba(255, 255, 255, 0.5)" :element-loading-text="loadingTextValue">
       <div class="stat-box">
         <div class="last-update-text-box">
-          上次更新在
+          {{ $t('overall_data.last_update') }}
           <span class="last-update-text">
-          {{lastUpdate}}
+          {{lastUpdate === '' ? $t('overall_data.last_update_default') : lastUpdate !== 0 ? lastUpdate + ' ' + $t('overall_data.days_ago') : $t('overall_data.update_tips.tip_0')}}
         </span>
-          ，{{tipsForUpdate}}
+          , {{tipsForUpdate === '' ? $t('overall_data.tips_for_update') : $t('overall_data.update_tips.tip_'+tipsForUpdate)}}
         </div>
         <div class="stat">
           <div class="avg-stat-left">
             <!--5星平均抽卡次数-->
             <div class="text-box">
-              五星平均出货次数：
+              {{ $t('overall_data.five_star_avg_count') }}
               <span class="text-value">
-              {{avgGachaCount}}
+              {{avgGachaCount === '' ? $t('loading_text.calculating') : avgGachaCount}}
             </span>
             </div>
             <!--5星抽卡次数-->
             <div class="text-box">
-              五星出货次数：
+              {{ $t('overall_data.five_star_count') }}
               <span class="text-value">
-              {{totalGachaCount}}
+              {{totalGachaCount === '' ? $t('loading_text.calculating') : totalGachaCount}}
             </span>
             </div>
           </div>
           <div class="avg-stat-right">
             <!--5星角色抽卡次数-->
             <div class="text-box">
-              五星角色平均出货次数：
+              {{ $t('overall_data.five_star_character_avg_count') }}
               <span class="text-value">
-              {{avgCharaGachaCount}}
+              {{avgCharaGachaCount === '' ? $t('loading_text.calculating') : avgCharaGachaCount}}
             </span>
             </div>
             <!--5星武器抽卡次数-->
             <div class="text-box">
-              五星武器平均出货次数：
+              {{ $t('overall_data.five_star_weapon_avg_count') }}
               <span class="text-value">
-              {{avgWeaponGachaCount}}
-            </span>
+                {{avgWeaponGachaCount === '' ? $t('loading_text.calculating') : avgWeaponGachaCount}}
+              </span>
             </div>
           </div>
         </div>
@@ -47,7 +47,7 @@
       <CharaList ref="charaList"/>
       <div class="tool-bar">
         <div class="mark-change">
-          显示头像：
+          {{ $t('data_table.show_profile') }}
           <el-switch
             @change = "changeMarkStatus"
             v-model="showMark"
@@ -81,21 +81,37 @@ export default {
   components: {BarChart, CharaList},
   data () {
     return {
-      loadingText: ['查询非酋程度...', '你有过十连双黄吗？我有。', '今天的爆率那叫一个高啊.jpg'],
-      updateTips: ['建议上传数据后再来', '哦？最近又抽到什么了', '有段时间没上传了，来看看最近运气如何？', '你知道吗？原神官方的抽卡数据只保留6个月哦。', '建议赶紧更新！！'],
+      loadingText: [
+      ],
+      updateTips: [
+      ],
       loadingCount: 0,
       showMark: true,
       isLoading: false,
       chartData: [{}],
-      lastUpdate: '不知道多少',
-      tipsForUpdate: '不选中玩家的话，就没法提供数据了哦~',
-      avgGachaCount: '计算中~',
-      avgCharaGachaCount: '计算中~',
-      avgWeaponGachaCount: '计算中~',
-      totalGachaCount: '计算中~',
+      lastUpdate: '',
+      tipsForUpdate: '',
+      avgGachaCount: '',
+      avgCharaGachaCount: '',
+      avgWeaponGachaCount: '',
+      totalGachaCount: '',
       loadingTextValue: '',
       iconSize: 30
     }
+  },
+  created () {
+    this.loadingText = [
+      this.$t('loading_text.text_5'),
+      this.$t('loading_text.text_6'),
+      this.$t('loading_text.text_7')
+    ]
+    this.updateTips = [
+      this.$t('overall_data.update_tips.tip_1'),
+      this.$t('overall_data.update_tips.tip_2'),
+      this.$t('overall_data.update_tips.tip_3'),
+      this.$t('overall_data.update_tips.tip_4'),
+      this.$t('overall_data.update_tips.tip_5')
+    ]
   },
   computed: {
     uidChanged () {
@@ -190,10 +206,10 @@ export default {
         this.avgGachaCount = tmp.toFixed(2)
         // avg Character
         tmp = avgCharCost / charaCount
-        charaCount === 0 ? this.avgCharaGachaCount = '无' : this.avgCharaGachaCount = tmp.toFixed(2) + ' (' + charaCount + ')'
+        charaCount === 0 ? this.avgCharaGachaCount = this.$t('stat.none') : this.avgCharaGachaCount = tmp.toFixed(2) + ' (' + charaCount + ')'
         // avg Weapon
         tmp = avgWeaponCost / WeaponCount
-        WeaponCount === 0 ? this.avgWeaponGachaCount = '无' : this.avgWeaponGachaCount = tmp.toFixed(2) + ' (' + WeaponCount + ')'
+        WeaponCount === 0 ? this.avgWeaponGachaCount = this.$t('stat.none') : this.avgWeaponGachaCount = tmp.toFixed(2) + ' (' + WeaponCount + ')'
         this.$refs.totalBarData.chart(this.chartData, 1000, this.showMark)
       })
     },
@@ -212,23 +228,20 @@ export default {
           this.lastUpdate = parseInt(data)
           // console.log(this.lastUpdate < 31)
           if (this.lastUpdate === 0) {
-            this.lastUpdate = '刚刚'
-            this.tipsForUpdate = this.updateTips[1]
+            this.lastUpdate = 0
+            this.tipsForUpdate = 1
           } else if (this.lastUpdate < 31) {
-            this.tipsForUpdate = this.updateTips[1]
+            this.tipsForUpdate = 2
           } else if (this.lastUpdate < 90) {
-            this.tipsForUpdate = this.updateTips[2]
+            this.tipsForUpdate = 2
           } else if (this.lastUpdate < 180) {
-            this.tipsForUpdate = this.updateTips[3]
+            this.tipsForUpdate = 3
           } else {
-            this.tipsForUpdate = this.updateTips[4]
-          }
-          if (this.lastUpdate !== '刚刚') {
-            this.lastUpdate += '天前'
+            this.tipsForUpdate = 4
           }
         } else {
-          this.lastUpdate = '不知道多少'
-          this.tipsForUpdate = this.updateTips[0]
+          this.lastUpdate = ''
+          this.tipsForUpdate = 0
         }
       })
     },
@@ -263,12 +276,12 @@ export default {
       this.$refs.charaList.getCharaListData({'': [{}]})
       this.loadingCount = 0
       this.lastUpdate = '?'
-      this.tipsForUpdate = '不选中玩家的话，就没法提供数据了哦~'
+      this.tipsForUpdate = ''
       this.$refs.totalBarData.chart([])
-      this.avgGachaCount = '计算中~'
-      this.totalGachaCount = '计算中~'
-      this.avgCharaGachaCount = '计算中~'
-      this.avgWeaponGachaCount = '计算中~'
+      this.avgGachaCount = ''
+      this.totalGachaCount = this.$t('loading_text.calculating')
+      this.avgCharaGachaCount = this.$t('loading_text.calculating')
+      this.avgWeaponGachaCount = this.$t('loading_text.calculating')
     }
   }
 }

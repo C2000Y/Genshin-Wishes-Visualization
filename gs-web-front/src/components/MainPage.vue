@@ -36,19 +36,19 @@
     <div class="data-display-area">
       <el-menu router :default-active="activeIndex" class="el-menu-demo" mode="horizontal">
         <el-menu-item index="/main/default">
-          观星台
+          {{ $t('menu_tab.observatory') }}
         </el-menu-item>
         <el-menu-item index="/main/overall">
-          全部祈愿
+          {{ $t('menu_tab.total_wishes') }}
         </el-menu-item>
         <el-menu-item index="/main/character">
-          角色祈愿
+          {{ $t('menu_tab.character_wishes') }}
         </el-menu-item>
         <el-menu-item index="/main/weapon">
-          武器祈愿
+          {{ $t('menu_tab.weapon_wishes') }}
         </el-menu-item>
         <el-menu-item index="/main/standard">
-          常驻祈愿
+          {{ $t('menu_tab.standard_wishes') }}
         </el-menu-item>
       </el-menu>
       <div>
@@ -79,7 +79,12 @@ export default {
       finishCount: 0,
       opacityLevel: 80,
       text: '',
-      loadingText: ['让我康康！', '转啊，转~', '♪好运来，祝你好运来♪', '今天的爆率那叫一个高啊.jpg'],
+      loadingText: [
+        this.$t('loading_text.text_1'),
+        this.$t('loading_text.text_2'),
+        this.$t('loading_text.text_3'),
+        this.$t('loading_text.text_4')
+      ],
       totalWishes: 0,
       charaWishes: 0,
       charaLeft: 0,

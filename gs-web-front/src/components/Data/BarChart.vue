@@ -35,12 +35,12 @@ export default {
     this.imgUrl = this.$common.getImgJson()
   },
   methods: {
-    chart (value, code, showMark) {
+    async chart (value, code, showMark) {
       let ToImg = this.imgUrl
       if (this.echarts != null && this.echarts !== '' && this.echarts !== undefined) {
         this.echarts.dispose()
       }
-      this.title(code)
+      this.text = await this.title(code)
       this.echarts = this.$echarts.init(document.getElementById(this.chartName))
       // 设置放大区块是否要缩小（预设：只显示20个）
       let startZoom = 0
@@ -140,31 +140,34 @@ export default {
         this.echarts.resize()
       })
     },
-    title (code) {
+    async title (code) {
+      console.log(code)
+      let text = ''
       switch (code) {
         case 301: {
-          this.text = '角色祈愿'
+          text = '角色祈愿'
           break
         }
         case 302: {
-          this.text = '武器祈愿'
+          text = '武器祈愿'
           break
         }
         case 200: {
-          this.text = '常驻祈愿'
+          text = '常驻祈愿'
           break
         }
         case 1000: {
-          this.text = '全部祈愿'
+          text = '全部祈愿'
           break
         }
       }
+      return text
     },
     iconSizeChange () {
       if (document.body.clientWidth < 501) {
         this.iconSize = 25
         this.iconNumber = 15
-      } else if (document.body.clientWidth < 1920) {
+      } else if (document.body.clientWidth < 1960) {
         this.iconSize = 35
         this.iconNumber = 30
       } else if (document.body.clientWidth < 2560) {

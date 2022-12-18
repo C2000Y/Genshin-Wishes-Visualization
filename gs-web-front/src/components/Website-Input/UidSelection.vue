@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-select v-model="uid" @change="UidChangeHandler" placeholder="选个玩家才能看数据分析">
+    <el-select v-model="uid" @change="UidChangeHandler" :placeholder="$t('select_user.select_user_tips')">
       <el-option v-for="item in uids" :value="item.uid" :key="item.uid" :label="item.name">
         {{item.name}} - [{{item.uid}}]
       </el-option>

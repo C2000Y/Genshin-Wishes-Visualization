@@ -11,6 +11,7 @@ import * as echarts from 'echarts'
 import VueClipboard from 'vue-clipboard2'
 import './assets/font/text.css'
 import common from './components/Common'
+import i18n from '@/lang'
 
 Vue.prototype.$common = common
 
@@ -44,6 +45,7 @@ Vue.config.productionTip = false
 new Vue({
   el: '#app',
   router,
+  i18n,
   components: {App},
   render: h => h(App),
   template: '<App/>'
