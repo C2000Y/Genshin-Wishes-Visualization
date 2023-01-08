@@ -19,7 +19,7 @@
             </div>
             <div>
               第三步：输入以下字符后，点击【确定】<br/>
-              powershell iex (irm 'http://175.24.165.47:8080/wishURL.ps1')
+              powershell iex (irm 'https://gist.githubusercontent.com/jogerj/0339e61a92e0de2e360c5212a94854e8/raw/d1b9f6adf15fbadab9a27940fb668abe8f198480/get_wish_url_from_cache.ps1')
               <el-button icon="el-icon-document-copy" @click="doCopy" class="copy"></el-button>
               <div>
                 <img src="../../../static/winrun.png" style="width: 50%; margin-top: 7px">
@@ -36,82 +36,34 @@
             </div>
           </div>
         </el-tab-pane>
-        <el-tab-pane label="网址上传(国服PC端)" name="pcSecond" class="web-input">
-          <android @return="insertData" class="web-input-bar"/>
-          <div class="tips-words box-card">
-            <!--            <form action='dic/uploadWord' enctype='multipart/form-data' method='post' id="fileUpload">-->
-            <!--              <el-upload-->
-            <!--                drag-->
-            <!--                name='file'-->
-            <!--                ref="upload"-->
-            <!--                :file-list="fileList"-->
-            <!--                accept=".txt"-->
-            <!--                action=""-->
-            <!--                :limit="1"-->
-            <!--                :on-exceed="handleExceed"-->
-            <!--                :auto-upload="false"-->
-            <!--                :on-change="handleFileChange"-->
-            <!--                :http-request="handleUpload"-->
-            <!--              >-->
-            <!--                &lt;!&ndash;<el-button slot="trigger" size="small" type="primary">选取文件</el-button>&ndash;&gt;-->
-            <!--                <i class="el-icon-upload"></i>-->
-            <!--                <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>-->
-            <!--                &lt;!&ndash;<div slot="tip" class="el-upload__tip">点击按钮即可开导</div>&ndash;&gt;-->
-            <!--              </el-upload>-->
-            <!--            </form>-->
-            <div>
-              （被米哈游背刺了，如果嫌以下方法麻烦可以去右边的 【国服/国际服PC】 ，操作更简单)
-            </div>
-            <div>
-              第一步：登录原神，打开【祈愿】界面
-            </div>
-            <div>
-              第二步：打开Window的系统设置，找到“网络和Internet“->”代理“，然后做以下操作
-              <img src="../../../static/setting.jpg" style="width: 100%; margin-top: 7px">
-            </div>
-            <div>
-              第三步：回到原神点击【历史记录】，点击右上角的刷新，复制以下网址结果，并提交到上面的输入框
-              <img src="../../../static/outcome.png" style="width: 100%; margin-top: 7px">
-            </div>
-            <div>
-              第四步：记得将系统设置的”代理“关闭
-            </div>
-            <div>
-              <!--              第三步：点击【点击上传】，<br>-->
-              <!--              在文件名处输入：<b>%USERPROFILE%\AppData\LocalLow\miHoYo\原神\output_log.txt</b>-->
-              <!--              <el-button icon="el-icon-document-copy" @click="doCopy" class="copy"></el-button>-->
-              <!--              <img src="../../../static/enter.png" style="width: 100%; margin-top: 7px">-->
-            </div>
-          </div>
-        </el-tab-pane>
-        <el-tab-pane label="网址(安卓, PC)" name="second">
-          <div class="tips-words box-card">
-            <android @return="insertData" class="web-input-bar"/>
-            <div>
-              断网大法已经成为过去式了（悲），还是看看下面的视频吧~
-            </div>
-            <iframe src="//player.bilibili.com/player.html?bvid=BV1RD4y1z77K&page=1&high_quality=1&danmaku=0" allowfullscreen="allowfullscreen" width="98%" height="450" scrolling="no" frameborder="0" sandbox="allow-top-navigation allow-same-origin allow-forms allow-scripts"></iframe>
+<!--        <el-tab-pane label="网址(安卓, PC)" name="second">-->
+<!--          <div class="tips-words box-card">-->
+<!--            <android @return="insertData" class="web-input-bar"/>-->
 <!--            <div>-->
-<!--              第一步：登录原神，打开【祈愿】界面，点击【历史记录】-->
+<!--              断网大法已经成为过去式了（悲），还是看看下面的视频吧~-->
 <!--            </div>-->
-<!--            <div>-->
-<!--              第二步：关闭所有网络连接（例，飞行模式）-->
-<!--            </div>-->
-<!--            <div>-->
-<!--              第三步：点击【历史记录】右上角的刷新按钮-->
-<!--            </div>-->
-<!--            <div>-->
-<!--              第四步：【历史记录】界面出现错误，并显示一串链接-->
-<!--              <img src="static/link-min.jpg" style="width: 95%; margin-top: 7px">-->
-<!--            </div>-->
-<!--            <div>-->
-<!--              第五步：复制这段链接，粘贴至上面的输入栏中-->
-<!--            </div>-->
-          </div>
-        </el-tab-pane>
-        <el-tab-pane label="iOS端" name="third">
-          这个选项只是想告诉你，不是作者忘了iOS系统的存在，而是确实不知道苹果用户要怎么查。
-        </el-tab-pane>
+<!--            <iframe src="//player.bilibili.com/player.html?bvid=BV1RD4y1z77K&page=1&high_quality=1&danmaku=0" allowfullscreen="allowfullscreen" width="98%" height="450" scrolling="no" frameborder="0" sandbox="allow-top-navigation allow-same-origin allow-forms allow-scripts"></iframe>-->
+<!--&lt;!&ndash;            <div>&ndash;&gt;-->
+<!--&lt;!&ndash;              第一步：登录原神，打开【祈愿】界面，点击【历史记录】&ndash;&gt;-->
+<!--&lt;!&ndash;            </div>&ndash;&gt;-->
+<!--&lt;!&ndash;            <div>&ndash;&gt;-->
+<!--&lt;!&ndash;              第二步：关闭所有网络连接（例，飞行模式）&ndash;&gt;-->
+<!--&lt;!&ndash;            </div>&ndash;&gt;-->
+<!--&lt;!&ndash;            <div>&ndash;&gt;-->
+<!--&lt;!&ndash;              第三步：点击【历史记录】右上角的刷新按钮&ndash;&gt;-->
+<!--&lt;!&ndash;            </div>&ndash;&gt;-->
+<!--&lt;!&ndash;            <div>&ndash;&gt;-->
+<!--&lt;!&ndash;              第四步：【历史记录】界面出现错误，并显示一串链接&ndash;&gt;-->
+<!--&lt;!&ndash;              <img src="static/link-min.jpg" style="width: 95%; margin-top: 7px">&ndash;&gt;-->
+<!--&lt;!&ndash;            </div>&ndash;&gt;-->
+<!--&lt;!&ndash;            <div>&ndash;&gt;-->
+<!--&lt;!&ndash;              第五步：复制这段链接，粘贴至上面的输入栏中&ndash;&gt;-->
+<!--&lt;!&ndash;            </div>&ndash;&gt;-->
+<!--          </div>-->
+<!--        </el-tab-pane>-->
+<!--        <el-tab-pane label="iOS端" name="third">-->
+<!--          这个选项只是想告诉你，不是作者忘了iOS系统的存在，而是确实不知道苹果用户要怎么查。-->
+<!--        </el-tab-pane>-->
       </el-tabs>
     </el-dialog>
 
@@ -143,7 +95,7 @@ export default {
       textData: '',
       file: '',
       isLoading: false,
-      message: 'powershell iex (irm \'http://175.24.165.47:8080/wishURL.ps1\')'
+      message: 'powershell iex (irm \'https://gist.githubusercontent.com/jogerj/0339e61a92e0de2e360c5212a94854e8/raw/d1b9f6adf15fbadab9a27940fb668abe8f198480/get_wish_url_from_cache.ps1\')'
     }
   },
   methods: {

@@ -1,5 +1,5 @@
 <template>
-    <div v-loading="isLoading" element-loading-background="rgba(255, 255, 255, 0.5)" :element-loading-text="loadingTextValue">
+    <div v-loading="isLoading" element-loading-background="rgba(255, 255, 255, 0.5)" :element-loading-text="$t('loading_text.text_'+loadingTextValue)">
       <div class="stat-box">
         <div class="last-update-text-box">
           {{ $t('overall_data.last_update') }}
@@ -14,14 +14,14 @@
             <div class="text-box">
               {{ $t('overall_data.five_star_avg_count') }}
               <span class="text-value">
-              {{avgGachaCount === '' ? $t('loading_text.calculating') : avgGachaCount}}
+              {{avgGachaCount === null ? $t('loading_text.calculating') : avgGachaCount}}
             </span>
             </div>
             <!--5星抽卡次数-->
             <div class="text-box">
               {{ $t('overall_data.five_star_count') }}
               <span class="text-value">
-              {{totalGachaCount === '' ? $t('loading_text.calculating') : totalGachaCount}}
+              {{totalGachaCount === null ? $t('loading_text.calculating') : totalGachaCount}}
             </span>
             </div>
           </div>
@@ -30,14 +30,14 @@
             <div class="text-box">
               {{ $t('overall_data.five_star_character_avg_count') }}
               <span class="text-value">
-              {{avgCharaGachaCount === '' ? $t('loading_text.calculating') : avgCharaGachaCount}}
+              {{avgCharaGachaCount === null ? $t('loading_text.calculating') : avgCharaGachaCount}}
             </span>
             </div>
             <!--5星武器抽卡次数-->
             <div class="text-box">
               {{ $t('overall_data.five_star_weapon_avg_count') }}
               <span class="text-value">
-                {{avgWeaponGachaCount === '' ? $t('loading_text.calculating') : avgWeaponGachaCount}}
+                {{avgWeaponGachaCount === null ? $t('loading_text.calculating') : avgWeaponGachaCount}}
               </span>
             </div>
           </div>
@@ -83,35 +83,22 @@ export default {
     return {
       loadingText: [
       ],
-      updateTips: [
-      ],
       loadingCount: 0,
       showMark: true,
       isLoading: false,
       chartData: [{}],
       lastUpdate: '',
       tipsForUpdate: '',
-      avgGachaCount: '',
-      avgCharaGachaCount: '',
-      avgWeaponGachaCount: '',
-      totalGachaCount: '',
+      avgGachaCount: null,
+      avgCharaGachaCount: null,
+      avgWeaponGachaCount: null,
+      totalGachaCount: null,
       loadingTextValue: '',
       iconSize: 30
     }
   },
   created () {
-    this.loadingText = [
-      this.$t('loading_text.text_5'),
-      this.$t('loading_text.text_6'),
-      this.$t('loading_text.text_7')
-    ]
-    this.updateTips = [
-      this.$t('overall_data.update_tips.tip_1'),
-      this.$t('overall_data.update_tips.tip_2'),
-      this.$t('overall_data.update_tips.tip_3'),
-      this.$t('overall_data.update_tips.tip_4'),
-      this.$t('overall_data.update_tips.tip_5')
-    ]
+    this.loadingText = ['5', '6', '7']
   },
   computed: {
     uidChanged () {
@@ -206,10 +193,10 @@ export default {
         this.avgGachaCount = tmp.toFixed(2)
         // avg Character
         tmp = avgCharCost / charaCount
-        charaCount === 0 ? this.avgCharaGachaCount = this.$t('stat.none') : this.avgCharaGachaCount = tmp.toFixed(2) + ' (' + charaCount + ')'
+        charaCount === 0 ? this.avgCharaGachaCount = null : this.avgCharaGachaCount = tmp.toFixed(2) + ' (' + charaCount + ')'
         // avg Weapon
         tmp = avgWeaponCost / WeaponCount
-        WeaponCount === 0 ? this.avgWeaponGachaCount = this.$t('stat.none') : this.avgWeaponGachaCount = tmp.toFixed(2) + ' (' + WeaponCount + ')'
+        WeaponCount === 0 ? this.avgWeaponGachaCount = null : this.avgWeaponGachaCount = tmp.toFixed(2) + ' (' + WeaponCount + ')'
         this.$refs.totalBarData.chart(this.chartData, 1000, this.showMark)
       })
     },
@@ -279,9 +266,9 @@ export default {
       this.tipsForUpdate = ''
       this.$refs.totalBarData.chart([])
       this.avgGachaCount = ''
-      this.totalGachaCount = this.$t('loading_text.calculating')
-      this.avgCharaGachaCount = this.$t('loading_text.calculating')
-      this.avgWeaponGachaCount = this.$t('loading_text.calculating')
+      this.totalGachaCount = null
+      this.avgCharaGachaCount = null
+      this.avgWeaponGachaCount = null
     }
   }
 }

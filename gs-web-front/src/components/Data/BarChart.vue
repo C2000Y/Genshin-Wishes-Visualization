@@ -20,7 +20,25 @@ export default {
       jsonFlag: false,
       charaCount: 0,
       iconSize: 30,
-      iconNumber: 30
+      iconNumber: 30,
+      chartParam: {
+        value: null,
+        code: null,
+        showMark: null
+      },
+      charaImg: []
+    }
+  },
+  computed: {
+    lang () {
+      return this.$i18n.locale
+    }
+  },
+  watch: {
+    lang (newV, oldV) {
+      if (this.chartParam.value !== null) {
+        this.chart(this.chartParam.value, this.chartParam.code, this.chartParam.showMark)
+      }
     }
   },
   mounted () {
@@ -36,7 +54,16 @@ export default {
   },
   methods: {
     async chart (value, code, showMark) {
+      this.chartParam = {
+        value: value,
+        code: code,
+        showMark: showMark
+      }
+      const wishNumber = this.$t('line_chart.wish_number')
+      const wishTime = this.$t('line_chart.wish_time')
+      const lang = this.$i18n.locale
       let ToImg = this.imgUrl
+      // console.log(ToImg)
       if (this.echarts != null && this.echarts !== '' && this.echarts !== undefined) {
         this.echarts.dispose()
       }
@@ -54,8 +81,18 @@ export default {
         xAxis: {
           name: '',
           type: 'category',
+          axisLabel: {
+            show: false
+          },
+          axisTick: {
+            show: false
+          },
           data: value.filter(v => v.name).map((item) => {
+            // if (this.$i18n.locale === 'en') {
+            //   return ToImg[item.name].nameEn
+            // } else {
             return item.name
+            // }
           })
         },
         dataZoom: [
@@ -77,6 +114,10 @@ export default {
         tooltip: {
           trigger: 'axis',
           formatter: function (params) {
+            let name = ToImg[params[0].name].name
+            if (lang === 'en') {
+              name = ToImg[params[0].name].nameEn
+            }
             let url = ToImg[params[0].name].url
             let date = new Date(value[params[0].dataIndex].time)
             let yr = date.getFullYear() + '-'
@@ -85,15 +126,15 @@ export default {
             var htmlStr = ''
             htmlStr +=
               '<img style="width: 50px" src=' + url + '></img>' +
-              '<div style="font-weight: bold; font-size: 1rem;">' + params[0].name + '</div>' +
+              '<div style="font-weight: bold; font-size: 1rem;">' + name + '</div>' +
               '<div style="text-align: left">' +
               '<span style="display:inline-block;margin-right:4px;border-radius:10px;width:10px;height:10px;background-color:#5470c6;"></span>' +
-              '<span style="font-size:14px;color:#666;font-weight:400;margin-left:2px"> 祈愿次数：' + '</span>' +
+              '<span style="font-size:14px;color:#666;font-weight:400;margin-left:2px"> ' + wishNumber + '</span>' +
               '<span style="float:right;margin-left:20px;font-size:14px;color:#666;font-weight:900">' + params[0].data + '</span>' +
               '</div>' +
               '<div style="text-align: left">' +
               '<span style="display:inline-block;margin-right:4px;border-radius:10px;width:10px;height:10px;background-color:#5470c6;"></span>' +
-              '<span style="font-size:14px;color:#666;font-weight:400;margin-left:2px"> 祈愿时间：' + '</span>' +
+              '<span style="font-size:14px;color:#666;font-weight:400;margin-left:2px"> ' + wishTime + '</span>' +
               '<span style="float:right;margin-left:20px;font-size:14px;color:#666;font-weight:900">' + yr + mon + day + '</span>' +
               '</div>'
             htmlStr += '</div>'
@@ -101,13 +142,13 @@ export default {
           }
         },
         yAxis: {
-          name: '祈愿次数',
+          name: this.$t('line_chart.wishes'),
           type: 'value',
           max: 90
         },
         series: [
           {
-            name: '祈愿次数',
+            name: this.$t('line_chart.wishes'),
             data: value.filter(v => v.count).map((item) => {
               return item.count
             }),
@@ -145,19 +186,19 @@ export default {
       let text = ''
       switch (code) {
         case 301: {
-          text = '角色祈愿'
+          text = this.$t('line_chart.wish_type[' + code + ']')
           break
         }
         case 302: {
-          text = '武器祈愿'
+          text = this.$t('line_chart.wish_type.' + code)
           break
         }
         case 200: {
-          text = '常驻祈愿'
+          text = this.$t('line_chart.wish_type.' + code)
           break
         }
         case 1000: {
-          text = '全部祈愿'
+          text = this.$t('line_chart.wish_type.' + code)
           break
         }
       }

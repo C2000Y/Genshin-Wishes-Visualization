@@ -18,10 +18,9 @@ const messages = {
     ...customZH // 将自定义英文包加入
   }
 }
-
 // 通过选项创建 VueI18n 实例
 const i18n = new VueI18n({
-  locale: 'zh', // 设置地区
+  locale: localStorage.getItem('lang'), // 设置地区
   messages // 设置地区信息
 })
 

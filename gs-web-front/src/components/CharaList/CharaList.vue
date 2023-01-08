@@ -15,7 +15,7 @@
         ref='pop'
         :reference='reference'
         placement="top-start"
-        :title="name"
+        :title="getName(name)"
         trigger="click"
         popper-class="pop-class"
       >
@@ -58,7 +58,8 @@ export default {
       // 控制渲染条件 如果不用v-if会报错 具体可自行尝试
       showPop: false,
       // 保存当前激活的refrence id
-      activeId: ''
+      activeId: '',
+      charaImgList: []
     }
   },
   mounted () {
@@ -111,6 +112,13 @@ export default {
           this.$refs.pop.doShow()
         })
       })
+    },
+    getName (name) {
+      const lang = this.$i18n.locale
+      if (lang === 'en') {
+        return this.charaImg[name].nameEn
+      }
+      return name
     }
   }
 }

@@ -1,22 +1,22 @@
 <template>
-  <div style="padding: 10px 0 10px 0" v-loading="isLoading" element-loading-background="rgba(255, 255, 255, 0.5)" :element-loading-text="loadingTextValue">
+  <div style="padding: 10px 0 10px 0" v-loading="isLoading" element-loading-background="rgba(255, 255, 255, 0.5)" :element-loading-text="$t('loading_text.text_'+loadingTextValue)">
     <div class="stat">
       <div class="avg-stat-left">
         <!--5星抽卡次数-->
         <div class="text-box">
-          五星出货次数：
+          {{$t('weapon_data.five_star')}}
           <span class="text-value">
-              {{totalGachaCount}}
-            </span>
+            {{totalGachaCount === null ? $t('loading_text.calculating') : totalGachaCount}}
+          </span>
         </div>
       </div>
       <div class="avg-stat-right">
         <!--5星角色抽卡次数-->
         <div class="text-box">
-          五星角色平均出货次数：
+          {{$t('weapon_data.five_star_avg')}}
           <span class="text-value">
-              {{avgCharaGachaCount}}
-            </span>
+            {{avgCharaGachaCount === null ? $t('loading_text.calculating') : avgCharaGachaCount}}
+          </span>
         </div>
       </div>
     </div>
@@ -24,7 +24,7 @@
     <CharaList ref="charaList"/>
     <div class="tool-bar">
       <div class="mark-change">
-        显示头像：
+        {{ $t('data_table.show_profile') }}
         <el-switch
           @change = "changeMarkStatus"
           v-model="showMark"
@@ -53,13 +53,13 @@ export default {
   props: ['uid'],
   data () {
     return {
-      loadingText: ['查询非酋程度...', '你有过十连双黄吗？我有。', '今天的爆率那叫一个高啊.jpg'],
+      loadingText: ['5', '6', '7'],
       isLoading: false,
       loadingTextValue: '',
       chartData: [],
-      avgCharaGachaCount: '计算中~',
+      avgCharaGachaCount: null,
       showMark: true,
-      totalGachaCount: '计算中~'
+      totalGachaCount: null
     }
   },
   computed: {
@@ -135,8 +135,8 @@ export default {
           }
         })
         let tmp = avgCharCost / charaCount
-        charaCount === 0 ? this.avgCharaGachaCount = '无' : this.avgCharaGachaCount = tmp.toFixed(2)
-        total === 0 ? this.avgCharaGachaCount += '' : this.avgCharaGachaCount += ' (' + (this.totalGachaCount / total * 100).toFixed(2) + '%)'
+        charaCount === 0 ? this.avgCharaGachaCount = null : this.avgCharaGachaCount = tmp.toFixed(2)
+        total === 0 ? this.avgCharaGachaCount = null : this.avgCharaGachaCount += ' (' + (this.totalGachaCount / total * 100).toFixed(2) + '%)'
         this.$refs.totalBarData.chart(this.chartData, 302, this.showMark)
       })
     },
@@ -170,8 +170,8 @@ export default {
       // this.lastUpdate = '?'
       // this.tipsForUpdate = '不选中玩家的话，就没法提供数据了哦~'
       this.$refs.totalBarData.chart([])
-      this.totalGachaCount = '计算中~'
-      this.avgCharaGachaCount = '计算中~'
+      this.totalGachaCount = null
+      this.avgCharaGachaCount = null
     }
   }
 }

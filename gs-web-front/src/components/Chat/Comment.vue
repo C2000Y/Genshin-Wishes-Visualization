@@ -4,26 +4,28 @@
         <el-input
           class="textSection"
           type="textarea"
-          :placeholder="placeholderText"
+          :placeholder="$t('comment.placeholder.text_' + placeholderText)"
           v-model="commentText"
           maxlength="100"
           show-word-limit
           resize="none"
         >
         </el-input>
-        <el-button type="text" :autofocus="false" @click.native="sendComment" :loading="sendLoading">发送</el-button>
+        <el-button type="text" :autofocus="false" @click.native="sendComment" :loading="sendLoading">
+          {{$t('comment.send')}}
+        </el-button>
       </div>
-      <div class="commentArea" v-loading="commentLoading" element-loading-background="rgba(255, 255, 255, 0.5)" :element-loading-text="loadingText">
+      <div class="commentArea" v-loading="commentLoading" element-loading-background="rgba(255, 255, 255, 0.5)" :element-loading-text="$t('comment.loading_text')">
         <div v-for="(x, index) in data" :key="index">
           <div :class="x.isTop===1 ? 'aComment topComment' : 'aComment'">
-            <div class="timeStamp" v-if="x.isTop===1" style="color: azure">[置顶 {{x.postDate}}]</div>
+            <div class="timeStamp" v-if="x.isTop===1" style="color: azure">[{{$t('comment.pinned')}} {{x.postDate}}]</div>
             <div class="timeStamp" v-else>[{{x.postDate}}]</div>
             <div class="commentText">{{x.comment}}</div>
           </div>
           <div class="bottomLine"></div>
         </div>
         <div class="end-line" @click="addPage">
-          {{endLineText}}
+          {{$t('comment.end_text.text_' + isEnd)}}
         </div>
       </div>
     </div>
@@ -42,16 +44,11 @@ export default {
       sendLoading: false,
       commentLoading: false,
       placeholderText: '',
-      placeholderTextData: [
-        '说点什么好呢?',
-        '欧吃矛！',
-        '骚话在嘴边说不出来的感觉如何？'
-      ],
+      placeholderTextData: ['1'],
       commentInCD: false,
-      loadingText: '寻找前人留下的痕迹',
       page: 1,
       isEndOfComment: false,
-      endLineText: '点击探索未知的星空',
+      isEnd: '1',
       countDown: 0
     }
   },
@@ -103,7 +100,7 @@ export default {
           })
           if (data.length < 10) {
             this.isEndOfComment = true
-            this.endLineText = '星空已尽在眼底'
+            this.isEnd = '2'
           }
           status === 0 ? this.data = data : this.data.push.apply(this.data, data)
         }
@@ -179,7 +176,6 @@ export default {
   .sendSection{
     position: relative;
     margin: 0 auto;
-    /*display: flex;*/
   }
   .textSection{
     width: 90%;

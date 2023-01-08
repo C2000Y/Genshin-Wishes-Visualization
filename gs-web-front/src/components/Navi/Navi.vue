@@ -42,7 +42,6 @@ export default {
     background: linear-gradient(to right, #ACB6E5, #74ebd5); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     box-shadow: -1px 2px 7px rgba(0, 0, 0, 0.5);
     position: relative;
-    min-width: 1160px;
   }
   .Navigate-main{
     width: 1160px;
@@ -73,5 +72,27 @@ export default {
     height: 24px;
     align-self: flex-start;
     margin-top: 12px;
+  }
+
+  @media screen and (max-width: 1180px){
+    .Navigate-main{
+      width: 850px;
+    }
+  }
+  @media screen and (max-width: 900px){
+    .Navigate-main{
+      width: 550px;
+    }
+  }
+  @media screen and (max-width: 600px){
+    .Navigate-main{
+      width: 380px;
+    }
+  }
+  @media screen and (max-width: 420px){
+    .Navigate-main{
+      width: 330px;
+      justify-content: flex-start
+    }
   }
 </style>

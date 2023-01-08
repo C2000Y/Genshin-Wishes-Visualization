@@ -1,4 +1,5 @@
 export default {
+  title: '提瓦特观星台',
   header: {
     teyvat_observatory: '提瓦特观星台'
   },
@@ -53,7 +54,43 @@ export default {
     },
     days_ago: '天前'
   },
+  character_data: {
+    five_star: '五星角色出货数：',
+    five_star_avg: '平均五星出货数：'
+  },
+  weapon_data: {
+    five_star: '五星武器出货数：',
+    five_star_avg: '平均五星出货数：'
+  },
+  standard_data: {
+    five_star: '五星出货数：',
+    five_star_avg: '平均五星出货数：'
+  },
+  comment: {
+    placeholder: {
+      text_1: '说点什么好呢'
+    },
+    loading_text: '寻找前人留下的痕迹',
+    pinned: '置顶',
+    send: '发送',
+    comment_title: '观星台讨论区',
+    end_text: {
+      text_1: '点击探索未知的星空',
+      text_2: '星空已尽在眼底'
+    }
+  },
   data_table: {
     show_profile: '显示头像：'
+  },
+  line_chart: {
+    wishes: '祈愿次数',
+    wish_type: {
+      301: '角色祈愿',
+      302: '武器祈愿',
+      200: '常驻祈愿',
+      1000: '全部祈愿'
+    },
+    wish_number: '祈愿次数：',
+    wish_time: '祈愿时间：'
   }
 }

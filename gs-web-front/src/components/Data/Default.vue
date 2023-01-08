@@ -1,7 +1,7 @@
 <template>
     <div>
       <div class="announcement">
-        观星台讨论区
+        {{$t('comment.comment_title')}}
       </div>
       <div>
       </div>
