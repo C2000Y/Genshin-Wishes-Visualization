@@ -1,6 +1,6 @@
 # Genshin Wishes Visualization
 Support All Servers
-Version 1.0.4.2  
+Version 1.0.4.3  
 http://www.genshin-stargazing.site/#/main/overall
 ![image](https://user-images.githubusercontent.com/67337861/192159015-2b367434-229f-482e-894c-e53386ae16d1.png)  
 ![image](https://user-images.githubusercontent.com/67337861/192159651-dc1571ac-b0f6-461d-93af-8a0507b4cd9d.png)
@@ -65,3 +65,7 @@ Add a background management system for images of characters and weapons
 修复了评论功能      
 Fixed the issue that the menu is not highlighted initially  
 Fixed Comment Send failure issue  
+  
+**Version 1.0.4.3 - 2023/01/08**  
+增加了多语言功能        
+Add i18n  
