@@ -6,7 +6,7 @@
           <span class="last-update-text">
           {{lastUpdate === '' ? $t('overall_data.last_update_default') : lastUpdate !== 0 ? lastUpdate + ' ' + $t('overall_data.days_ago') : $t('overall_data.update_tips.tip_0')}}
         </span>
-          , {{tipsForUpdate === '' ? $t('overall_data.tips_for_update') : $t('overall_data.update_tips.tip_'+tipsForUpdate)}}
+          {{tipsForUpdate === '' ? $t('overall_data.tips_for_update') : $t('overall_data.update_tips.tip_'+tipsForUpdate)}}
         </div>
         <div class="stat">
           <div class="avg-stat-left">
@@ -220,11 +220,11 @@ export default {
           } else if (this.lastUpdate < 31) {
             this.tipsForUpdate = 2
           } else if (this.lastUpdate < 90) {
-            this.tipsForUpdate = 2
-          } else if (this.lastUpdate < 180) {
             this.tipsForUpdate = 3
-          } else {
+          } else if (this.lastUpdate < 180) {
             this.tipsForUpdate = 4
+          } else {
+            this.tipsForUpdate = 5
           }
         } else {
           this.lastUpdate = ''

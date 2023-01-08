@@ -46,11 +46,11 @@ export default {
     tips_for_update: 'Select a player for more detail~',
     update_tips: {
       tip_0: 'just now',
-      tip_1: 'come back after upload the data',
-      tip_2: 'Oh? What have you got recently?',
-      tip_3: 'It\'s been a while since last upload',
-      tip_4: 'Genshin\'s official wish history is only kept for 6 months.',
-      tip_5: 'recommend update right now!'
+      tip_1: '',
+      tip_2: '. Oh? What have you got recently?',
+      tip_3: '. It\'s been a while since last upload',
+      tip_4: '. Genshin\'s official wish history is only kept for 6 months.',
+      tip_5: '. Please upload now!'
     },
     days_ago: 'days ago'
   },
@@ -92,5 +92,22 @@ export default {
     },
     wish_number: 'Wishes: ',
     wish_time: 'Date: '
+  },
+  upload_data: {
+    title: 'Wishes Upload',
+    label: {
+      all_server: 'Web Upload(All PC)'
+    },
+    step1: 'Step 1: Open Genshin Impact in this PC, open the wish history',
+    step2: 'Step 2: Press WIN + R, or press START and search "run"',
+    step3: 'Step 3: Copy and paster the script below and hit ENTER',
+    step4: 'Step 4: Wait until the blue windows popup and disappear. Paste the text into the text box on the top',
+    error: {
+      file_type_error: 'File type error',
+      key_not_exist: 'Key info does not exist in the file'
+    },
+    loading_text: 'The loading time depends on your pull in the past 6 months. Please be patient~',
+    upload_placeholder: 'Paster the link here',
+    upload: 'Upload'
   }
 }

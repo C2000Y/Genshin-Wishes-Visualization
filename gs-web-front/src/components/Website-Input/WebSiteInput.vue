@@ -3,30 +3,25 @@
     <div class="setting">
       <el-button class="el-icon-setting" @click="dialogTableVisible = true" style=" width: 52px; height: 52px; padding: 2px 2px 2px 2px; border-radius: 50%; border: unset"></el-button>
     </div>
-    <el-dialog title="上传数据" :visible.sync="dialogTableVisible" :lock-scroll="true" class="web-upload-dialog-box">
+    <el-dialog :title="$t('upload_data.title')" :visible.sync="dialogTableVisible" :lock-scroll="true" class="web-upload-dialog-box">
       <el-tabs v-model="activeName" type="border-card" style="height: 450px;" class="web-upload-dialog">
-        <el-tab-pane label="网址上传(全服务器PC端)" name="pcFirst" class="web-input">
+        <el-tab-pane :label="$t('upload_data.label.all_server')" name="pcFirst" class="web-input">
           <android @return="insertData" class="web-input-bar"/>
           <div class="tips-words box-card">
             <div>
-              第一步：登录原神，打开【祈愿】界面，进入【历史记录】
+              {{ $t('upload_data.step1') }}
             </div>
             <div>
-              第二步：按住WIN键+R，或者在开始菜单中搜索“运行”
-              <div>
-                <img src="../../../static/win+r.png" style="width: 50%; margin-top: 7px">
-              </div>
+              {{ $t('upload_data.step2') }}
             </div>
             <div>
-              第三步：输入以下字符后，点击【确定】<br/>
+              {{ $t('upload_data.step3') }}
+              <br/>
               powershell iex (irm 'https://gist.githubusercontent.com/jogerj/0339e61a92e0de2e360c5212a94854e8/raw/d1b9f6adf15fbadab9a27940fb668abe8f198480/get_wish_url_from_cache.ps1')
               <el-button icon="el-icon-document-copy" @click="doCopy" class="copy"></el-button>
-              <div>
-                <img src="../../../static/winrun.png" style="width: 50%; margin-top: 7px">
-              </div>
             </div>
             <div>
-              第四步：等待蓝框（PowerShell）弹出并结束后，将粘贴板中的文字粘贴(Ctrl+V)到输入框中
+              {{ $t('upload_data.step4') }}
             </div>
             <div>
               <!--              第三步：点击【点击上传】，<br>-->
@@ -120,27 +115,10 @@ export default {
       //   ELEMENT.Message({message: '请输入网址', type: 'warning'})
       // }
     },
-    handleExceed () {
-      ELEMENT.Message.warning('一次只能上传一个哦')
-    },
-    handleUpload (file) {
-      // reader.readAsText(file)
-      // console.log(file)
-      // let reader = new FileReader()
-      // reader.readAsText(file.raw, 'gb2312')
-      // reader.readAsArrayBuffer(file.raw)
-      // reader.onload = function (e) {
-      //   var ints = new Uint8Array(e.target.result) // 要使用读取的内容，所以将读取内容转化成Uint8Array
-      //   ints = ints.slice(0, 5000) // 截取一段读取的内容
-      //   let snippets = new TextDecoder('gb2312').decode(ints) // 二进制缓存区内容转化成中文（即也就是读取到的内容）
-      //   console.log('读取的内容如下：')
-      //   console.log(snippets)
-      // }
-    },
     handleFileChange (file) {
       // 判断后缀名是否为txt
       if (file.name.split('.').pop() !== 'txt') {
-        this.dataValidation({data: {code: 500, msg: '文件类型错误'}})
+        this.dataValidation({data: {code: 500, msg: this.$t('upload_data.error.file_type_error')}})
         this.$refs.upload.clearFiles()
         return
       }
@@ -159,7 +137,7 @@ export default {
         }
         // 如果变量url没有改变，说明文件中缺少关键信息
         if (url === 'empty') {
-          this.dataValidation({data: {code: 500, msg: '文件中的关键信息不存在'}})
+          this.dataValidation({data: {code: 500, msg: this.$t('upload_data.error.file_type_error')}})
         } else {
           this.insertData(url)
         }
@@ -167,7 +145,7 @@ export default {
       this.$refs.upload.clearFiles()
     },
     async insertData (url) {
-      ELEMENT.Loading.service({ fullscreen: true, text: '加载时间取决于您近6个月的抽卡次数(1000抽需要20秒)，请耐心等待~' })
+      ELEMENT.Loading.service({ fullscreen: true, text: this.$t('upload_data.loading_text') })
       console.log(url)
       url = encodeURI(url)
       console.log(url)
