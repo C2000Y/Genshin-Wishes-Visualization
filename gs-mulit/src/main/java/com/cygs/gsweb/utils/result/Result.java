@@ -8,9 +8,6 @@
 
 package com.cygs.gsweb.utils.result;
 
-import com.cygs.gsweb.utils.result.ErrorCode;
-import com.cygs.gsweb.utils.result.MessageUtils;
-
 import java.io.Serializable;
 
 /**

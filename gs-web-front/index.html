@@ -53,9 +53,9 @@
     <!-- built files will be auto injected -->
   </body>
   <script>
-    const background = ["http://175.24.165.47:8080/background.jpg","http://175.24.165.47:8080/background2.jpg","http://175.24.165.47:8080/background3.jpg","http://175.24.165.47:8080/background4.jpg","http://175.24.165.47:8080/background5.jpg"]
+    const background = ["background.jpg","background2.jpg","background3.jpg","background4.jpg","background5.jpg"]
     const ranNum = Math.floor(Math.random() * background.length)
-    document.body.style.background ="url(" + background[ranNum] + ") fixed no-repeat 50% 0 #d1d1d1";
+    document.body.style.background ="url(http://20.163.229.170:8080/" + background[ranNum] + ") fixed no-repeat 50% 0 #d1d1d1";
     document.body.style.backgroundColor = 'rgb(140,202,227)';
   </script>
 </html>

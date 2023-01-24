@@ -1,20 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="80e52e6c-25e1-4953-a92a-88ee256e1626" name="Default Changelist" comment="Default Changelist">
-      <change beforePath="$PROJECT_DIR$/gs-web-front/src/components/CharaList/CharaList.vue" beforeDir="false" afterPath="$PROJECT_DIR$/gs-web-front/src/components/CharaList/CharaList.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gs-web-front/src/components/Chat/Comment.vue" beforeDir="false" afterPath="$PROJECT_DIR$/gs-web-front/src/components/Chat/Comment.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gs-web-front/src/components/Data/BarChart.vue" beforeDir="false" afterPath="$PROJECT_DIR$/gs-web-front/src/components/Data/BarChart.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gs-web-front/src/components/Data/CharacterData.vue" beforeDir="false" afterPath="$PROJECT_DIR$/gs-web-front/src/components/Data/CharacterData.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gs-web-front/src/components/Data/Default.vue" beforeDir="false" afterPath="$PROJECT_DIR$/gs-web-front/src/components/Data/Default.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gs-web-front/src/components/Data/OverallData.vue" beforeDir="false" afterPath="$PROJECT_DIR$/gs-web-front/src/components/Data/OverallData.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gs-web-front/src/components/Data/StandardData.vue" beforeDir="false" afterPath="$PROJECT_DIR$/gs-web-front/src/components/Data/StandardData.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gs-web-front/src/components/Data/WeaponData.vue" beforeDir="false" afterPath="$PROJECT_DIR$/gs-web-front/src/components/Data/WeaponData.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gs-web-front/src/components/Lang/lang.vue" beforeDir="false" afterPath="$PROJECT_DIR$/gs-web-front/src/components/Lang/lang.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gs-web-front/src/components/Navi/Navi.vue" beforeDir="false" afterPath="$PROJECT_DIR$/gs-web-front/src/components/Navi/Navi.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gs-web-front/src/lang/locale/en.js" beforeDir="false" afterPath="$PROJECT_DIR$/gs-web-front/src/lang/locale/en.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gs-web-front/src/lang/locale/zh.js" beforeDir="false" afterPath="$PROJECT_DIR$/gs-web-front/src/lang/locale/zh.js" afterDir="false" />
-    </list>
+    <list default="true" id="80e52e6c-25e1-4953-a92a-88ee256e1626" name="Default Changelist" comment="Default Changelist" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -36,7 +23,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/gs-web-front" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/gs-mulit" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -76,6 +63,7 @@
       <workItem from="1668231843390" duration="869000" />
       <workItem from="1668233160129" duration="757000" />
       <workItem from="1673145580826" duration="324000" />
+      <workItem from="1674521786660" duration="30000" />
     </task>
     <servers />
   </component>
