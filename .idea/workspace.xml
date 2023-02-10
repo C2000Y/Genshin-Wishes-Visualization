@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="80e52e6c-25e1-4953-a92a-88ee256e1626" name="Default Changelist" comment="Default Changelist" />
+    <list default="true" id="80e52e6c-25e1-4953-a92a-88ee256e1626" name="Default Changelist" comment="Default Changelist">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gs-web-front/config/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/gs-web-front/config/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gs-web-front/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/gs-web-front/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gs-web-front/src/components/Admin/Login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/gs-web-front/src/components/Admin/Login.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gs-web-front/src/components/Common.vue" beforeDir="false" afterPath="$PROJECT_DIR$/gs-web-front/src/components/Common.vue" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -23,7 +29,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/gs-mulit" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/gs-web-front" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -64,6 +70,7 @@
       <workItem from="1668233160129" duration="757000" />
       <workItem from="1673145580826" duration="324000" />
       <workItem from="1674521786660" duration="30000" />
+      <workItem from="1675398989808" duration="675000" />
     </task>
     <servers />
   </component>

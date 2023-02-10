@@ -10,7 +10,6 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 // 用于测试
 public class HTMLPageParser {
@@ -79,6 +78,9 @@ public class HTMLPageParser {
     }
 
     public static String convertUrl(String urlInfo, String poolType){
+//        if (urlInfo.contains("webstatic.mihoyo.com/hk4e/event/e20190909gacha-v2/index.html")) {
+//
+//        }
         if (urlInfo.contains("game_biz=hk4e_cn")){
             urlInfo = "https://hk4e-api.mihoyo.com/event/gacha_info/api/getGachaLog?" + urlInfo.substring(urlInfo.indexOf("?")+1);
         }

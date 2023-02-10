@@ -68,6 +68,7 @@ import BarChart from './Data/BarChart'
 import UidSelection from './Website-Input/UidSelection'
 import Loading from './Effect/Loading'
 import OverallData from './Data/OverallData'
+import {Loading} from 'element-ui'
 
 export default {
   name: 'MainPage',
@@ -140,7 +141,7 @@ export default {
     },
     startLoading () {
       this.text = this.loadingText[Math.floor(Math.random() * this.loadingText.length)]
-      ELEMENT.Loading.service({ fullscreen: true, text: this.text })
+      Loading.service({ fullscreen: true, text: this.text })
     },
     // 重置所有参数
     reInitChart () {

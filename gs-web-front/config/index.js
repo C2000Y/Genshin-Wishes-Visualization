@@ -9,13 +9,13 @@ let proxyObjDev = {};
 proxyObjPrd['/ws'] = {
   ws: true,
   // target: "ws://localhost:6480",
-  target: 'http://175.24.165.47:6480',
+  target: 'http://20.163.229.170:6480',
   changeOrigin: true
 };
 proxyObjPrd['/'] = {
   ws: false,
   // target: "ws://localhost:6480",
-  target: 'http://175.24.165.47:6480',
+  target: 'http://20.163.229.170:6480',
 
   changeOrigin: true,
   pathRewrite: {
@@ -26,13 +26,13 @@ proxyObjPrd['/'] = {
 proxyObjDev['/ws'] = {
   ws: true,
   // target: "ws://localhost:6480",
-  target: 'http://175.24.165.47:6480',
+  target: 'http://20.163.229.170:6480',
   changeOrigin: true
 };
 proxyObjDev['/'] = {
   ws: false,
   // target: "ws://localhost:6480",
-  target: 'http://175.24.165.47:6480',
+  target: 'http://20.163.229.170:6480',
   changeOrigin: true,
   pathRewrite: {
     '^/': ''

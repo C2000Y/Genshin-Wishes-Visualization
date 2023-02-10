@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import {getCookie, setCookie} from '../../util/util'
+import {setCookie} from '../../util/util'
 
 export default {
   name: 'Login',

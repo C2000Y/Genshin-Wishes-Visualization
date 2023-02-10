@@ -2,7 +2,7 @@
 import axios from 'axios'
 let imgJson = {}
 let hasJsData = false
-let httpUrl = 'http://175.24.165.47:6480/'
+let httpUrl = 'http://20.163.229.170:6480/'
 // let httpUrl = 'http://localhost:6480/'
 function getImgJson () {
   if (hasJsData) {
