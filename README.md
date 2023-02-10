@@ -1,6 +1,6 @@
 # Genshin Wishes Visualization
 Support All Servers
-Version 1.0.4.3  
+Version 1.0.4.4  
 http://www.genshin-stargazing.site/#/main/overall
 ![image](https://user-images.githubusercontent.com/67337861/192159015-2b367434-229f-482e-894c-e53386ae16d1.png)  
 ![image](https://user-images.githubusercontent.com/67337861/192159651-dc1571ac-b0f6-461d-93af-8a0507b4cd9d.png)
@@ -69,3 +69,7 @@ Fixed Comment Send failure issue
 **Version 1.0.4.3 - 2023/01/08**  
 增加了多语言功能        
 Add i18n  
+  
+**Version 1.0.4.4 - 2023/--/--**  
+修复了已知bug        
+  
